@@ -115,10 +115,10 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-6">
-              Paixão por Cozinhar
+              Pasión por Cocinar
             </h1>
             <p className="text-lg md:text-xl text-neutral-300 mb-8 max-w-2xl mx-auto">
-              Transformando ingredientes en memórias. Panelux es el distribuidor oficial en Uruguay de la marca brasileña líder en utensilios de cocina.
+              Transformando ingredientes en recuerdos. Panelux es el distribuidor oficial en Uruguay de la marca brasileña líder en utensilios de cocina.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link
