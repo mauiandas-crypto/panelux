@@ -9,9 +9,9 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 group hover:opacity-80 transition-opacity">
           <div className="flex items-center">
             <img
-              src="/assets/panelux-logo.svg"
+              src="/assets/panelux-logo.png"
               alt="Panelux"
-              className="h-16 w-auto max-w-sm"
+              className="h-14 w-auto max-w-lg"
             />
           </div>
 
