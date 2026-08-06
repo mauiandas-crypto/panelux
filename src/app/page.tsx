@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import { Card } from '@/components/ui/card'
+import { Spotlight } from '@/components/ui/spotlight'
+import { SplineScene } from '@/components/ui/spline'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -145,21 +147,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero principal */}
-      <section className="bg-gradient-to-b from-white to-gray-50 py-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Pasión por Cocinar
-          </h1>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-            Transformando ingredientes en recuerdos. Panelux es el distribuidor oficial en Uruguay.
-          </p>
-          <Link
-            href="#categorias"
-            className="inline-block px-8 py-3 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-500 transition-colors text-lg"
-          >
-            Explorar Productos
-          </Link>
+      {/* Hero principal con 3D */}
+      <section className="relative bg-gradient-to-b from-white to-gray-50 py-12 px-4 min-h-screen flex items-center overflow-hidden">
+        <Spotlight className="top-10 left-1/2 -translate-x-1/2" size={300} />
+
+        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
+          {/* Contenido */}
+          <div>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              Pasión por Cocinar
+            </h1>
+            <p className="text-xl text-gray-700 mb-8">
+              Transformando ingredientes en recuerdos. Panelux es el distribuidor oficial en Uruguay de la marca brasileña líder en utensilios de cocina.
+            </p>
+            <Link
+              href="#categorias"
+              className="inline-block px-8 py-4 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-500 transition-colors text-lg"
+            >
+              Explorar Productos
+            </Link>
+          </div>
+
+          {/* Modelo 3D */}
+          <div className="hidden lg:block h-96 rounded-lg overflow-hidden shadow-2xl">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
+          </div>
         </div>
       </section>
 
