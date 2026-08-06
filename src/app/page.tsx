@@ -184,9 +184,9 @@ export default function Home() {
       </section>
 
       {/* Productos destacados */}
-      <section id="categorias" className="py-16 px-4 bg-gray-50">
+      <section id="categorias" className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-12 text-center">
             Productos en Destaque
           </h2>
 
@@ -196,20 +196,18 @@ export default function Home() {
                 key={category.id}
                 href={`/categoria/${category.slug}`}
               >
-                <Card className="group hover:shadow-xl transition-all cursor-pointer h-full border-2 border-gray-200 bg-white">
-                  <div className="p-8">
-                    <div className="text-5xl mb-4">{category.icon}</div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-yellow-500 transition-colors">
-                      {category.name}
-                    </h3>
-                    <p className="text-gray-700 mb-4">
-                      {category.description}
-                    </p>
-                    <div className="text-yellow-500 font-semibold group-hover:translate-x-2 transition-transform inline-block">
-                      Ver más →
-                    </div>
+                <div className="bg-white border-2 border-gray-300 rounded-lg p-8 hover:shadow-2xl transition-all cursor-pointer group">
+                  <div className="text-5xl mb-4">{category.icon}</div>
+                  <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-yellow-500 transition-colors">
+                    {category.name}
+                  </h3>
+                  <p className="text-black font-medium mb-4">
+                    {category.description}
+                  </p>
+                  <div className="text-yellow-500 font-bold group-hover:translate-x-2 transition-transform inline-block">
+                    Ver más →
                   </div>
-                </Card>
+                </div>
               </Link>
             ))}
           </div>
