@@ -184,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* Productos destacados */}
-      <section id="categorias" className="py-16 px-4 bg-white">
+      <section id="categorias" className="py-16 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
             Productos en Destaque
@@ -196,16 +196,16 @@ export default function Home() {
                 key={category.id}
                 href={`/categoria/${category.slug}`}
               >
-                <Card className="group hover:shadow-xl transition-all cursor-pointer h-full border-2 border-gray-200">
+                <Card className="group hover:shadow-xl transition-all cursor-pointer h-full border-2 border-gray-200 bg-white">
                   <div className="p-8">
                     <div className="text-5xl mb-4">{category.icon}</div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-yellow-500 transition-colors">
                       {category.name}
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-700 mb-4">
                       {category.description}
                     </p>
-                    <div className="mt-4 text-yellow-500 font-semibold group-hover:translate-x-2 transition-transform">
+                    <div className="text-yellow-500 font-semibold group-hover:translate-x-2 transition-transform inline-block">
                       Ver más →
                     </div>
                   </div>
