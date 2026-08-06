@@ -159,7 +159,7 @@ export default function Home() {
           </p>
           <Link
             href="#categorias"
-            className="inline-block px-8 py-4 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-500 transition-colors text-lg"
+            className="inline-block px-8 py-4 bg-cyan-500 text-white font-bold rounded-lg hover:bg-cyan-600 transition-colors text-lg"
           >
             Explorar Productos
           </Link>
@@ -228,15 +228,15 @@ export default function Home() {
       </section>
 
       {/* Sección "Sobre la Marca" */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4 bg-gradient-to-b from-blue-50 to-purple-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-12 text-center">
             ¿Por Qué Elegir Panelux?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white p-6 rounded-lg border-l-4 border-blue-500">
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">
                 🏆 Distribuidor Oficial
               </h3>
               <p className="text-gray-700 leading-relaxed">
@@ -244,8 +244,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white p-6 rounded-lg border-l-4 border-purple-500">
+              <h3 className="text-2xl font-bold text-purple-900 mb-4">
                 ⭐ Calidad Premium
               </h3>
               <p className="text-gray-700 leading-relaxed">
@@ -253,8 +253,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white p-6 rounded-lg border-l-4 border-blue-500">
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">
                 🚚 Envíos Rápidos
               </h3>
               <p className="text-gray-700 leading-relaxed">
@@ -262,8 +262,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-white p-6 rounded-lg border-l-4 border-purple-500">
+              <h3 className="text-2xl font-bold text-purple-900 mb-4">
                 🛡️ Protegido
               </h3>
               <p className="text-gray-700 leading-relaxed">
