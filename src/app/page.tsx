@@ -284,17 +284,17 @@ export default function Home() {
             <div className="bg-white bg-opacity-95 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-3">🎁</div>
               <h3 className="text-xl font-bold text-blue-600 mb-2">Ofertas Especiales</h3>
-              <p className="text-gray-700 text-sm">Descuentos exclusivos en paquetes y juegos de ollas</p>
+              <p className="text-gray-900 font-medium text-sm">Descuentos exclusivos en paquetes y juegos de ollas</p>
             </div>
             <div className="bg-white bg-opacity-95 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-3">⚡</div>
               <h3 className="text-xl font-bold text-purple-600 mb-2">Envío Express</h3>
-              <p className="text-gray-700 text-sm">Entrega en 24-48 horas a Montevideo y zona</p>
+              <p className="text-gray-900 font-medium text-sm">Entrega en 24-48 horas a Montevideo y zona</p>
             </div>
             <div className="bg-white bg-opacity-95 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-3">💳</div>
               <h3 className="text-xl font-bold text-blue-600 mb-2">Sin Interés</h3>
-              <p className="text-gray-700 text-sm">Hasta 12 cuotas sin interés en tarjeta</p>
+              <p className="text-gray-900 font-medium text-sm">Hasta 12 cuotas sin interés en tarjeta</p>
             </div>
           </div>
 
