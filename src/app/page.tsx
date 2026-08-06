@@ -205,7 +205,8 @@ export default function Home() {
             Productos en Destaque
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full lg:w-auto">
             {CATEGORIES.map((category) => (
               <Link
                 key={category.id}
@@ -225,6 +226,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+            </div>
           </div>
         </div>
       </section>

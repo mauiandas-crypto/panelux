@@ -6,18 +6,19 @@ export default function Header() {
     <header className="bg-white shadow-md sticky top-0 z-40">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group hover:opacity-80 transition-opacity">
           <div className="flex items-center">
             <img
               src="/assets/panelux-logo.webp"
               alt="Panelux"
-              className="h-12 w-auto"
+              className="h-14 w-auto max-w-xs"
+              priority
             />
           </div>
 
-          <div className="hidden sm:flex flex-col">
-            <p className="text-xs text-gray-500 font-medium leading-none">Distribuidor Oficial</p>
-            <p className="text-xs text-gray-500 font-medium">Uruguay</p>
+          <div className="hidden md:flex flex-col">
+            <p className="text-xs text-gray-600 font-medium leading-tight">Distribuidor Oficial</p>
+            <p className="text-xs text-gray-600 font-medium">Uruguay</p>
           </div>
         </Link>
 
