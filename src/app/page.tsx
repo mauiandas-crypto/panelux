@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { Card } from '@/components/ui/card'
 import { Spotlight } from '@/components/ui/spotlight'
 import Link from 'next/link'
+import Header from '@/components/header'
 
 export const metadata: Metadata = {
   title: 'Panelux Uruguay | Distribuidor Oficial de Utensilios de Cocina',
@@ -110,6 +111,7 @@ const BENEFITS = [
 export default function Home() {
   return (
     <>
+      <Header />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -274,21 +276,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="py-16 px-4 bg-yellow-400">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-            Transforma Tu Cocina Hoy
-          </h2>
-          <p className="text-lg text-black mb-8 opacity-90">
-            Descubre por qué miles de uruguayos confían en Panelux.
-          </p>
-          <Link
-            href="#categorias"
-            className="inline-block px-8 py-4 bg-black text-yellow-400 font-bold rounded-lg hover:bg-gray-900 transition-colors text-lg"
-          >
-            Ver Catálogo Completo
-          </Link>
+      {/* Banner Promocional Premium */}
+      <section className="py-12 px-4 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full -mr-48 -mt-48"></div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white bg-opacity-95 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-4xl mb-3">🎁</div>
+              <h3 className="text-xl font-bold text-blue-600 mb-2">Ofertas Especiales</h3>
+              <p className="text-gray-700 text-sm">Descuentos exclusivos en paquetes y juegos de ollas</p>
+            </div>
+            <div className="bg-white bg-opacity-95 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-4xl mb-3">⚡</div>
+              <h3 className="text-xl font-bold text-purple-600 mb-2">Envío Express</h3>
+              <p className="text-gray-700 text-sm">Entrega en 24-48 horas a Montevideo y zona</p>
+            </div>
+            <div className="bg-white bg-opacity-95 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-4xl mb-3">💳</div>
+              <h3 className="text-xl font-bold text-blue-600 mb-2">Sin Interés</h3>
+              <p className="text-gray-700 text-sm">Hasta 12 cuotas sin interés en tarjeta</p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Calidad Brasileña a tu Alcance
+            </h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Utensilios de cocina premium con garantía oficial. Confía en Panelux, la marca que miles de familias uruguayas eligieron.
+            </p>
+            <Link
+              href="#categorias"
+              className="inline-block px-10 py-4 bg-cyan-500 text-white font-bold rounded-lg hover:bg-cyan-600 transition-colors text-lg shadow-lg"
+            >
+              Explorar Catálogo Completo
+            </Link>
+          </div>
         </div>
       </section>
 
