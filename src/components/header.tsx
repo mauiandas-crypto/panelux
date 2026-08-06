@@ -9,7 +9,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 group">
           <div className="flex items-center">
             <img
-              src="https://www.panelux.com.br/_nuxt/img/logo.4194d79.webp"
+              src="/assets/panelux-logo.webp"
               alt="Panelux"
               className="h-12 w-auto"
             />
