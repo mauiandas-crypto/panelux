@@ -1,26 +1,22 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Header() {
   return (
     <header className="bg-white shadow-md sticky top-0 z-40">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-            <svg
-              className="w-7 h-7 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {/* Olla minimalista moderna */}
-              <path d="M4 8h16v8c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V8z" fill="currentColor" opacity="0.9"/>
-              <path d="M6 8V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v2" stroke="white" strokeWidth="1.5" fill="none"/>
-              <path d="M18 10c1.5 0 2.5.5 3 1.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-            </svg>
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="flex items-center">
+            <img
+              src="https://www.panelux.com.br/_nuxt/img/logo.4194d79.webp"
+              alt="Panelux"
+              className="h-12 w-auto"
+            />
           </div>
 
-          <div className="hidden sm:block">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Panelux</h1>
+          <div className="hidden sm:flex flex-col">
+            <p className="text-xs text-gray-500 font-medium leading-none">Distribuidor Oficial</p>
             <p className="text-xs text-gray-500 font-medium">Uruguay</p>
           </div>
         </Link>
