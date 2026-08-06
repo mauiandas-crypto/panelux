@@ -5,35 +5,23 @@ export default function Header() {
     <header className="bg-white shadow-md sticky top-0 z-40">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <svg
-            className="w-10 h-10 text-blue-600"
-            fill="currentColor"
-            viewBox="0 0 100 100"
-          >
-            {/* Círculo fondo */}
-            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="2" />
-
-            {/* Olla estilizada */}
-            <path
-              d="M30 50 Q30 35 50 35 Q70 35 70 50 L68 65 Q68 70 63 70 L37 70 Q32 70 32 65 Z"
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
+            <svg
+              className="w-7 h-7 text-white"
               fill="currentColor"
-              opacity="0.8"
-            />
-
-            {/* Mango */}
-            <path
-              d="M70 48 Q85 48 85 55"
-              stroke="currentColor"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-            />
-          </svg>
+              viewBox="0 0 24 24"
+            >
+              {/* Olla minimalista moderna */}
+              <path d="M4 8h16v8c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V8z" fill="currentColor" opacity="0.9"/>
+              <path d="M6 8V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v2" stroke="white" strokeWidth="1.5" fill="none"/>
+              <path d="M18 10c1.5 0 2.5.5 3 1.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+            </svg>
+          </div>
 
           <div className="hidden sm:block">
-            <h1 className="text-2xl font-bold text-blue-600">Panelux</h1>
-            <p className="text-xs text-gray-600">Uruguay</p>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Panelux</h1>
+            <p className="text-xs text-gray-500 font-medium">Uruguay</p>
           </div>
         </Link>
 
