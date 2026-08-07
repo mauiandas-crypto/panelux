@@ -1,4 +1,5 @@
 import { getCategoryBySlug, getProductsByCategory } from '@/lib/products'
+import { searchProductsByCategory, convertMLProduct, MLProduct } from '@/lib/mercadolibre/search'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/header'
@@ -21,14 +22,31 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
-export default function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const category = getCategoryBySlug(params.slug)
 
   if (!category) {
     notFound()
   }
 
-  const products = getProductsByCategory(params.slug)
+  // Intentar traer productos de MercadoLibre, fallback a datos locales
+  let mlProducts: MLProduct[] = []
+  try {
+    mlProducts = await searchProductsByCategory(params.slug)
+  } catch (error) {
+    console.log('Usando datos locales de prueba')
+  }
+
+  // Convertir productos de MercadoLibre o usar datos locales
+  let products
+  if (mlProducts.length > 0) {
+    products = mlProducts.map(mlProd => convertMLProduct(mlProd, params.slug))
+  } else {
+    products = getProductsByCategory(params.slug)
+  }
+
+  // Marcar si son datos de MercadoLibre
+  const isFromML = mlProducts.length > 0
 
   return (
     <>
@@ -48,13 +66,21 @@ export default function CategoryPage({ params }: Props) {
         {/* Category Header */}
         <div className="bg-gradient-to-b from-blue-50 to-purple-50 py-12 px-4 border-b border-gray-200">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3 flex items-center gap-3">
-              <span className="text-4xl">{category.icon}</span>
-              {category.name}
-            </h1>
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-4xl font-bold text-gray-900 flex items-center gap-3">
+                <span className="text-4xl">{category.icon}</span>
+                {category.name}
+              </h1>
+              {isFromML && (
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full">
+                  📦 MercadoLibre
+                </span>
+              )}
+            </div>
             <p className="text-lg text-gray-600">{category.description}</p>
             <p className="text-sm text-gray-500 mt-4">
               {products.length} producto{products.length !== 1 ? 's' : ''} disponible{products.length !== 1 ? 's' : ''}
+              {isFromML && ' (desde MercadoLibre)'}
             </p>
           </div>
         </div>
