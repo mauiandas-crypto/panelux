@@ -3,6 +3,7 @@
 import { useCart } from '@/context/cart-context'
 import Link from 'next/link'
 import Header from '@/components/header'
+import CheckoutButton from '@/components/checkout-button'
 import { useState } from 'react'
 
 export default function CartPage() {
@@ -193,9 +194,7 @@ export default function CartPage() {
                     </div>
                   </div>
 
-                  <button className="w-full bg-cyan-500 text-white font-bold py-3 rounded-lg hover:bg-cyan-600 transition-colors mb-3">
-                    Proceder al Pago
-                  </button>
+                  <CheckoutButton />
 
                   <button
                     onClick={clearCart}
