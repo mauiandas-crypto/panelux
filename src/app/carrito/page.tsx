@@ -3,9 +3,13 @@
 import { useCart } from '@/context/cart-context'
 import Link from 'next/link'
 import Header from '@/components/header'
+import { useState } from 'react'
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, total, clearCart } = useCart()
+  const { items, removeItem, updateQuantity, total, clearCart, coupon, discount, applyCoupon, removeCoupon, subtotal } = useCart()
+  const [couponInput, setCouponInput] = useState('')
+  const [couponError, setCouponError] = useState('')
+  const [couponSuccess, setCouponSuccess] = useState(false)
 
   return (
     <>
@@ -107,11 +111,78 @@ export default function CartPage() {
                     Resumen de Compra
                   </h2>
 
+                  {/* Cupón */}
+                  <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                      Código de Cupón
+                    </label>
+                    {coupon ? (
+                      <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded p-3">
+                        <div>
+                          <p className="text-sm font-medium text-green-800">{coupon}</p>
+                          <p className="text-xs text-green-600">{discount}% descuento aplicado</p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            removeCoupon()
+                            setCouponInput('')
+                            setCouponError('')
+                            setCouponSuccess(false)
+                          }}
+                          className="text-green-600 hover:text-green-700 text-sm font-medium"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        <input
+                          type="text"
+                          placeholder="Ingresa tu cupón"
+                          value={couponInput}
+                          onChange={(e) => {
+                            setCouponInput(e.target.value.toUpperCase())
+                            setCouponError('')
+                            setCouponSuccess(false)
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        />
+                        <button
+                          onClick={() => {
+                            if (applyCoupon(couponInput)) {
+                              setCouponSuccess(true)
+                              setCouponInput('')
+                              setTimeout(() => setCouponSuccess(false), 3000)
+                            } else {
+                              setCouponError('Cupón inválido')
+                              setTimeout(() => setCouponError(''), 3000)
+                            }
+                          }}
+                          className="w-full px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                        >
+                          Aplicar
+                        </button>
+                        {couponError && (
+                          <p className="text-xs text-red-600">{couponError}</p>
+                        )}
+                        {couponSuccess && (
+                          <p className="text-xs text-green-600">¡Cupón aplicado!</p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between text-gray-600">
                       <span>Subtotal:</span>
-                      <span>${total.toFixed(2)}</span>
+                      <span>${subtotal.toFixed(2)}</span>
                     </div>
+                    {discount > 0 && (
+                      <div className="flex justify-between text-green-600 font-medium">
+                        <span>Descuento ({discount}%):</span>
+                        <span>-${((subtotal * discount) / 100).toFixed(2)}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between text-gray-600">
                       <span>Envío:</span>
                       <span>Calculado al pagar</span>

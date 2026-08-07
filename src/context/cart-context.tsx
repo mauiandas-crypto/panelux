@@ -18,12 +18,27 @@ interface CartContextType {
   clearCart: () => void
   total: number
   itemCount: number
+  coupon: string | null
+  discount: number
+  applyCoupon: (code: string) => boolean
+  removeCoupon: () => void
+  subtotal: number
+}
+
+// Cupones válidos (código: descuento%)
+const VALID_COUPONS: Record<string, number> = {
+  'PANELUX10': 10,
+  'DESCUENTO15': 15,
+  'ENVIO5': 5,
+  'VERANO20': 20,
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [coupon, setCoupon] = useState<string | null>(null)
+  const [discount, setDiscount] = useState(0)
 
   const addItem = (item: Omit<CartItem, 'quantity'>) => {
     setItems((prevItems) => {
@@ -57,8 +72,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([])
   }
 
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const discountAmount = (subtotal * discount) / 100
+  const total = subtotal - discountAmount
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
+
+  const applyCoupon = (code: string): boolean => {
+    const upperCode = code.toUpperCase().trim()
+    if (VALID_COUPONS[upperCode]) {
+      setCoupon(upperCode)
+      setDiscount(VALID_COUPONS[upperCode])
+      return true
+    }
+    return false
+  }
+
+  const removeCoupon = () => {
+    setCoupon(null)
+    setDiscount(0)
+  }
 
   return (
     <CartContext.Provider
@@ -70,6 +102,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         clearCart,
         total,
         itemCount,
+        coupon,
+        discount,
+        applyCoupon,
+        removeCoupon,
+        subtotal,
       }}
     >
       {children}
