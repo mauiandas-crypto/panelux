@@ -6,14 +6,15 @@ import Footer from '@/components/footer'
 import AddToCartButton from '@/components/add-to-cart-button'
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string
     'producto-slug': string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: Props) {
-  const product = getProductBySlug(params.slug, params['producto-slug'])
+  const { slug, 'producto-slug': productoSlug } = await params
+  const product = getProductBySlug(slug, productoSlug)
   if (!product) return {}
 
   return {
@@ -22,9 +23,10 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
-export default function ProductPage({ params }: Props) {
-  const category = getCategoryBySlug(params.slug)
-  const product = getProductBySlug(params.slug, params['producto-slug'])
+export default async function ProductPage({ params }: Props) {
+  const { slug, 'producto-slug': productoSlug } = await params
+  const category = getCategoryBySlug(slug)
+  const product = getProductBySlug(slug, productoSlug)
 
   if (!category || !product) {
     notFound()

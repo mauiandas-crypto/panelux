@@ -28,6 +28,32 @@ export default function CheckoutButton({ email = '' }: CheckoutButtonProps) {
     setError('')
 
     try {
+      const orderId = `order-${Date.now()}`
+
+      // 1. Crear orden en BD
+      const createOrderResponse = await fetch('/api/orders/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: emailInput,
+          items: items.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          total,
+          orderId,
+        }),
+      })
+
+      if (!createOrderResponse.ok) {
+        setError('Error al crear la orden')
+        return
+      }
+
+      // 2. Crear preferencia de pago en Mercado Pago
       const response = await fetch('/api/payments/create-preference', {
         method: 'POST',
         headers: {
@@ -40,7 +66,7 @@ export default function CheckoutButton({ email = '' }: CheckoutButtonProps) {
             price: item.price,
           })),
           email: emailInput,
-          orderId: `order-${Date.now()}`,
+          orderId,
         }),
       })
 

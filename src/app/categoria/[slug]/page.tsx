@@ -7,13 +7,14 @@ import Footer from '@/components/footer'
 import AddToCartButton from '@/components/add-to-cart-button'
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: Props) {
-  const category = getCategoryBySlug(params.slug)
+  const { slug } = await params
+  const category = getCategoryBySlug(slug)
   if (!category) return {}
 
   return {
@@ -23,7 +24,8 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const category = getCategoryBySlug(params.slug)
+  const { slug } = await params
+  const category = getCategoryBySlug(slug)
 
   if (!category) {
     notFound()
@@ -32,7 +34,7 @@ export default async function CategoryPage({ params }: Props) {
   // Intentar traer productos de MercadoLibre, fallback a datos locales
   let mlProducts: MLProduct[] = []
   try {
-    mlProducts = await searchProductsByCategory(params.slug)
+    mlProducts = await searchProductsByCategory(slug)
   } catch (error) {
     console.log('Usando datos locales de prueba')
   }
@@ -40,9 +42,9 @@ export default async function CategoryPage({ params }: Props) {
   // Convertir productos de MercadoLibre o usar datos locales
   let products
   if (mlProducts.length > 0) {
-    products = mlProducts.map(mlProd => convertMLProduct(mlProd, params.slug))
+    products = mlProducts.map(mlProd => convertMLProduct(mlProd, slug))
   } else {
-    products = getProductsByCategory(params.slug)
+    products = getProductsByCategory(slug)
   }
 
   // Marcar si son datos de MercadoLibre

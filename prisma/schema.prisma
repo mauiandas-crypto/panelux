@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Órdenes de compra
+model Order {
+  id        String   @id @default(cuid())
+  email     String
+  items     OrderItem[]
+  total     Float
+  discount  Float    @default(0)
+  coupon    String?
+  status    String   @default("pending") // pending, approved, failed, cancelled, delivered
+  paymentId String?  @unique
+  orderId   String   @unique
+
+  // Datos del comprador
+  customerName String?
+  customerPhone String?
+
+  // Direcciones
+  shippingAddress String?
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  reviews   Review[]
+}
+
+// Items de una orden
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  productName String
+  quantity  Int
+  price     Float
+
+  createdAt DateTime @default(now())
+}
+
+// Reseñas y comentarios
+model Review {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  productName String
+
+  rating    Int      // 1-5 stars
+  comment   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Historial de pagos
+model Payment {
+  id        String   @id @default(cuid())
+  orderId   String
+
+  mpPaymentId String @unique
+  mpStatus  String
+  amount    Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Búsquedas guardadas (opcional para análisis)
+model SearchLog {
+  id        String   @id @default(cuid())
+  query     String
+  results   Int
+
+  createdAt DateTime @default(now())
+}

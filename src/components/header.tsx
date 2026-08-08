@@ -1,8 +1,22 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import CartModal from './cart-modal'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Header() {
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/buscar?q=${encodeURIComponent(searchQuery)}`)
+      setSearchQuery('')
+    }
+  }
   return (
     <header className="bg-white shadow-md sticky top-0 z-40">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -23,7 +37,7 @@ export default function Header() {
         </Link>
 
         {/* Navegación */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8">
           <Link href="/" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
             Inicio
           </Link>
@@ -35,9 +49,35 @@ export default function Header() {
           </a>
         </nav>
 
+        {/* Buscador */}
+        <form onSubmit={handleSearch} className="hidden md:flex items-center">
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
+          />
+          <button
+            type="submit"
+            className="px-3 py-2 bg-cyan-500 text-white rounded-r-lg hover:bg-cyan-600 transition-colors"
+          >
+            🔍
+          </button>
+        </form>
+
         {/* Carrito + Acciones */}
         <div className="flex items-center gap-3">
           <CartModal />
+
+          {/* Admin Link */}
+          <Link
+            href="/admin"
+            className="hidden md:inline-block px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium"
+            title="Panel de Admin"
+          >
+            ⚙️
+          </Link>
 
           {/* WhatsApp Button (Mobile) */}
           <Link
