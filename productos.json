@@ -1,0 +1,344 @@
+﻿[
+    {
+        "nombre":  "Classic - Olla a presión 3L - Pulido - 1,4mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000001,
+        "pvp":  670
+    },
+    {
+        "nombre":  "Classic - Olla a presión 4,5L - Pulido - 1,4mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000002,
+        "pvp":  950
+    },
+    {
+        "nombre":  "Classic - Olla a presión 7L - Pulido - 1,8mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000003,
+        "pvp":  1450
+    },
+    {
+        "nombre":  "Classic - Olla a presión 10L - Pulido - 2,3mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000004,
+        "pvp":  1750
+    },
+    {
+        "nombre":  "Magnific - Olla a presión 3L - Grafito - 1,6mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000019,
+        "pvp":  990
+    },
+    {
+        "nombre":  "Magnific - Olla a presión 4,5L - Grafito - 1,6mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000020,
+        "pvp":  1190
+    },
+    {
+        "nombre":  "Magnific - Olla a presión 7L - Grafito - 1,9mm",
+        "categoria":  "Ollas a presión",
+        "codigo":  5000021,
+        "pvp":  1690
+    },
+    {
+        "nombre":  "Classic Pró - Olla presión cierre externo 15 litros, 4,4mm - Pulido",
+        "categoria":  "Ollas a presión",
+        "codigo":  2000009,
+        "pvp":  6140
+    },
+    {
+        "nombre":  "Maximum Stone - Juego de ollas 7 Pzs - Color Negro - 2mm",
+        "categoria":  "Juego de ollas",
+        "codigo":  5001844,
+        "pvp":  5790
+    },
+    {
+        "nombre":  "Magnific - Juego c/7 ollas - Cereza",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002620,
+        "pvp":  3820
+    },
+    {
+        "nombre":  "Magnific - Juego c/6 ollas - Grafito",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002619,
+        "pvp":  3300
+    },
+    {
+        "nombre":  "Magnific - Juego c/6 ollas - Pulido",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002424,
+        "pvp":  2420
+    },
+    {
+        "nombre":  "Maximum Stone - Juego de ollas 5 Pzs - Color Negro - 2mm",
+        "categoria":  "Juego de ollas",
+        "codigo":  5001842,
+        "pvp":  3850
+    },
+    {
+        "nombre":  "Magnific - Juego c/5 ollas - Grafito",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002618,
+        "pvp":  2020
+    },
+    {
+        "nombre":  "Magnific - Juego c/5 ollas - Cereza",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002617,
+        "pvp":  2020
+    },
+    {
+        "nombre":  "Magnific - Juego c/5 ollas - Pulido",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002423,
+        "pvp":  1760
+    },
+    {
+        "nombre":  "Magnific - Juego c/4 ollas - Grafito",
+        "categoria":  "Juego de ollas",
+        "codigo":  5002616,
+        "pvp":  1470
+    },
+    {
+        "nombre":  "Magnific - Juego Sartenes Francesas 16 + 20cm - Grafito",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5002927,
+        "pvp":  450
+    },
+    {
+        "nombre":  "Magnific - Sartén francesa 22cm - Grafito - 1mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5002401,
+        "pvp":  290
+    },
+    {
+        "nombre":  "Magnific - Sartén francesa 32cm - Grafito - 2,1mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5000041,
+        "pvp":  710
+    },
+    {
+        "nombre":  "Magnific - Sartén panquequera 22cm - Grafito - 1mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5004086,
+        "pvp":  260
+    },
+    {
+        "nombre":  "Magnific - Sartén hondo 22cm - Grafito - 1,2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5000141,
+        "pvp":  750
+    },
+    {
+        "nombre":  "Maximum Stone - Sartén Hondo 26cm c/tapa - Color Negro - 2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5001640,
+        "pvp":  1280
+    },
+    {
+        "nombre":  "Magnific - Omeletera 20cm - Grafito - 1,2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5000183,
+        "pvp":  560
+    },
+    {
+        "nombre":  "Magnific - Omeletera 20cm - Cereza - 1,2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5001190,
+        "pvp":  560
+    },
+    {
+        "nombre":  "Magnific - Sartén para huevos 12cm - Grafito - 1mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5000134,
+        "pvp":  220
+    },
+    {
+        "nombre":  "Magnific - Wok 24cm - Grafito - 1,2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5001217,
+        "pvp":  470
+    },
+    {
+        "nombre":  "Magnific - Wok 24cm - Cereza - 1,2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5001219,
+        "pvp":  470
+    },
+    {
+        "nombre":  "Maximum Stone - Sartén Wok 28cm c/tapa y Asa - Color Negro - 2mm",
+        "categoria":  "Sartenes y woks",
+        "codigo":  5002498,
+        "pvp":  1350
+    },
+    {
+        "nombre":  "Magnific - Olla 16cm c/Mango - Grafito - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000184,
+        "pvp":  520
+    },
+    {
+        "nombre":  "Magnific - Olla 18cm c/Mango - Grafito - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000185,
+        "pvp":  520
+    },
+    {
+        "nombre":  "Magnific - Olla 20cm c/Mango - Grafito - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000186,
+        "pvp":  590
+    },
+    {
+        "nombre":  "Magnific - Olla 18cm c/Mango - Cereza - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5001193,
+        "pvp":  595
+    },
+    {
+        "nombre":  "Maximum Stone - Olla 18cm c/Mango - Color Negro - 2mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5001656,
+        "pvp":  890
+    },
+    {
+        "nombre":  "Maximum Stone - Olla 20cm c/Mango - Color Negro - 2mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5001658,
+        "pvp":  980
+    },
+    {
+        "nombre":  "Magnific - Cacerola 18cm - Grafito - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000094,
+        "pvp":  600
+    },
+    {
+        "nombre":  "Magnific - Cacerola 22cm - Grafito - 1,2mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000096,
+        "pvp":  840
+    },
+    {
+        "nombre":  "Magnific - Cacerola 24cm - Grafito - 1,5mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000097,
+        "pvp":  890
+    },
+    {
+        "nombre":  "Magnific - Hervidor 12cm - Grafito - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000123,
+        "pvp":  380
+    },
+    {
+        "nombre":  "Magnific - Hervidor 16cm - Grafito - 1mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5000133,
+        "pvp":  465
+    },
+    {
+        "nombre":  "Magnific - Hervidor 12cm - Pulido - 0,9mm",
+        "categoria":  "Ollas y cacerolas",
+        "codigo":  5002518,
+        "pvp":  250
+    },
+    {
+        "nombre":  "Magnific - Asadera Nº2 - 27 x 18 x 5 cm - Grafito - 0,8mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5000220,
+        "pvp":  1450
+    },
+    {
+        "nombre":  "Magnific - Asadera Nº2 - 27 x 18 x 5 cm - Pulido - 0,7mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002513,
+        "pvp":  820
+    },
+    {
+        "nombre":  "Magnific - Molde redondo 24cm - Pulido - 0,9mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002526,
+        "pvp":  280
+    },
+    {
+        "nombre":  "Magnific - Molde redondo 28cm - Pulido - 0,9mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002527,
+        "pvp":  330
+    },
+    {
+        "nombre":  "Magnific - Molde redondo c/tubo 24cm - Pulido - 0,9mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002521,
+        "pvp":  330
+    },
+    {
+        "nombre":  "Magnific - Molde redondo c/tubo 28cm - Pulido - 0,9mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002522,
+        "pvp":  380
+    },
+    {
+        "nombre":  "Magnific - Molde redondo para budin c/tubo 22cm - Pulido - 0,8mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002525,
+        "pvp":  260
+    },
+    {
+        "nombre":  "Magnific - Molde para pizza 35 x 2cm - Pulido - 0,8mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002529,
+        "pvp":  340
+    },
+    {
+        "nombre":  "Magnific - Molde para Pan 23 x 10cm - Pulido - 0,7mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002523,
+        "pvp":  190
+    },
+    {
+        "nombre":  "Magnific - Molde para Pan 27 x 10cm - Pulido - 0,7mm",
+        "categoria":  "Asaderas y moldes",
+        "codigo":  5002524,
+        "pvp":  200
+    },
+    {
+        "nombre":  "Magnific - Display Exhibidor c/45 ollas - Grafito",
+        "categoria":  "Exhibidores",
+        "codigo":  5003716,
+        "pvp":  19400
+    },
+    {
+        "nombre":  "Magnific - Exhibidor c/48 asaderas - Pulido",
+        "categoria":  "Exhibidores",
+        "codigo":  5002427,
+        "pvp":  16700
+    },
+    {
+        "nombre":  "Anillo para ollas a presión cierre interno 3,0/4,0/4,5L",
+        "categoria":  "Repuestos",
+        "codigo":  5000278,
+        "pvp":  80
+    },
+    {
+        "nombre":  "Anillo para ollas a presión cierre interno 7,0/10,0",
+        "categoria":  "Repuestos",
+        "codigo":  5000279,
+        "pvp":  80
+    },
+    {
+        "nombre":  "Valvula Reguladora de presión 3,0/4,0/4,5/7,0/10,0L (70 KPA)",
+        "categoria":  "Repuestos",
+        "codigo":  5000281,
+        "pvp":  100
+    },
+    {
+        "nombre":  "Valvula Seguridad para ollas a presión 3,0/4,0/4,5/7,0/10,0L",
+        "categoria":  "Repuestos",
+        "codigo":  5000280,
+        "pvp":  60
+    }
+]
