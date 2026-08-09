@@ -1,89 +1,86 @@
-﻿import Link from 'next/link'
-
-// Catálogo de productos (datos estáticos)
-const productos = [
-  { codigo: "5000041", nombre: "Magnific - Sartén francesa 32cm - Grafito - 2,1mm", categoria: "Sartenes y woks", pvp: 710, imagen: "/productos/Magnific%20AA/5000041_Magnific_AA_Frigideira%20Francesa%20%C3%8732_Grafite.jpg", linea: "Magnific AA" },
-  { codigo: "5000094", nombre: "Magnific - Cacerola 18cm - Grafito - 1mm", categoria: "Ollas y cacerolas", pvp: 600, imagen: "/productos/Magnific%20AA/5000094_Magnific_AA_Ca%C3%A7arola%20%C3%8718_Grafite.jpg", linea: "Magnific AA" },
-  { codigo: "5000096", nombre: "Magnific - Cacerola 22cm - Grafito - 1,2mm", categoria: "Ollas y cacerolas", pvp: 840, imagen: "/productos/Magnific%20AA/5000096_Magnific_AA_Ca%C3%A7arola%20%C3%8722_Grafite.jpg", linea: "Magnific AA" },
-  { codigo: "5000097", nombre: "Magnific - Cacerola 24cm - Grafito - 1,5mm", categoria: "Ollas y cacerolas", pvp: 890, imagen: "/productos/Magnific%20AA/5000097_Magnific_AA_Ca%C3%A7arola%20%C3%8724_Grafite.jpg", linea: "Magnific AA" },
-  { codigo: "5000123", nombre: "Magnific - Hervidor 12cm - Grafito - 1mm", categoria: "Ollas y cacerolas", pvp: 380, imagen: "/productos/Magnific%20AA/5000123_Magnific_Fervedor%20%C3%8712_Grafite.jpg", linea: "Magnific AA" },
-  { codigo: "5000133", nombre: "Magnific - Hervidor 16cm - Grafito - 1mm", categoria: "Ollas y cacerolas", pvp: 465, imagen: "/productos/Magnific%20AA/5000133_Magnific_Fervedor%20%C3%8716_Grafite.jpg", linea: "Magnific AA" },
-]
-
-export default function Home() {
-  // Agrupar por categoría
-  const porCategoria = productos.reduce((acc, p) => {
-    if (!acc[p.categoria]) acc[p.categoria] = []
-    acc[p.categoria].push(p)
-    return acc
-  }, {} as Record<string, typeof productos>)
-
-  const categorias = Object.keys(porCategoria).sort()
-
+﻿export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-3xl font-bold text-blue-600">🍳 Panelux</Link>
-          <nav className="hidden md:flex gap-6">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium">Inicio</Link>
-            <Link href="#productos" className="text-gray-700 hover:text-blue-600 font-medium">Productos</Link>
-          </nav>
-          <Link href="https://wa.me/598XXXXXXXXX" target="_blank" className="bg-green-500 text-white px-4 py-2 rounded-lg">
-            WhatsApp
-          </Link>
-        </div>
-      </header>
+    <html>
+      <head>
+        <title>Panelux Uruguay</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body style={{ margin: 0, padding: 0, fontFamily: "Arial, sans-serif", backgroundColor: "#f5f5f5" }}>
+        {/* Header */}
+        <header style={{ backgroundColor: "white", padding: "20px", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", position: "sticky", top: 0 }}>
+          <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h1 style={{ margin: 0, fontSize: "28px", color: "#2563eb" }}>🍳 Panelux Uruguay</h1>
+            <a href="https://wa.me/598XXXXXXXXX" target="_blank" style={{ backgroundColor: "#22c55e", color: "white", padding: "10px 20px", borderRadius: "5px", textDecoration: "none" }}>
+              WhatsApp
+            </a>
+          </div>
+        </header>
 
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-20 px-4 text-center">
-        <h1 className="text-5xl font-bold mb-4">Panelux Uruguay</h1>
-        <p className="text-xl mb-8">Distribuidor oficial de utensilios de cocina premium</p>
-        <Link href="#productos" className="inline-block px-8 py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100">
-          Ver Catálogo
-        </Link>
-      </section>
+        {/* Hero */}
+        <section style={{ background: "linear-gradient(to right, #2563eb, #60a5fa)", color: "white", padding: "60px 20px", textAlign: "center" }}>
+          <h2 style={{ fontSize: "40px", margin: "0 0 20px 0" }}>Panelux Uruguay</h2>
+          <p style={{ fontSize: "18px", margin: "0 0 30px 0" }}>Distribuidor oficial de utensilios de cocina premium</p>
+          <a href="#productos" style={{ backgroundColor: "white", color: "#2563eb", padding: "12px 30px", borderRadius: "5px", textDecoration: "none", fontWeight: "bold", display: "inline-block" }}>
+            Ver Catálogo
+          </a>
+        </section>
 
-      {/* Productos */}
-      <section id="productos" className="max-w-7xl mx-auto px-4 py-20">
-        {categorias.map((categoria) => (
-          <div key={categoria} className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 pb-4 border-b-4 border-blue-500">
-              {categoria}
-            </h2>
+        {/* Productos */}
+        <section id="productos" style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 20px" }}>
+          <h2 style={{ fontSize: "32px", color: "#1f2937", marginBottom: "30px", borderBottom: "4px solid #2563eb", paddingBottom: "10px" }}>
+            Sartenes y woks
+          </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {porCategoria[categoria].map((producto) => (
-                <div key={producto.codigo} className="bg-white rounded-lg shadow-lg hover:shadow-2xl overflow-hidden">
-                  <div className="relative h-48 bg-gray-100">
-                    <img
-                      src={producto.imagen}
-                      alt={producto.nombre}
-                      className="w-full h-full object-cover"
-                      onError={(e) => { e.currentTarget.style.fontSize = "48px"; e.currentTarget.textContent = "🍳" }}
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-gray-900 mb-2 text-sm line-clamp-2">{producto.nombre}</h3>
-                    <p className="text-xs text-gray-500 mb-2">Código: {producto.codigo}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-2xl font-bold text-blue-600">${producto.pvp}</span>
-                      <button className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 text-sm">➕</button>
-                    </div>
-                  </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "20px", marginBottom: "60px" }}>
+            {/* Producto 1 */}
+            <div style={{ backgroundColor: "white", borderRadius: "8px", overflow: "hidden", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+              <img src="/productos/Magnific%20AA/5000041_Magnific_AA_Frigideira%20Francesa%20%C3%8732_Grafite.jpg" alt="Sartén" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+              <div style={{ padding: "15px" }}>
+                <h3 style={{ margin: "0 0 10px 0", fontSize: "14px", fontWeight: "bold" }}>Magnific - Sartén francesa 32cm - Grafito</h3>
+                <p style={{ margin: "0 0 10px 0", fontSize: "12px", color: "#666" }}>Código: 5000041</p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontSize: "24px", fontWeight: "bold", color: "#2563eb" }}>$710</span>
+                  <button style={{ backgroundColor: "#2563eb", color: "white", border: "none", padding: "8px 12px", borderRadius: "5px", cursor: "pointer" }}>➕</button>
                 </div>
-              ))}
+              </div>
+            </div>
+
+            {/* Producto 2 */}
+            <div style={{ backgroundColor: "white", borderRadius: "8px", overflow: "hidden", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+              <img src="/productos/Magnific%20AA/5000094_Magnific_AA_Ca%C3%A7arola%20%C3%8718_Grafite.jpg" alt="Cacerola" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+              <div style={{ padding: "15px" }}>
+                <h3 style={{ margin: "0 0 10px 0", fontSize: "14px", fontWeight: "bold" }}>Magnific - Cacerola 18cm - Grafito</h3>
+                <p style={{ margin: "0 0 10px 0", fontSize: "12px", color: "#666" }}>Código: 5000094</p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontSize: "24px", fontWeight: "bold", color: "#2563eb" }}>$600</span>
+                  <button style={{ backgroundColor: "#2563eb", color: "white", border: "none", padding: "8px 12px", borderRadius: "5px", cursor: "pointer" }}>➕</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Producto 3 */}
+            <div style={{ backgroundColor: "white", borderRadius: "8px", overflow: "hidden", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+              <img src="/productos/Magnific%20AA/5000096_Magnific_AA_Ca%C3%A7arola%20%C3%8722_Grafite.jpg" alt="Cacerola" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+              <div style={{ padding: "15px" }}>
+                <h3 style={{ margin: "0 0 10px 0", fontSize: "14px", fontWeight: "bold" }}>Magnific - Cacerola 22cm - Grafito</h3>
+                <p style={{ margin: "0 0 10px 0", fontSize: "12px", color: "#666" }}>Código: 5000096</p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontSize: "24px", fontWeight: "bold", color: "#2563eb" }}>$840</span>
+                  <button style={{ backgroundColor: "#2563eb", color: "white", border: "none", padding: "8px 12px", borderRadius: "5px", cursor: "pointer" }}>➕</button>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
-      </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 text-center">
-        <p>© 2026 Panelux Uruguay - Distribuidor Oficial</p>
-        <p className="text-gray-400">Yaguarón 1764, Montevideo</p>
-      </footer>
-    </div>
+          <p style={{ textAlign: "center", color: "#666", fontSize: "14px" }}>✨ Mostrando 3 de 76 productos disponibles</p>
+        </section>
+
+        {/* Footer */}
+        <footer style={{ backgroundColor: "#111827", color: "white", padding: "30px 20px", textAlign: "center" }}>
+          <p style={{ margin: 0 }}>© 2026 Panelux Uruguay - Distribuidor Oficial</p>
+          <p style={{ margin: "10px 0 0 0", color: "#9ca3af" }}>Yaguarón 1764, Montevideo</p>
+        </footer>
+      </body>
+    </html>
   )
 }
