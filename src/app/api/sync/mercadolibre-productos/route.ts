@@ -1,59 +1,98 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { searchProductsByCategory, getProductDetail, MLProduct } from '@/lib/mercadolibre/search'
-import { CATEGORIES } from '@/lib/products'
+import { getMercadoLibreAccessToken } from '@/lib/mercadolibre/getAccessToken'
 
-export async function GET(request: NextRequest) {
+const CATEGORIES = [
+  { slug: 'ollas', name: 'Ollas', icon: '🍲', keywords: ['olla', 'ollas'] },
+  { slug: 'juegos-ollas', name: 'Juegos de Ollas', icon: '🍽️', keywords: ['juego', 'set', 'batería'] },
+  { slug: 'ollas-presion', name: 'Ollas de Presión', icon: '⚙️', keywords: ['presión', 'presion'] },
+  { slug: 'sartenes', name: 'Sartenes', icon: '🍳', keywords: ['sartén', 'sarten', 'wok'] },
+  { slug: 'moldes-bandejas', name: 'Moldes y Bandejas', icon: '📦', keywords: ['molde', 'bandeja', 'fuente'] },
+  { slug: 'accesorios', name: 'Accesorios', icon: '⚒️', keywords: ['accesorio', 'tapa', 'asa', 'utensilio'] },
+]
+
+export async function GET(request: Request) {
   try {
     const results: Record<string, any> = {}
     let totalProducts = 0
 
-    console.log('Sincronizando productos de MercadoLibre...')
-
-    // Por cada categoría, buscar productos en ML
     for (const category of CATEGORIES) {
-      console.log(`Buscando productos para: ${category.name}`)
+      try {
+        console.log(`Buscando productos para: ${category.name}`)
 
-      const mlProducts = await searchProductsByCategory(category.slug)
+        // Delay para evitar rate limiting
+        await new Promise(resolve => setTimeout(resolve, 1000))
 
-      if (mlProducts.length > 0) {
-        results[category.slug] = {
-          category: category.name,
-          icon: category.icon,
-          count: mlProducts.length,
-          products: mlProducts.map((product: MLProduct) => ({
+        // Obtener token autenticado
+        const accessToken = await getMercadoLibreAccessToken()
+
+        const searchUrl = `https://api.mercadolibre.com/sites/MLU/search?q=panelux&limit=50`
+
+        const response = await fetch(searchUrl, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept': 'application/json',
+          },
+          cache: 'no-store'
+        })
+
+        let products = []
+
+        if (response.ok) {
+          const data = await response.json()
+          let mlProducts = data.results || []
+
+          // Filtrar por palabras clave de la categoría
+          mlProducts = mlProducts.filter((product: any) => {
+            const title = product.title.toLowerCase()
+            return category.keywords.some(keyword => title.includes(keyword))
+          })
+
+          products = mlProducts.slice(0, 12).map((product: any) => ({
             id: product.id,
             title: product.title,
             price: product.price,
-            image: product.thumbnail,
-            seller: product.seller.nickname,
-            currency: product.currency_id,
-            condition: product.condition,
-          })),
-          status: '✓ OK',
+            image: product.thumbnail || product.pictures?.[0]?.url || '🍳',
+            seller: product.seller?.nickname || 'Unknown',
+            currency: product.currency_id || 'UYU',
+            condition: product.condition === 'new' ? 'new' : 'used'
+          }))
+        } else {
+          console.log(`No se pudieron obtener productos para ${category.name}`)
         }
-        totalProducts += mlProducts.length
-      } else {
+
+        results[category.slug] = {
+          category: category.name,
+          icon: category.icon,
+          count: products.length,
+          products,
+          status: products.length > 0 ? 'Encontrados' : 'Sin resultados'
+        }
+
+        totalProducts += products.length
+      } catch (categoryError) {
+        console.error(`Error sincronizando ${category.name}:`, categoryError)
         results[category.slug] = {
           category: category.name,
           icon: category.icon,
           count: 0,
           products: [],
-          status: '⚠️ Sin productos',
+          status: 'Error'
         }
       }
     }
 
-    return NextResponse.json({
+    return Response.json({
       success: true,
       timestamp: new Date().toISOString(),
       totalCategories: CATEGORIES.length,
       totalProducts,
-      results,
+      results
     })
   } catch (error) {
-    console.error('Error sincronizando productos:', error)
-    return NextResponse.json(
-      { error: 'Error sincronizando productos' },
+    console.error('Error en sincronización:', error)
+    return Response.json(
+      { success: false, error: 'Sync error' },
       { status: 500 }
     )
   }
