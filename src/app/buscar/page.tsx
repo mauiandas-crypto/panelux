@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation'
 import Header from '@/components/header'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 interface SearchResult {
   id: string
   name: string
