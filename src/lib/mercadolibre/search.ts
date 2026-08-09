@@ -23,46 +23,6 @@ export interface MLSearchResponse {
   }
 }
 
-export async function getProductDetail(productId: string) {
-  try {
-    const response = await fetch(
-      `${ML_API_BASE}/items/${productId}`,
-      {
-        next: { revalidate: 3600 }
-      }
-    )
-
-    if (!response.ok) {
-      return null
-    }
-
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching product detail:', error)
-    return null
-  }
-}
-
-export async function getProductDescriptions(productId: string) {
-  try {
-    const response = await fetch(
-      `${ML_API_BASE}/items/${productId}/description`,
-      {
-        next: { revalidate: 3600 }
-      }
-    )
-
-    if (!response.ok) {
-      return null
-    }
-
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching product description:', error)
-    return null
-  }
-}
-
 // Convertir producto de MercadoLibre al formato interno
 export function convertMLProduct(mlProduct: MLProduct, categorySlug: string) {
   return {
