@@ -1,22 +1,6 @@
-export default function Home() {
-  return (
-    <div style={{ padding: '40px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
-      <h1>🍳 Panelux Uruguay</h1>
-      <p>Distribuidor oficial de utensilios de cocina</p>
-      <p style={{ marginTop: '30px', color: '#666' }}>Sitio en construcción</p>
-    </div>
-  )
-        height: 630,
-        alt: 'Utensilios de cocina Panelux',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Panelux Uruguay | Distribuidor Oficial',
-    description: 'Utensilios de cocina premium de la marca brasileña Panelux.',
-  },
-}
+import Link from 'next/link'
+import Header from '@/components/header'
+import Spotlight from '@/components/spotlight'
 
 const CATEGORIES = [
   {
