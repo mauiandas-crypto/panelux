@@ -30,7 +30,7 @@ export default async function CategoryPage({ params }: Props) {
     notFound()
   }
 
-  // Usar productos locales
+  // Get products from local database
   const products = getProductsByCategory(slug)
 
   // Marcar si son datos de MercadoLibre
