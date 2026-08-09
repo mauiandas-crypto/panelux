@@ -1,33 +1,11 @@
-import { Metadata } from 'next'
-import { Card } from '@/components/ui/card'
-import { Spotlight } from '@/components/ui/spotlight'
-import Link from 'next/link'
-import Header from '@/components/header'
-
-export const metadata: Metadata = {
-  title: 'Panelux Uruguay | Distribuidor Oficial de Utensilios de Cocina',
-  description:
-    'Panelux es el distribuidor oficial en Uruguay de la marca brasileña de utensilios de cocina. Ollas, sartenes, ollas de presión y más. Envíos a todo el país.',
-  keywords: [
-    'panelux',
-    'utensilios cocina',
-    'ollas',
-    'sartenes',
-    'olla presion',
-    'cookware',
-    'uruguay',
-    'distribuidor oficial',
-  ],
-  openGraph: {
-    title: 'Panelux Uruguay | Distribuidor Oficial',
-    description: 'Utensilios de cocina premium. Distribuidor oficial en Uruguay.',
-    type: 'website',
-    locale: 'es_UY',
-    url: 'https://panelux.com.uy',
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=1200&h=630&fit=crop',
-        width: 1200,
+export default function Home() {
+  return (
+    <div style={{ padding: '40px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
+      <h1>🍳 Panelux Uruguay</h1>
+      <p>Distribuidor oficial de utensilios de cocina</p>
+      <p style={{ marginTop: '30px', color: '#666' }}>Sitio en construcción</p>
+    </div>
+  )
         height: 630,
         alt: 'Utensilios de cocina Panelux',
       },
