@@ -64,7 +64,7 @@ export default async function ProductPage({ params }: Props) {
               <div>
                 <div className="mb-6">
                   <Link
-                    href={`/categoria/${params.slug}`}
+                    href={`/categoria/${slug}`}
                     className="text-sm text-blue-600 hover:text-blue-700 mb-2 inline-block"
                   >
                     ← Volver a {category.name}
