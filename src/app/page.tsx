@@ -1,113 +1,12 @@
 export default function Home() {
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
+    <div style={{ padding: '40px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
       <h1>🍳 Panelux Uruguay</h1>
-      <p>Test de conexión básico</p>
+      <p>Distribuidor oficial de utensilios de cocina</p>
+      <p style={{ marginTop: '30px', color: '#666' }}>Sitio en construcción - Migración a Vercel completada ✅</p>
     </div>
   )
 }
-
-// OLD CODE BELOW - DISABLED
-/*
-import Link from 'next/link'
-import Header from '@/components/header'
-import Spotlight from '@/components/spotlight'
-
-const CATEGORIES = [
-  {
-    id: 'ollas',
-    name: 'Ollas',
-    slug: 'ollas',
-    description: 'Antiaderentes, aluminio, cerámica e inducción',
-    icon: '🍳',
-  },
-  {
-    id: 'juegos-ollas',
-    name: 'Juegos de Ollas',
-    slug: 'juegos-ollas',
-    description: 'Juegos completos coordinados',
-    icon: '🎁',
-  },
-  {
-    id: 'ollas-presion',
-    name: 'Ollas de Presión',
-    slug: 'ollas-presion',
-    description: 'Seguras y eficientes',
-    icon: '⚡',
-  },
-  {
-    id: 'sartenes',
-    name: 'Sartenes',
-    slug: 'sartenes',
-    description: 'Para todo tipo de cocción',
-    icon: '🍳',
-  },
-  {
-    id: 'moldes-bandejas',
-    name: 'Moldes y Bandejas',
-    slug: 'moldes-bandejas',
-    description: 'Para hornear y preparar',
-    icon: '🥐',
-  },
-  {
-    id: 'accesorios',
-    name: 'Accesorios',
-    slug: 'accesorios',
-    description: 'Complementos para tus ollas',
-    icon: '🔧',
-  },
-]
-
-const BENEFITS = [
-  {
-    title: 'Calidad que Dura',
-    description: 'Productos resistentes y confiables',
-    icon: '✨',
-  },
-  {
-    title: 'Envíos a Todo el País',
-    description: 'Entrega rápida y segura',
-    icon: '🚚',
-  },
-  {
-    title: 'Compra 100% Segura',
-    description: 'Seguridad del inicio al fin',
-    icon: '🔒',
-  },
-  {
-    title: 'Hasta 6 Cuotas',
-    description: 'Sin interés en tarjeta',
-    icon: '💳',
-  },
-]
-
-export default function Home() {
-  return (
-    <>
-      <Header />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'LocalBusiness',
-            name: 'Panelux Uruguay',
-            description: 'Distribuidor oficial de utensilios de cocina Panelux',
-            url: 'https://panelux.com.uy',
-            telephone: '+598123456789',
-            address: {
-              '@type': 'PostalAddress',
-              addressCountry: 'UY',
-            },
-            sameAs: [
-              'https://www.mercadolibre.com.uy/seller/panelux-uy',
-            ],
-          }),
-        }}
-      />
-
-      {/* Beneficios superiores */}
-      <section className="bg-gradient-to-r from-purple-100 to-purple-50 py-6 border-b-4 border-purple-600">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {BENEFITS.map((benefit, i) => (
