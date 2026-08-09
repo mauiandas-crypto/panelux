@@ -1,5 +1,4 @@
 import { getCategoryBySlug, getProductsByCategory } from '@/lib/products'
-import { searchProductsByCategory, convertMLProduct, MLProduct } from '@/lib/mercadolibre/search'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/header'
@@ -31,21 +30,8 @@ export default async function CategoryPage({ params }: Props) {
     notFound()
   }
 
-  // Intentar traer productos de MercadoLibre, fallback a datos locales
-  let mlProducts: MLProduct[] = []
-  try {
-    mlProducts = await searchProductsByCategory(slug)
-  } catch (error) {
-    console.log('Usando datos locales de prueba')
-  }
-
-  // Convertir productos de MercadoLibre o usar datos locales
-  let products
-  if (mlProducts.length > 0) {
-    products = mlProducts.map(mlProd => convertMLProduct(mlProd, slug))
-  } else {
-    products = getProductsByCategory(slug)
-  }
+  // Usar productos locales
+  const products = getProductsByCategory(slug)
 
   // Marcar si son datos de MercadoLibre
   const isFromML = mlProducts.length > 0
@@ -73,16 +59,10 @@ export default async function CategoryPage({ params }: Props) {
                 <span className="text-4xl">{category.icon}</span>
                 {category.name}
               </h1>
-              {isFromML && (
-                <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full">
-                  📦 MercadoLibre
-                </span>
-              )}
             </div>
             <p className="text-lg text-gray-600">{category.description}</p>
             <p className="text-sm text-gray-500 mt-4">
               {products.length} producto{products.length !== 1 ? 's' : ''} disponible{products.length !== 1 ? 's' : ''}
-              {isFromML && ' (desde MercadoLibre)'}
             </p>
           </div>
         </div>
