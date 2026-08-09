@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: Props) {
               Inicio
             </Link>
             <span className="text-gray-400">›</span>
-            <Link href={`/categoria/${params.slug}`} className="text-blue-600 hover:text-blue-700">
+            <Link href={`/categoria/${slug}`} className="text-blue-600 hover:text-blue-700">
               {category.name}
             </Link>
             <span className="text-gray-400">›</span>
