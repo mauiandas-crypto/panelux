@@ -33,9 +33,6 @@ export default async function CategoryPage({ params }: Props) {
   // Get products from local database
   const products = getProductsByCategory(slug)
 
-  // Marcar si son datos de MercadoLibre
-  const isFromML = mlProducts.length > 0
-
   return (
     <>
       <Header />
@@ -85,7 +82,7 @@ export default async function CategoryPage({ params }: Props) {
                 {products.map((product) => (
                   <Link
                     key={product.id}
-                    href={`/categoria/${params.slug}/${product.slug}`}
+                    href={`/categoria/${slug}/${product.slug}`}
                   >
                     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer h-full flex flex-col">
                       {/* Image */}
