@@ -1,3 +1,14 @@
+export default function Home() {
+  return (
+    <div style={{ padding: '20px', textAlign: 'center' }}>
+      <h1>🍳 Panelux Uruguay</h1>
+      <p>Test de conexión básico</p>
+    </div>
+  )
+}
+
+// OLD CODE BELOW - DISABLED
+/*
 import Link from 'next/link'
 import Header from '@/components/header'
 import Spotlight from '@/components/spotlight'
