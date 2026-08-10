@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState, useMemo } from "react"
-import productos from "../../catalogo-completo.json"
+import { productos } from "@/data/productos"
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
