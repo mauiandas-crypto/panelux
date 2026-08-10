@@ -100,27 +100,29 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {productosVisibles.map((producto: any) => (
-              <div key={`${producto.codigo}-${producto.imagen}`} className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden group">
-                <div className="relative h-56 bg-gray-200">
-                  <img
-                    src={producto.imagen}
-                    alt={producto.nombre}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-sm font-bold text-gray-900 mb-1 line-clamp-2">{producto.nombre}</h3>
-                  <p className="text-xs text-gray-600 mb-2">{producto.linea}</p>
-                  <p className="text-xs text-gray-500 mb-3">Código: {producto.codigo}</p>
-                  <div className="flex items-center justify-between pt-3 border-t">
-                    <span className="text-2xl font-bold text-blue-600">${producto.pvp}</span>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-bold transition shadow-md">
-                      ➕
-                    </button>
+              <Link key={`${producto.codigo}-${producto.imagen}`} href={`/productos/${producto.codigo}`}>
+                <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden group h-full cursor-pointer">
+                  <div className="relative h-56 bg-gray-200 overflow-hidden">
+                    <img
+                      src={producto.imagen}
+                      alt={producto.nombre}
+                      className="w-full h-full object-cover group-hover:scale-125 transition duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-sm font-bold text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition">{producto.nombre}</h3>
+                    <p className="text-xs text-gray-600 mb-2">{producto.linea}</p>
+                    <p className="text-xs text-gray-500 mb-3">Código: {producto.codigo}</p>
+                    <div className="flex items-center justify-between pt-3 border-t">
+                      <span className="text-2xl font-bold text-blue-600">${producto.pvp}</span>
+                      <span className="bg-blue-600 group-hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-bold transition shadow-md">
+                        ➕
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
