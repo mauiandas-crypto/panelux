@@ -7,7 +7,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-4xl">🍳</span>
+            <img src="/assets/panelux-logo.png" alt="Panelux" className="h-12 w-12" />
             <span className="text-3xl font-bold text-blue-600">Panelux</span>
           </div>
           <nav className="hidden md:flex gap-8">
