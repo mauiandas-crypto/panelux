@@ -1,6 +1,22 @@
-﻿import Link from "next/link"
+﻿'use client'
+
+import Link from "next/link"
+import { useState, useMemo } from "react"
+import productos from "../../catalogo-completo.json"
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  const productosPorCategoria = useMemo(() => {
+    return productos.reduce((acc: Record<string, typeof productos>, p) => {
+      if (!acc[p.categoria]) acc[p.categoria] = []
+      acc[p.categoria].push(p)
+      return acc
+    }, {})
+  }, [])
+
+  const categorias = Object.keys(productosPorCategoria).sort()
+  const productosVisibles = selectedCategory ? productosPorCategoria[selectedCategory] : productos.slice(0, 6)
   return (
     <div className="min-h-screen bg-white">
       {/* Beneficios */}
@@ -63,14 +79,7 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { codigo: "5000041", nombre: "Magnific - Sartén Francesa 32cm", categoria: "Sartenes", pvp: 710, imagen: "/productos/Magnific%20AA/5000041_Magnific_AA_Frigideira%20Francesa%20%C3%8732_Grafite.jpg" },
-              { codigo: "5000094", nombre: "Magnific - Cacerola 18cm", categoria: "Ollas", pvp: 600, imagen: "/productos/Magnific%20AA/5000094_Magnific_AA_Ca%C3%A7arola%20%C3%8718_Grafite.jpg" },
-              { codigo: "5000096", nombre: "Magnific - Cacerola 22cm", categoria: "Ollas", pvp: 840, imagen: "/productos/Magnific%20AA/5000096_Magnific_AA_Ca%C3%A7arola%20%C3%8722_Grafite.jpg" },
-              { codigo: "5000097", nombre: "Magnific - Cacerola 24cm", categoria: "Ollas", pvp: 890, imagen: "/productos/Magnific%20AA/5000097_Magnific_AA_Ca%C3%A7arola%20%C3%8724_Grafite.jpg" },
-              { codigo: "5000123", nombre: "Magnific - Hervidor 12cm", categoria: "Ollas", pvp: 380, imagen: "/productos/Magnific%20AA/5000123_Magnific_Fervedor%20%C3%8712_Grafite.jpg" },
-              { codigo: "5000133", nombre: "Magnific - Hervidor 16cm", categoria: "Ollas", pvp: 465, imagen: "/productos/Magnific%20AA/5000133_Magnific_Fervedor%20%C3%8716_Grafite.jpg" },
-            ].map(producto => (
+            {productosVisibles.map((producto: any) => (
               <div key={producto.codigo} className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden group">
                 <div className="relative h-64 bg-gray-200">
                   <img src={producto.imagen} alt={producto.nombre} className="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
@@ -90,7 +99,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12 p-8 bg-blue-50 rounded-lg">
-            <p className="text-lg text-gray-600">✨ Mostrando 6 de 76 productos disponibles</p>
+            <p className="text-lg text-gray-600">✨ Mostrando {productosVisibles.length} de {productos.length} productos disponibles</p>
           </div>
         </div>
       </section>
