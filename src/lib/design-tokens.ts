@@ -18,7 +18,7 @@ export const COLORS = {
     200: '#e5e7eb',
     900: '#111827',
   },
-};
+} as const;
 
 export const Z_INDEX = {
   sticky: 1020,
