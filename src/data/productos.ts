@@ -3,7 +3,7 @@ export const productos = [
     "pvp": 710,
     "nombre": "Magnific - Sartén francesa 32cm - Grafito - 2,1mm",
     "categoria": "Sartenes y woks",
-    "imagen": "/productos/Magnific AA/5000041_Magnific_AA_Frigideira Francesa Ø32_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000041_Magnific_AA_Frigideira%20Francesa%20%C3%9832_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000041"
   },
@@ -11,7 +11,7 @@ export const productos = [
     "pvp": 600,
     "nombre": "Magnific - Cacerola 18cm - Grafito - 1mm",
     "categoria": "Ollas y cacerolas",
-    "imagen": "/productos/Magnific AA/5000094_Magnific_AA_Caçarola Ø18_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000094_Magnific_AA_Ca%C3%A7arola%20%C3%9818_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000094"
   },
@@ -19,7 +19,7 @@ export const productos = [
     "pvp": 840,
     "nombre": "Magnific - Cacerola 22cm - Grafito - 1,2mm",
     "categoria": "Ollas y cacerolas",
-    "imagen": "/productos/Magnific AA/5000096_Magnific_AA_Caçarola Ø22_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000096_Magnific_AA_Ca%C3%A7arola%20%C3%9822_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000096"
   },
@@ -27,7 +27,7 @@ export const productos = [
     "pvp": 890,
     "nombre": "Magnific - Cacerola 24cm - Grafito - 1,5mm",
     "categoria": "Ollas y cacerolas",
-    "imagen": "/productos/Magnific AA/5000097_Magnific_AA_Caçarola Ø24_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000097_Magnific_AA_Ca%C3%A7arola%20%C3%9824_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000097"
   },
@@ -35,7 +35,7 @@ export const productos = [
     "pvp": 380,
     "nombre": "Magnific - Hervidor 12cm - Grafito - 1mm",
     "categoria": "Ollas y cacerolas",
-    "imagen": "/productos/Magnific AA/5000123_Magnific_Fervedor Ø12_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000123_Magnific_Fervedor%20%C3%9812_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000123"
   },
@@ -43,7 +43,7 @@ export const productos = [
     "pvp": 465,
     "nombre": "Magnific - Hervidor 16cm - Grafito - 1mm",
     "categoria": "Ollas y cacerolas",
-    "imagen": "/productos/Magnific AA/5000133_Magnific_Fervedor Ø16_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000133_Magnific_Fervedor%20%C3%9816_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000133"
   },
@@ -51,7 +51,7 @@ export const productos = [
     "pvp": 220,
     "nombre": "Magnific - Sartén para huevos 12cm - Grafito - 1mm",
     "categoria": "Sartenes y woks",
-    "imagen": "/productos/Magnific AA/5000134_Magnific_AA_Frigideira para Ovo Ø12_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000134_Magnific_AA_Frigideira%20para%20Ovo%20%C3%9812_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000134"
   },
@@ -59,7 +59,7 @@ export const productos = [
     "pvp": 750,
     "nombre": "Magnific - Sartén hondo 22cm - Grafito - 1,2mm",
     "categoria": "Sartenes y woks",
-    "imagen": "/productos/Magnific AA/5000141_Magnific_AA_Frigideira Funda_com_Tampa Ø22_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000141_Magnific_AA_Frigideira%20Funda_com_Tampa%20%C3%9822_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000141"
   },
@@ -67,7 +67,7 @@ export const productos = [
     "pvp": 560,
     "nombre": "Magnific - Omeletera 20cm - Grafito - 1,2mm",
     "categoria": "Sartenes y woks",
-    "imagen": "/productos/Magnific AA/5000183_Magnific_AA_Omeleteita Ø20_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000183_Magnific_AA_Omeleteita%20%C3%9820_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000183"
   },
@@ -75,7 +75,7 @@ export const productos = [
     "pvp": 520,
     "nombre": "Magnific - Olla 16cm c/Mango - Grafito - 1mm",
     "categoria": "Ollas y cacerolas",
-    "imagen": "/productos/Magnific AA/5000184_Magnific_AA_Panela Ø16_Grafite.jpg",
+    "imagen": "/productos/Magnific%20AA/5000184_Magnific_AA_Panela%20%C3%9816_Grafite.jpg",
     "linea": "Magnific AA",
     "codigo": "5000184"
   }
