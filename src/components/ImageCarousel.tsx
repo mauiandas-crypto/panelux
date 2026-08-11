@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 
 interface ImageCarouselProps {
   imagenBase: string
@@ -11,7 +10,7 @@ interface ImageCarouselProps {
 export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps) {
   const [fotoIndex, setFotoIndex] = useState(0)
   const [fotos, setFotos] = useState<string[]>([imagenBase])
-  const [loadedFotos, setLoadedFotos] = useState<boolean[]>([true])
+  const [fotosValidas, setFotosValidas] = useState<number[]>([0])
 
   useEffect(() => {
     const imagenSinExtension = imagenBase.substring(0, imagenBase.lastIndexOf('.'))
@@ -25,23 +24,27 @@ export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps
     ]
 
     setFotos(variantes)
-    setLoadedFotos(new Array(variantes.length).fill(false))
-    setLoadedFotos((prev) => {
-      const newLoaded = [...prev]
-      newLoaded[0] = true // La primera siempre existe
-      return newLoaded
-    })
+    setFotoIndex(0)
+    // Solo la primera imagen se considera válida por defecto
+    setFotosValidas([0])
   }, [imagenBase])
 
   const handleImageLoad = (index: number) => {
-    setLoadedFotos((prev) => {
-      const newLoaded = [...prev]
-      newLoaded[index] = true
-      return newLoaded
+    // Marcar esta imagen como válida
+    setFotosValidas((prev) => {
+      if (!prev.includes(index)) {
+        return [...prev, index].sort((a, b) => a - b)
+      }
+      return prev
     })
   }
 
-  const fotosActuales = fotos.filter((_, i) => loadedFotos[i])
+  const handleImageError = (index: number) => {
+    // Si la imagen actual no carga, cambiar a la primera válida
+    if (fotoIndex === index && fotosValidas.length > 0) {
+      setFotoIndex(fotosValidas[0])
+    }
+  }
 
   return (
     <div>
@@ -51,18 +54,14 @@ export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps
           src={fotos[fotoIndex]}
           alt={`${nombre} - Vista ${fotoIndex + 1}`}
           className="w-full h-full object-contain max-h-96 hover:scale-110 transition duration-300"
-          onError={() => {
-            if (fotoIndex !== 0) {
-              setFotoIndex(0)
-            }
-          }}
+          onError={() => handleImageError(fotoIndex)}
         />
       </div>
 
-      {/* Controles - Solo mostrar si hay más de 1 foto */}
-      {fotos.length > 1 && (
+      {/* Controles - Solo mostrar si hay más de 1 foto válida */}
+      {fotosValidas.length > 1 && (
         <div className="flex gap-2">
-          {fotos.map((foto, index) => (
+          {fotosValidas.map((index) => (
             <button
               key={index}
               onClick={() => setFotoIndex(index)}
@@ -74,13 +73,10 @@ export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps
               title={`Vista ${index + 1}`}
             >
               <img
-                src={foto}
+                src={fotos[index]}
                 alt={`Miniatura ${index + 1}`}
                 className="w-full h-full object-contain bg-gray-50"
                 onLoad={() => handleImageLoad(index)}
-                onError={() => {
-                  // Si no carga, simplemente no lo mostraremos
-                }}
               />
             </button>
           ))}
