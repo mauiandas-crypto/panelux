@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
@@ -12,9 +12,26 @@ export default function ProductoDetail() {
   const codigo = params.codigo as string
   const [cantidad, setCantidad] = useState(1)
   const [agregado, setAgregado] = useState(false)
+  const [fotoIndex, setFotoIndex] = useState(0)
   const { agregarAlCarrito } = useCart()
 
   const producto = productos.find((p) => p.codigo === codigo)
+
+  // Generar URLs de las 3 variantes de imágenes
+  const fotos = useMemo(() => {
+    if (!producto) return []
+
+    const imagenBase = producto.imagen
+    const imagenSinExtension = imagenBase.substring(0, imagenBase.lastIndexOf('.'))
+    const extension = imagenBase.substring(imagenBase.lastIndexOf('.'))
+
+    // Intentar cargar las 3 variantes: original, _B, _CX
+    return [
+      imagenBase, // Foto principal
+      `${imagenSinExtension}_B${extension}`, // Foto secundaria
+      `${imagenSinExtension}_CX${extension}`, // Foto de caja
+    ]
+  }, [producto?.imagen])
 
   if (!producto) {
     return (
@@ -68,13 +85,37 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Imagen */}
-          <div className="flex items-center justify-center bg-white rounded-lg overflow-hidden h-96 md:h-full min-h-96">
-            <img
-              src={producto.imagen}
-              alt={producto.nombre}
-              className="w-full h-full object-contain hover:scale-110 transition duration-300"
-            />
+          {/* Carousel de Imágenes */}
+          <div>
+            <div className="bg-white rounded-lg overflow-hidden mb-4 flex items-center justify-center min-h-96">
+              <img
+                src={fotos[fotoIndex]}
+                alt={`${producto.nombre} - Vista ${fotoIndex + 1}`}
+                className="w-full h-full object-contain max-h-96 hover:scale-110 transition duration-300"
+              />
+            </div>
+
+            {/* Controles del Carousel */}
+            <div className="flex gap-2">
+              {fotos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setFotoIndex(index)}
+                  className={`flex-1 h-20 rounded-lg overflow-hidden border-2 transition ${
+                    fotoIndex === index
+                      ? 'border-blue-600 shadow-lg'
+                      : 'border-gray-200 hover:border-gray-400'
+                  }`}
+                  title={`Vista ${index + 1}`}
+                >
+                  <img
+                    src={fotos[index]}
+                    alt={`Miniatura ${index + 1}`}
+                    className="w-full h-full object-contain bg-gray-50"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Detalles */}
