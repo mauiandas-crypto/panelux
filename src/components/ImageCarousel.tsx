@@ -25,8 +25,8 @@ export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps
 
     setFotos(variantes)
     setFotoIndex(0)
-    // Intentar cargar todas las imágenes
-    setFotosExisten([true, false, false])
+    // Asumir que todas las imágenes existen por defecto
+    setFotosExisten([true, true, true])
   }, [imagenBase])
 
   const handleImageLoad = (index: number) => {
