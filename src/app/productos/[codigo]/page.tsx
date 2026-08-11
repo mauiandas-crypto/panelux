@@ -43,13 +43,15 @@ export default function ProductoDetail() {
     setTimeout(() => setAgregado(false), 2000)
   }
 
-  const descripcion = `${producto.nombre}.
-Marca: ${producto.linea}.
-Código del producto: ${producto.codigo}.
-Precio: $${producto.pvp}.
+  const descripcion = `${producto.nombre}
 
-Este es un producto de calidad premium de Panelux, distribuidor oficial en Uruguay.
-Garantía oficial del fabricante y envíos seguros a todo el país.`
+Marca: ${producto.linea}
+Código: ${producto.codigo}
+Precio: $${producto.pvp}
+
+Este es un producto de calidad premium de la marca brasileña Panelux.
+Distribuido por Todogastro, distribuidor oficial en Uruguay.
+Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
   return (
     <div className="min-h-screen bg-white pt-24 pb-20">
@@ -71,7 +73,7 @@ Garantía oficial del fabricante y envíos seguros a todo el país.`
             <img
               src={producto.imagen}
               alt={producto.nombre}
-              className="w-full h-full object-cover hover:scale-110 transition duration-300"
+              className="w-full h-full object-contain hover:scale-110 transition duration-300 p-4"
             />
           </div>
 
@@ -163,11 +165,11 @@ Garantía oficial del fabricante y envíos seguros a todo el país.`
 
             {/* Info adicional */}
             <div className="mt-8 pt-8 border-t-2 border-gray-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">¿Por qué comprar con Panelux?</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">¿Por qué comprar con Todogastro?</h3>
               <ul className="space-y-3">
                 <li className="flex items-center gap-3">
                   <span className="text-2xl">✅</span>
-                  <span className="text-gray-700">Distribuidor oficial en Uruguay</span>
+                  <span className="text-gray-700">Distribuidor oficial de Panelux en Uruguay</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-2xl">✅</span>
