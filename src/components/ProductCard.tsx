@@ -101,7 +101,7 @@ export default function ProductCard({ codigo, nombre, imagen, linea, pvp }: Prod
                     : 'bg-blue-600 hover:bg-blue-700'
                 }`}
               >
-                {agregado ? '✓' : '🛒'}
+                {agregado ? '✓ Agregado' : '🛒 Agregar'}
               </button>
             </div>
           </div>
