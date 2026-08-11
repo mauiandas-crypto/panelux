@@ -40,11 +40,11 @@ export default function ProductCard({ codigo, nombre, imagen, linea, pvp }: Prod
     <Link href={`/productos/${codigo}`}>
       <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden group h-full cursor-pointer">
         {/* Imagen */}
-        <div className="relative h-56 bg-gray-200 overflow-hidden">
+        <div className="relative h-56 bg-white overflow-hidden">
           <img
             src={imagen}
             alt={nombre}
-            className="w-full h-full object-contain group-hover:scale-110 transition duration-500 p-2"
+            className="w-full h-full object-cover group-hover:scale-125 transition duration-500"
             loading="lazy"
           />
         </div>

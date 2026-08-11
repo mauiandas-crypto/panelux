@@ -69,11 +69,11 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Imagen */}
-          <div className="flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden h-96 md:h-full min-h-96">
+          <div className="flex items-center justify-center bg-white rounded-lg overflow-hidden h-96 md:h-full min-h-96">
             <img
               src={producto.imagen}
               alt={producto.nombre}
-              className="w-full h-full object-contain hover:scale-110 transition duration-300 p-4"
+              className="w-full h-full object-contain hover:scale-110 transition duration-300"
             />
           </div>
 
