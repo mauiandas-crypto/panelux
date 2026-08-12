@@ -54,8 +54,8 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-white mb-4">Tips Gastronómicos</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/blog" className="hover:text-blue-400 transition">Blog</Link></li>
-              <li><Link href="/blog/como-elegir-sarten" className="hover:text-blue-400 transition">Guías y consejos</Link></li>
-              <li><Link href="/blog/receta-guiso" className="hover:text-blue-400 transition">Recetas</Link></li>
+              <li><Link href="/guia-compra" className="hover:text-blue-400 transition">Guía de Compra</Link></li>
+              <li><Link href="/testimonios" className="hover:text-blue-400 transition">Testimonios</Link></li>
             </ul>
           </div>
 
@@ -65,7 +65,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-blue-400 transition">Todos los productos</Link></li>
               <li><Link href="/buscar" className="hover:text-blue-400 transition">Buscar</Link></li>
-              <li><Link href="/carrito" className="hover:text-blue-400 transition">Mi carrito</Link></li>
+              <li><Link href="/promociones" className="hover:text-blue-400 transition">Promociones</Link></li>
             </ul>
           </div>
 
@@ -73,10 +73,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold text-white mb-4">Servicios</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/" className="hover:text-blue-400 transition">Envíos seguros</Link></li>
-              <li><Link href="/" className="hover:text-blue-400 transition">Garantía oficial</Link></li>
-              <li><Link href="/" className="hover:text-blue-400 transition">Devoluciones</Link></li>
-              <li><Link href="/" className="hover:text-blue-400 transition">Cuotas sin interés</Link></li>
+              <li><Link href="/faq" className="hover:text-blue-400 transition">Preguntas Frecuentes</Link></li>
+              <li><Link href="/guia-compra" className="hover:text-blue-400 transition">Guía de Capacidades</Link></li>
+              <li><Link href="/testimonios" className="hover:text-blue-400 transition">Opiniones</Link></li>
+              <li><Link href="/blog" className="hover:text-blue-400 transition">Blog de Consejos</Link></li>
             </ul>
           </div>
 
@@ -168,11 +168,13 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
             <p>© 2026 Panelux SAS - Distribuidor oficial en Uruguay | RUT 21999001001</p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap justify-center">
               <Link href="/privacidad" className="hover:text-gray-200 transition">Privacidad</Link>
               <Link href="/terminos" className="hover:text-gray-200 transition">Términos</Link>
-              <Link href="/blog" className="hover:text-gray-200 transition">Blog</Link>
-              <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition">Soporte</a>
+              <Link href="/faq" className="hover:text-gray-200 transition">FAQ</Link>
+              <Link href="/testimonios" className="hover:text-gray-200 transition">Testimonios</Link>
+              <Link href="/promociones" className="hover:text-gray-200 transition">Ofertas</Link>
+              <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition">Contacto</a>
             </div>
           </div>
         </div>
