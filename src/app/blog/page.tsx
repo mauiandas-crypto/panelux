@@ -127,12 +127,14 @@ export default function Blog() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">¿Necesitas Asesoramiento?</h2>
           <p className="text-lg text-blue-100 mb-8">Nuestro equipo experto te ayudará a elegir los utensilios perfectos</p>
-          <button
-            onClick={() => window.open('https://wa.me/598095244593', '_blank')}
+          <a
+            href="https://wa.me/598095244593"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition"
           >
             Hablar con un Asesor
-          </button>
+          </a>
         </div>
       </section>
     </div>

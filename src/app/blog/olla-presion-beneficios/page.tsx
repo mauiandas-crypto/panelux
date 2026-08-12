@@ -123,12 +123,14 @@ export default function ArticuloOllaPresion() {
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-xl p-8 my-12">
           <h3 className="text-2xl font-bold mb-2">¿Necesitas una olla a presión?</h3>
           <p className="mb-4">Tenemos opciones de todas las capacidades y marcas confiables con garantía oficial.</p>
-          <button
-            onClick={() => window.open('https://wa.me/598095244593', '_blank')}
-            className="bg-white text-blue-600 font-bold px-6 py-3 rounded-lg hover:bg-blue-50 transition"
+          <a
+            href="https://wa.me/598095244593"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg hover:bg-blue-50 transition"
           >
             Consultar disponibilidad
-          </button>
+          </a>
         </div>
 
         {/* Relacionados */}
