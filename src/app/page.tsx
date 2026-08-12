@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useMemo } from "react"
 import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
+import BannerCarousel from "@/components/BannerCarousel"
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -21,6 +22,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Carrusel de Banners */}
+      <BannerCarousel />
+
       {/* Beneficios */}
       <section className="bg-gradient-to-r from-blue-50 to-purple-50 py-8 px-6 border-b-4 border-blue-500">
         <div className="max-w-7xl mx-auto">
