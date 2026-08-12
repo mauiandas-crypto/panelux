@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface SearchResult {
   id: string
@@ -93,8 +94,18 @@ export function SearchContent() {
               className="group"
             >
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
-                <div className="bg-gradient-to-br from-blue-100 to-purple-100 h-48 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
-                  {product.image || '🍳'}
+                <div className="bg-gradient-to-br from-blue-100 to-purple-100 h-48 flex items-center justify-center relative group-hover:scale-110 transition-transform">
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-6xl">🍳</span>
+                  )}
                 </div>
 
                 <div className="p-4 flex-1 flex flex-col">
