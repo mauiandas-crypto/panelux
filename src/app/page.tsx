@@ -146,34 +146,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h4 className="font-bold mb-4 text-lg flex items-center gap-2">
-                <img src="/assets/panelux-logo.png" alt="Panelux" className="h-8" />
-                Panelux Uruguay
-              </h4>
-              <p className="text-gray-400">Distribuidor oficial de utensilios de cocina premium</p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4 text-lg">Contacto</h4>
-              <p className="text-gray-400">Yaguarón 1764, Montevideo</p>
-              <p className="text-gray-400">+598 9271 5555</p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4 text-lg">Horario</h4>
-              <p className="text-gray-400">Lun-Vie: 8:30 - 17:15</p>
-              <p className="text-gray-400">Sábado: Cerrado</p>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>© 2026 Panelux Uruguay - Distribuidor Oficial</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
