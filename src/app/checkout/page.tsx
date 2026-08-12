@@ -53,14 +53,26 @@ export default function CheckoutPage() {
       }
 
       // Crear orden
+      const now = new Date()
       const order = {
+        id: `order-${Date.now()}`,
+        fecha: now.toISOString(),
         cliente: formData,
-        items,
+        items: items.map(item => ({
+          codigo: item.codigo,
+          nombre: item.nombre,
+          pvp: item.pvp,
+          cantidad: item.cantidad,
+          imagen: item.imagen,
+          subtotal: item.pvp * item.cantidad,
+        })),
         subtotal: total,
         descuento: 0,
         total,
+        estado: 'pendiente' as const,
         metodoPago,
-        notas: `Pedido realizado el ${new Date().toLocaleDateString('es-UY')}`,
+        notas: `Pedido realizado el ${now.toLocaleDateString('es-UY')}`,
+        fechaActualizacion: now.toISOString(),
       }
 
       await addOrder(order)
