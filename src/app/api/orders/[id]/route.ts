@@ -5,7 +5,7 @@ let orders: any[] = []
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Por ahora devolver error 404 ya que no tenemos DB
@@ -20,7 +20,7 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '')
@@ -31,12 +31,13 @@ export async function PATCH(
     }
 
     const { estado, numeroSeguimiento, notas } = await request.json()
+    const { id } = await params
 
     // En producción actualizar en DB
-    console.log(`Actualizando orden ${params.id} a estado: ${estado}`)
+    console.log(`Actualizando orden ${id} a estado: ${estado}`)
 
     return NextResponse.json({
-      id: params.id,
+      id,
       estado,
       numeroSeguimiento,
       notas,
