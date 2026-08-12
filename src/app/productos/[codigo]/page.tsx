@@ -76,35 +76,35 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
           {/* Detalles */}
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">{producto.nombre}</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{producto.nombre}</h1>
 
-            <div className="mb-6 space-y-2">
-              <p className="text-lg text-gray-600">
+            <div className="mb-4 space-y-1">
+              <p className="text-sm text-gray-600">
                 <span className="font-semibold">Línea:</span> {producto.linea}
               </p>
-              <p className="text-lg text-gray-600">
+              <p className="text-sm text-gray-600">
                 <span className="font-semibold">Categoría:</span> {producto.categoria}
               </p>
-              <p className="text-lg text-gray-600">
+              <p className="text-sm text-gray-600">
                 <span className="font-semibold">Código:</span> {producto.codigo}
               </p>
             </div>
 
             {/* Precio */}
-            <div className="mb-8 p-6 bg-blue-50 rounded-lg border-2 border-blue-200">
-              <p className="text-gray-600 mb-2">Precio por unidad</p>
-              <p className="text-5xl font-bold text-blue-600">${producto.pvp}</p>
+            <div className="mb-6 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+              <p className="text-xs text-gray-600 mb-1">Precio por unidad</p>
+              <p className="text-3xl font-bold text-blue-600">${producto.pvp}</p>
             </div>
 
             {/* Cantidad */}
-            <div className="mb-8">
-              <label className="block text-lg font-semibold text-gray-900 mb-3">
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
                 Cantidad a agregar
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={() => setCantidad(Math.max(1, cantidad - 1))}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded transition"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-3 rounded transition text-sm"
                 >
                   −
                 </button>
@@ -112,12 +112,12 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
                   type="number"
                   value={cantidad}
                   onChange={(e) => setCantidad(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-20 text-center text-2xl font-bold border-2 border-gray-300 rounded px-3 py-2"
+                  className="w-16 text-center text-lg font-bold border-2 border-gray-300 rounded px-2 py-1 text-black"
                   min="1"
                 />
                 <button
                   onClick={() => setCantidad(cantidad + 1)}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded transition"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-3 rounded transition text-sm"
                 >
                   +
                 </button>
@@ -125,9 +125,9 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
             </div>
 
             {/* Subtotal */}
-            <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-              <p className="text-gray-600 mb-2">Subtotal</p>
-              <p className="text-3xl font-bold text-gray-900">
+            <div className="mb-6 p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <p className="text-xs text-gray-600 mb-1">Subtotal</p>
+              <p className="text-2xl font-bold text-gray-900">
                 ${(producto.pvp * cantidad).toLocaleString('es-UY')}
               </p>
             </div>
@@ -135,7 +135,7 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
             {/* Botón Agregar al Carrito */}
             <button
               onClick={handleAgregarAlCarrito}
-              className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition mb-4 ${
+              className={`w-full py-3 px-4 rounded-lg font-bold text-base transition mb-3 ${
                 agregado
                   ? 'bg-green-600 text-white'
                   : 'bg-blue-600 hover:bg-blue-700 text-white'
@@ -147,38 +147,38 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
             {/* Volver */}
             <Link
               href="/"
-              className="block text-center py-3 px-6 border-2 border-gray-300 rounded-lg text-gray-900 font-bold hover:bg-gray-50 transition"
+              className="block text-center py-2 px-4 border-2 border-gray-300 rounded-lg text-gray-900 font-bold text-sm hover:bg-gray-50 transition"
             >
               Volver al catálogo
             </Link>
 
             {/* Descripción */}
-            <div className="mt-12 pt-8 border-t-2 border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Descripción del producto</h2>
-              <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <h2 className="text-lg font-bold text-gray-900 mb-3">Descripción del producto</h2>
+              <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
                 {descripcion}
               </p>
             </div>
 
             {/* Info adicional */}
-            <div className="mt-8 pt-8 border-t-2 border-gray-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">¿Por qué comprar con Todogastro?</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-3">
-                  <span className="text-2xl">✅</span>
-                  <span className="text-gray-700">Distribuidor oficial de Panelux en Uruguay</span>
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h3 className="text-base font-bold text-gray-900 mb-3">¿Por qué comprar con Todogastro?</h3>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2">
+                  <span className="text-lg">✅</span>
+                  <span className="text-sm text-gray-700">Distribuidor oficial de Panelux en Uruguay</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-2xl">✅</span>
-                  <span className="text-gray-700">Garantía oficial del fabricante</span>
+                <li className="flex items-center gap-2">
+                  <span className="text-lg">✅</span>
+                  <span className="text-sm text-gray-700">Garantía oficial del fabricante</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-2xl">✅</span>
-                  <span className="text-gray-700">Envíos seguros a todo el país</span>
+                <li className="flex items-center gap-2">
+                  <span className="text-lg">✅</span>
+                  <span className="text-sm text-gray-700">Envíos seguros a todo el país</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-2xl">✅</span>
-                  <span className="text-gray-700">Hasta 6 cuotas sin interés</span>
+                <li className="flex items-center gap-2">
+                  <span className="text-lg">✅</span>
+                  <span className="text-sm text-gray-700">Hasta 6 cuotas sin interés</span>
                 </li>
               </ul>
             </div>
