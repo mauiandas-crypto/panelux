@@ -108,33 +108,6 @@ export default function Hero() {
             <div className="absolute bottom-10 left-10 text-6xl opacity-30 animate-bounce" style={{ animationDelay: '0.5s' }}>🍲</div>
           </div>
         </div>
-
-        {/* Features Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-12 border-t border-blue-400">
-          <div className="text-center">
-            <div className="text-3xl mb-2">🚚</div>
-            <p className="text-sm font-semibold text-blue-100">Envío Gratis</p>
-            <p className="text-xs text-blue-200">Mvd y Cd. de la Costa</p>
-          </div>
-
-          <div className="text-center">
-            <div className="text-3xl mb-2">💳</div>
-            <p className="text-sm font-semibold text-blue-100">Hasta 12 Cuotas</p>
-            <p className="text-xs text-blue-200">Sin interés</p>
-          </div>
-
-          <div className="text-center">
-            <div className="text-3xl mb-2">🛡️</div>
-            <p className="text-sm font-semibold text-blue-100">Garantía Oficial</p>
-            <p className="text-xs text-blue-200">Del fabricante</p>
-          </div>
-
-          <div className="text-center">
-            <div className="text-3xl mb-2">🔧</div>
-            <p className="text-sm font-semibold text-blue-100">Servicio Técnico</p>
-            <p className="text-xs text-blue-200">Propio</p>
-          </div>
-        </div>
       </div>
     </div>
   )
