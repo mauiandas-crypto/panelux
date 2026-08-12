@@ -1,0 +1,61 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "nodeVersion": "18.x",
+  "env": {
+    "ADMIN_PASSWORD": {
+      "description": "Admin panel password",
+      "required": true
+    },
+    "NEXT_PUBLIC_BASE_URL": {
+      "description": "Your website URL (e.g., https://panelux.com.uy)",
+      "required": true
+    },
+    "MERCADOPAGO_ACCESS_TOKEN": {
+      "description": "Mercado Pago API token",
+      "required": false
+    },
+    "RESEND_API_KEY": {
+      "description": "Resend API key for emails",
+      "required": false
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/admin/login",
+      "destination": "/admin/login",
+      "permanent": false
+    }
+  ]
+}
