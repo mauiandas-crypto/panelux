@@ -12,9 +12,11 @@ export default function NewHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState<typeof productos>([]);
+  const [totalSearchResults, setTotalSearchResults] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const DISPLAY_LIMIT = 10;
 
   // Normalizar texto: minúsculas y sin acentos
   const normalizeText = (text: string) => {
@@ -34,9 +36,10 @@ export default function NewHeader() {
         return normalizedSearchTerms.every(
           (term) => normalizedNombre.includes(term) || normalizedCodigo.includes(term)
         );
-      }).slice(0, 5);
+      });
 
-      setSearchSuggestions(filtered);
+      setTotalSearchResults(filtered.length);
+      setSearchSuggestions(filtered.slice(0, DISPLAY_LIMIT));
       setShowSuggestions(true);
     } else {
       setSearchSuggestions([]);
@@ -114,14 +117,14 @@ export default function NewHeader() {
             {/* Dropdown de sugerencias */}
             {showSuggestions && searchSuggestions.length > 0 && (
               <div
-                className="absolute top-full left-0 right-0 mt-1 bg-white border-2 rounded-lg shadow-lg z-50"
+                className="absolute top-full left-0 right-0 mt-1 bg-white border-2 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto"
                 style={{ borderColor: COLORS.primary[200] }}
               >
                 {searchSuggestions.map((producto) => (
                   <button
                     key={producto.codigo}
                     onClick={() => handleSuggestionClick(producto.codigo)}
-                    className="w-full text-left px-4 py-3 hover:bg-blue-50 border-b last:border-b-0 transition flex items-center gap-3"
+                    className="w-full text-left px-4 py-3 hover:bg-blue-50 border-b transition flex items-center gap-3"
                   >
                     <img
                       src={producto.imagen}
@@ -134,6 +137,20 @@ export default function NewHeader() {
                     </div>
                   </button>
                 ))}
+
+                {/* Botón Ver todos si hay más resultados */}
+                {totalSearchResults > DISPLAY_LIMIT && (
+                  <button
+                    onClick={() => {
+                      router.push(`/buscar?q=${encodeURIComponent(searchInput)}`);
+                      setSearchInput('');
+                      setShowSuggestions(false);
+                    }}
+                    className="w-full text-center px-4 py-3 text-blue-600 font-semibold hover:bg-blue-50 transition border-t"
+                  >
+                    Ver todos ({totalSearchResults} resultados)
+                  </button>
+                )}
               </div>
             )}
           </div>
