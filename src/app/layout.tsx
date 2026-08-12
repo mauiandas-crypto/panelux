@@ -34,7 +34,6 @@ export const metadata: Metadata = {
     description: "Distribuidor oficial de utensilios de cocina premium",
     images: ["https://panelux.com.uy/twitter-image.jpg"],
   },
-  canonical: "https://panelux.com.uy",
   alternates: {
     canonical: "https://panelux.com.uy",
   },
