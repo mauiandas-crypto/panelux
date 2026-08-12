@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import NewHeader from "@/components/layout/NewHeader";
+import Footer from "@/components/layout/Footer";
 import WhatsappButton from "@/components/layout/WhatsappButton";
 import { OrganizationSchema, LocalBusinessSchema } from "@/components/SchemaOrg";
 import { CartProvider } from "@/context/CartContext";
@@ -80,6 +81,7 @@ export default function RootLayout({
               <NewHeader />
               {children}
               <WhatsappButton />
+              <Footer />
             </CartProvider>
           </OrderProvider>
         </AdminProvider>
