@@ -10,18 +10,23 @@ export default function PromosAdmin() {
   const [promos, setPromos] = useState<PromoMessage[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [token, setToken] = useState<string | null>(null)
   const router = useRouter()
 
-  const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null
+  useEffect(() => {
+    const t = localStorage.getItem('adminToken')
+    if (!t) {
+      router.push('/admin/login')
+    } else {
+      setToken(t)
+    }
+  }, [router])
 
   useEffect(() => {
-    if (!token) {
-      router.push('/admin/login')
-      return
+    if (token) {
+      fetchData()
     }
-
-    fetchData()
-  }, [token, router])
+  }, [token])
 
   const fetchData = async () => {
     try {
