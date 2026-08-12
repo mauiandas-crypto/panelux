@@ -16,13 +16,26 @@ export default function NewHeader() {
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  // Normalizar texto: minúsculas y sin acentos
+  const normalizeText = (text: string) => {
+    return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  };
+
   useEffect(() => {
     if (searchInput.trim()) {
-      const filtered = productos.filter(
-        (p) =>
-          p.nombre.toLowerCase().includes(searchInput.toLowerCase()) ||
-          p.codigo.toLowerCase().includes(searchInput.toLowerCase())
-      ).slice(0, 5);
+      const searchTerms = searchInput.trim().split(/\s+/);
+      const normalizedSearchTerms = searchTerms.map(normalizeText);
+
+      const filtered = productos.filter((p) => {
+        const normalizedNombre = normalizeText(p.nombre);
+        const normalizedCodigo = normalizeText(p.codigo);
+
+        // Todas las palabras del búsqueda deben estar en el nombre o código
+        return normalizedSearchTerms.every(
+          (term) => normalizedNombre.includes(term) || normalizedCodigo.includes(term)
+        );
+      }).slice(0, 5);
+
       setSearchSuggestions(filtered);
       setShowSuggestions(true);
     } else {
