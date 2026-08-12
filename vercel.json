@@ -5,12 +5,14 @@
   "framework": "nextjs",
   "env": {
     "ADMIN_PASSWORD": {
-      "description": "Admin panel password",
-      "required": true
+  "description": "Admin panel password",
+  "required": true,
+  "example": "admin123"
     },
     "NEXT_PUBLIC_BASE_URL": {
-      "description": "Your website URL (e.g., https://panelux.com.uy)",
-      "required": true
+  "description": "Your website URL (e.g., https://panelux.com.uy)",
+  "required": true,
+  "example": "https://panelux-uy.vercel.app"
     },
     "MERCADOPAGO_ACCESS_TOKEN": {
       "description": "Mercado Pago API token",
