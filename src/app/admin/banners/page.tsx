@@ -1,36 +1,27 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Banner, AdminData } from '@/lib/admin-data'
+import { useAdminAuth } from '@/hooks/useAdminAuth'
 
 export default function BannersAdmin() {
+  const { isAuthenticated, loading: authLoading } = useAdminAuth()
   const [data, setData] = useState<AdminData | null>(null)
   const [banners, setBanners] = useState<Banner[]>([])
   const [editingId, setEditingId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [token, setToken] = useState<string | null>(null)
-  const router = useRouter()
 
   useEffect(() => {
-    const t = localStorage.getItem('adminToken')
-    if (!t) {
-      router.push('/admin/login')
-    } else {
-      setToken(t)
-    }
-  }, [router])
-
-  useEffect(() => {
-    if (token) {
+    if (isAuthenticated) {
       fetchData()
     }
-  }, [token])
+  }, [isAuthenticated])
 
   const fetchData = async () => {
     try {
+      const token = localStorage.getItem('adminToken')
       const response = await fetch('/api/admin/data', {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -38,8 +29,6 @@ export default function BannersAdmin() {
         const adminData = await response.json()
         setData(adminData)
         setBanners(adminData.banners)
-      } else {
-        router.push('/admin/login')
       }
     } catch (error) {
       console.error('Error fetching data:', error)
