@@ -104,37 +104,40 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
               </p>
             </div>
 
-            {/* Precio */}
-            <div className="mb-6 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-              <p className="text-xs text-gray-600 mb-1">Precio por unidad</p>
-              <p className="text-3xl font-bold text-blue-600">${producto.pvp}</p>
-            </div>
+            {/* Precio y Cantidad */}
+            <div className="mb-6 flex items-end gap-4">
+              {/* Precio */}
+              <div className="flex-1">
+                <p className="text-xs text-gray-600 mb-1">Precio</p>
+                <p className="text-2xl font-bold text-blue-600">${producto.pvp}</p>
+              </div>
 
-            {/* Cantidad */}
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
-                Cantidad a agregar
-              </label>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setCantidad(Math.max(1, cantidad - 1))}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-3 rounded transition text-sm"
-                >
-                  −
-                </button>
-                <input
-                  type="number"
-                  value={cantidad}
-                  onChange={(e) => setCantidad(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-16 text-center text-lg font-bold border-2 border-gray-300 rounded px-2 py-1 text-black"
-                  min="1"
-                />
-                <button
-                  onClick={() => setCantidad(cantidad + 1)}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-3 rounded transition text-sm"
-                >
-                  +
-                </button>
+              {/* Cantidad */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-900 mb-1">
+                  Cantidad
+                </label>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setCantidad(Math.max(1, cantidad - 1))}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-2 rounded transition text-sm"
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    value={cantidad}
+                    onChange={(e) => setCantidad(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-12 text-center text-sm font-bold border-2 border-gray-300 rounded px-2 py-1 text-black"
+                    min="1"
+                  />
+                  <button
+                    onClick={() => setCantidad(cantidad + 1)}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-2 rounded transition text-sm"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -176,7 +179,7 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
             {/* Info adicional */}
             <div className="mt-6 pt-6 border-t border-gray-200">
-              <h3 className="text-base font-bold text-gray-900 mb-3">¿Por qué comprar con Todogastro?</h3>
+              <h3 className="text-base font-bold text-gray-900 mb-3">¿Por qué comprarnos a nosotros?</h3>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
                   <span className="text-lg">✅</span>
