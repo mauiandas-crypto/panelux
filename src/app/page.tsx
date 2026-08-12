@@ -46,7 +46,7 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="text-4xl mb-3">💳</div>
-              <h3 className="font-bold text-gray-900">Hasta 6 Cuotas</h3>
+              <h3 className="font-bold text-gray-900">Hasta 12 Cuotas</h3>
               <p className="text-gray-600 text-sm">Sin interés en tarjeta</p>
             </div>
           </div>
