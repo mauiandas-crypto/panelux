@@ -16,20 +16,29 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
+      console.log('Intentando autenticar...')
       const response = await fetch('/api/admin/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       })
 
+      console.log('Respuesta:', response.status)
+
       if (response.ok) {
         const data = await response.json()
+        console.log('Token recibido:', data.token)
         localStorage.setItem('adminToken', data.token)
-        router.push('/admin')
+        console.log('Token guardado, redirigiendo...')
+        // Usar window.location en lugar de router.push para una redirección más confiable
+        window.location.href = '/admin'
       } else {
+        const errorData = await response.json().catch(() => ({}))
+        console.log('Error:', errorData)
         setError('Contraseña incorrecta')
       }
     } catch (err) {
+      console.error('Error:', err)
       setError('Error al iniciar sesión')
     } finally {
       setLoading(false)
