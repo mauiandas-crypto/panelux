@@ -1,0 +1,28 @@
+# Robots.txt for Panelux Uruguay
+# Última actualización: 2026-08-11
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /checkout
+Disallow: /*.json$
+Disallow: /*?*
+Allow: /?*&sort=
+Allow: /?*&filter=
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://panelux.com.uy/sitemap.xml
+Sitemap: https://panelux.com.uy/sitemap-products.xml
+Sitemap: https://panelux.com.uy/sitemap-categories.xml
