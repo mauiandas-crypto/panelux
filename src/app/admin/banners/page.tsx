@@ -40,6 +40,7 @@ export default function BannersAdmin() {
   const saveData = async (updatedBanners: Banner[]) => {
     setSaving(true)
     try {
+      const token = localStorage.getItem('adminToken')
       const response = await fetch('/api/admin/data', {
         method: 'POST',
         headers: {
