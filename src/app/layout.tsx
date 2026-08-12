@@ -4,6 +4,7 @@ import NewHeader from "@/components/layout/NewHeader";
 import WhatsappButton from "@/components/layout/WhatsappButton";
 import { CartProvider } from "@/context/CartContext";
 import { AdminProvider } from "@/context/AdminContext";
+import { OrderProvider } from "@/context/OrderContext";
 
 export const metadata: Metadata = {
   title: "Panelux Uruguay | Distribuidor Oficial",
@@ -19,11 +20,13 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <AdminProvider>
-          <CartProvider>
-            <NewHeader />
-            {children}
-            <WhatsappButton />
-          </CartProvider>
+          <OrderProvider>
+            <CartProvider>
+              <NewHeader />
+              {children}
+              <WhatsappButton />
+            </CartProvider>
+          </OrderProvider>
         </AdminProvider>
       </body>
     </html>
