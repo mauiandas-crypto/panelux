@@ -39,6 +39,7 @@ export default function PromosAdmin() {
   const saveData = async (updatedPromos: PromoMessage[]) => {
     setSaving(true)
     try {
+      const token = localStorage.getItem('adminToken')
       const response = await fetch('/api/admin/data', {
         method: 'POST',
         headers: {
