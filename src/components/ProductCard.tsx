@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { useCart } from '@/context/CartContext'
 
@@ -41,11 +42,14 @@ export default function ProductCard({ codigo, nombre, imagen, linea, pvp }: Prod
       <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden group h-full cursor-pointer">
         {/* Imagen */}
         <div className="relative h-56 bg-white overflow-hidden">
-          <img
+          <Image
             src={imagen}
             alt={nombre}
+            fill
             className="w-full h-full object-cover group-hover:scale-125 transition duration-500"
             loading="lazy"
+            quality={75}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useAdmin } from '@/context/AdminContext'
 
 export default function BannerCarousel() {
@@ -32,10 +33,14 @@ export default function BannerCarousel() {
   return (
     <div className="relative w-full h-96 bg-gray-900 overflow-hidden">
       {/* Imagen del banner */}
-      <img
+      <Image
         src={banner.imageUrl}
         alt={banner.title}
+        fill
         className="w-full h-full object-cover"
+        priority
+        quality={85}
+        sizes="100vw"
       />
 
       {/* Overlay con contenido */}

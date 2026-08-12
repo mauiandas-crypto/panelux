@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NewHeader from "@/components/layout/NewHeader";
 import WhatsappButton from "@/components/layout/WhatsappButton";
+import { OrganizationSchema, LocalBusinessSchema } from "@/components/SchemaOrg";
 import { CartProvider } from "@/context/CartContext";
 import { AdminProvider } from "@/context/AdminContext";
 import { OrderProvider } from "@/context/OrderContext";
@@ -47,6 +48,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <OrganizationSchema />
+        <LocalBusinessSchema />
+      </head>
       <body>
         <AdminProvider>
           <OrderProvider>

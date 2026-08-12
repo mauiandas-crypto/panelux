@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 interface ImageCarouselProps {
   imagenBase: string
@@ -58,13 +59,17 @@ export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps
   return (
     <div>
       {/* Imagen Principal */}
-      <div className="bg-white rounded-lg overflow-hidden mb-4 flex items-center justify-center min-h-96">
-        <img
+      <div className="bg-white rounded-lg overflow-hidden mb-4 flex items-center justify-center min-h-96 relative">
+        <Image
           src={fotos[fotoIndex]}
           alt={`${nombre} - Vista ${fotoIndex + 1}`}
-          className="w-full h-full object-contain max-h-96 hover:scale-110 transition duration-300"
+          fill
+          className="w-full h-full object-contain hover:scale-110 transition duration-300"
           onLoad={() => handleImageLoad(fotoIndex)}
           onError={() => handleImageError(fotoIndex)}
+          quality={85}
+          priority={fotoIndex === 0}
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
 
@@ -76,19 +81,22 @@ export default function ImageCarousel({ imagenBase, nombre }: ImageCarouselProps
               <button
                 key={index}
                 onClick={() => setFotoIndex(index)}
-                className={`flex-1 h-20 rounded-lg overflow-hidden border-2 transition ${
+                className={`flex-1 h-20 rounded-lg overflow-hidden border-2 transition relative ${
                   fotoIndex === index
                     ? 'border-blue-600 shadow-lg'
                     : 'border-gray-200 hover:border-gray-400'
                 }`}
                 title={`Vista ${index + 1}`}
               >
-                <img
+                <Image
                   src={foto}
                   alt={`Miniatura ${index + 1}`}
+                  fill
                   className="w-full h-full object-contain bg-gray-50"
                   onLoad={() => handleImageLoad(index)}
                   onError={() => handleImageError(index)}
+                  quality={60}
+                  sizes="80px"
                 />
               </button>
             )

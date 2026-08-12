@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { productos } from '@/data/productos'
 import { useCart } from '@/context/CartContext'
 import ImageCarousel from '@/components/ImageCarousel'
+import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
 
 export default function ProductoDetail() {
   const params = useParams()
@@ -56,6 +57,19 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
   return (
     <div className="min-h-screen bg-white pt-24 pb-20">
+      <ProductSchema
+        codigo={producto.codigo}
+        nombre={producto.nombre}
+        descripcion={`${producto.nombre} - Marca ${producto.linea}`}
+        imagen={producto.imagen}
+        pvp={producto.pvp}
+        categoria={producto.categoria}
+      />
+      <BreadcrumbSchema items={[
+        { name: "Inicio", url: "https://panelux.com.uy" },
+        { name: producto.categoria, url: `https://panelux.com.uy/?categoria=${producto.categoria}` },
+        { name: producto.nombre, url: `https://panelux.com.uy/productos/${producto.codigo}` },
+      ]} />
       <div className="max-w-7xl mx-auto px-6">
         {/* Breadcrumb */}
         <div className="mb-8 text-sm text-gray-600">
