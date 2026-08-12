@@ -2,52 +2,52 @@ import { MetadataRoute } from 'next'
 import { productos } from '@/data/productos'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://panelux.com.uy'
+  const baseUrl = 'https://panelux.com.uy'
 
-  // Páginas principales
-  const mainPages = [
+  // URLs estáticas
+  const staticUrls: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: `${baseUrl}/#productos`,
+      url: `${baseUrl}/buscar`,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 0.9,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/carrito`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/checkout`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
   ]
 
-  // Páginas de categorías (generadas dinámicamente)
-  const categories = [...new Set(productos.map(p => p.categoria))]
-  const categoryPages = categories.map(cat => ({
-    url: `${baseUrl}/?categoria=${encodeURIComponent(cat)}`,
+  // URLs de productos
+  const productUrls: MetadataRoute.Sitemap = productos.map((producto) => ({
+    url: `${baseUrl}/productos/${producto.codigo}`,
     lastModified: new Date(),
-    changeFrequency: 'daily' as const,
+    changeFrequency: 'weekly' as const,
     priority: 0.8,
   }))
 
-  // Páginas de productos
-  const productPages = productos.map(producto => ({
-    url: `${baseUrl}/productos/${producto.codigo}`,
+  // URLs de categorías
+  const categorias = [...new Set(productos.map((p) => p.categoria))]
+  const categoryUrls: MetadataRoute.Sitemap = categorias.map((categoria) => ({
+    url: `${baseUrl}/?categoria=${encodeURIComponent(categoria)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }))
 
-  return [...mainPages, ...categoryPages, ...productPages]
+  return [...staticUrls, ...productUrls, ...categoryUrls]
 }
