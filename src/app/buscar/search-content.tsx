@@ -90,7 +90,7 @@ export function SearchContent() {
           {results.map((product) => (
             <Link
               key={product.id}
-              href={`/categoria/${product.categorySlug}/${product.slug}`}
+              href={`/productos/${product.id}`}
               className="group"
             >
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
