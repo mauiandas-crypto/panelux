@@ -5,7 +5,7 @@ export const siteConfig = {
   // Contacto
   contact: {
     whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '59892715555',
-    phone: process.env.NEXT_PUBLIC_PHONE || '+598 95 244 593',
+    phone: process.env.NEXT_PUBLIC_PHONE || '+598 9271 5555',
     email: process.env.NEXT_PUBLIC_EMAIL || 'info@panelux.com.uy',
     address: process.env.NEXT_PUBLIC_ADDRESS || 'Yaguarón 1764, Montevideo',
   },
