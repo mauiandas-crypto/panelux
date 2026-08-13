@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -8,17 +8,43 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [csrfToken, setCsrfToken] = useState<string | null>(null)
   const router = useRouter()
+
+  // Obtener token CSRF al cargar la página
+  useEffect(() => {
+    const fetchCSRFToken = async () => {
+      try {
+        const response = await fetch('/api/admin/csrf')
+        const data = await response.json()
+        setCsrfToken(data.csrfToken)
+      } catch (err) {
+        console.error('Error obteniendo CSRF token:', err)
+        setError('Error al cargar la página. Recarga e intenta de nuevo.')
+      }
+    }
+
+    fetchCSRFToken()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
+    if (!csrfToken) {
+      setError('Token CSRF no disponible. Recarga la página.')
+      setLoading(false)
+      return
+    }
+
     try {
       const response = await fetch('/api/admin/auth', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken,
+        },
         body: JSON.stringify({ password }),
       })
 

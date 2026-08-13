@@ -24,7 +24,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    if (!getAdminSession(request)) {
+    if (!(await getAdminSession(request))) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isValidAdminPassword, generateSecureToken, storeToken } from '@/lib/admin-auth'
+import { validateCSRFToken } from '@/lib/csrf'
 
 // Simple rate limiting (en producción usar Redis)
 const loginAttempts = new Map<string, { count: number; resetAt: number }>()
@@ -41,6 +42,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Validar token CSRF
+    const csrfToken = request.headers.get('x-csrf-token')
+    if (!csrfToken || !validateCSRFToken(csrfToken)) {
+      return NextResponse.json(
+        { error: 'CSRF token inválido o expirado' },
+        { status: 403 }
+      )
+    }
+
     const { password } = await request.json()
 
     // Validar contraseña contra variable de entorno
@@ -53,7 +63,7 @@ export async function POST(request: NextRequest) {
 
     // Generar token seguro
     const token = generateSecureToken()
-    storeToken(token, 24 * 60) // 24 horas de expiración
+    await storeToken(token, 24 * 60) // 24 horas de expiración
 
     // Devolver token de forma segura
     const response = NextResponse.json({ token })

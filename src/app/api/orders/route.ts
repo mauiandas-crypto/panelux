@@ -11,7 +11,7 @@ let orders: Order[] = []
 export async function GET(request: NextRequest) {
   try {
     // Verificar si es una solicitud autenticada (admin)
-    if (!getAdminSession(request)) {
+    if (!(await getAdminSession(request))) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
