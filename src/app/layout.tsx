@@ -3,7 +3,6 @@ import Script from "next/script";
 import "./globals.css";
 import NewHeader from "@/components/layout/NewHeader";
 import Footer from "@/components/layout/Footer";
-import WhatsappButton from "@/components/layout/WhatsappButton";
 import WhatsAppChat from "@/components/WhatsAppChat";
 import TrustBadges from "@/components/TrustBadges";
 import { OrganizationSchema, LocalBusinessSchema } from "@/components/SchemaOrg";
@@ -87,7 +86,6 @@ export default function RootLayout({
               <NewHeader />
               <TrustBadges />
               {children}
-              <WhatsappButton />
               <WhatsAppChat />
               <AIChat />
               <DarkModeToggle />
