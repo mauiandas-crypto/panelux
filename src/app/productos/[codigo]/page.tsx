@@ -141,14 +141,6 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
               </div>
             </div>
 
-            {/* Subtotal */}
-            <div className="mb-6 p-3 bg-gray-50 rounded-lg border border-gray-200">
-              <p className="text-xs text-gray-600 mb-1">Subtotal</p>
-              <p className="text-2xl font-bold text-gray-900">
-                ${(producto.pvp * cantidad).toLocaleString('es-UY')}
-              </p>
-            </div>
-
             {/* Botón Agregar al Carrito */}
             <button
               onClick={handleAgregarAlCarrito}
