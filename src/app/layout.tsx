@@ -10,6 +10,9 @@ import { OrganizationSchema, LocalBusinessSchema } from "@/components/SchemaOrg"
 import { CartProvider } from "@/context/CartContext";
 import { AdminProvider } from "@/context/AdminContext";
 import { OrderProvider } from "@/context/OrderContext";
+import DarkModeToggle from "@/components/DarkModeToggle";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
+import AIChat from "@/components/AIChat";
 
 export const metadata: Metadata = {
   title: "Panelux Uruguay | Distribuidor Oficial de Utensilios de Cocina Premium",
@@ -77,6 +80,7 @@ export default function RootLayout({
         <LocalBusinessSchema />
       </head>
       <body>
+        <AnalyticsTracker />
         <AdminProvider>
           <OrderProvider>
             <CartProvider>
@@ -85,6 +89,8 @@ export default function RootLayout({
               {children}
               <WhatsappButton />
               <WhatsAppChat />
+              <AIChat />
+              <DarkModeToggle />
               <Footer />
             </CartProvider>
           </OrderProvider>

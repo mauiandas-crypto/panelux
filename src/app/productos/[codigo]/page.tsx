@@ -5,7 +5,10 @@ import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
 import { useCart } from '@/context/CartContext'
-import ImageCarousel from '@/components/ImageCarousel'
+import ProductGallery from '@/components/ProductGallery'
+import ReviewsSection from '@/components/ReviewsSection'
+import VideoGallery from '@/components/VideoGallery'
+import GreenShippingInfo from '@/components/GreenShippingInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
 
 export default function ProductoDetail() {
@@ -83,9 +86,9 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Carousel de Imágenes */}
+          {/* Galería de Productos */}
           <div>
-            <ImageCarousel imagenBase={producto.imagen} nombre={producto.nombre} />
+            <ProductGallery imagenBase={producto.imagen} nombre={producto.nombre} />
           </div>
 
           {/* Detalles */}
@@ -192,6 +195,13 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
               </ul>
             </div>
           </div>
+        </div>
+
+        {/* Nuevas secciones de producto */}
+        <div className="mt-16 space-y-16">
+          <ReviewsSection productoCodigo={producto.codigo} productNombre={producto.nombre} />
+          <VideoGallery />
+          <GreenShippingInfo />
         </div>
       </div>
     </div>
