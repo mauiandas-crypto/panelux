@@ -23,12 +23,8 @@ export default function AdminLogin() {
       })
 
       if (response.ok) {
-        const data = await response.json()
-        // Guardar en localStorage
-        localStorage.setItem('adminToken', data.token)
-        // También guardar en una cookie para mayor persistencia
-        document.cookie = `adminToken=${data.token}; path=/; max-age=86400`
-        // Esperar un poco para asegurar que localStorage se haya guardado
+        // Token se guarda automáticamente como cookie HttpOnly Secure por el servidor
+        // No guardamos en localStorage por seguridad (vulnerable a XSS)
         setTimeout(() => {
           router.push('/admin')
         }, 100)
