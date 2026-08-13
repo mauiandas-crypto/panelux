@@ -81,7 +81,7 @@ export default function AIChat() {
       {/* Botón Flotante */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 right-6 z-40 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center font-bold text-2xl"
+        className="fixed bottom-32 right-6 z-40 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center font-bold text-2xl"
         title={isOpen ? 'Cerrar chat' : 'Abrir chat'}
       >
         {isOpen ? '✕' : '💬'}
@@ -89,7 +89,7 @@ export default function AIChat() {
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="fixed bottom-40 right-6 z-40 w-96 max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-96 border-2 border-gray-200">
+        <div className="fixed bottom-48 right-6 z-40 w-96 max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-96 border-2 border-gray-200">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
             <h3 className="font-bold text-lg">🤖 Asistente Panelux</h3>
