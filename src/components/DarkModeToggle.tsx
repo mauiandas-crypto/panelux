@@ -36,7 +36,7 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="fixed bottom-6 right-6 z-40 bg-gray-900 dark:bg-white text-white dark:text-gray-900 w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center font-bold text-xl"
+      className="fixed top-6 right-6 z-40 bg-gray-900 dark:bg-white text-white dark:text-gray-900 w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center font-bold text-xl"
       aria-label={isDark ? 'Modo claro' : 'Modo oscuro'}
       title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
     >
