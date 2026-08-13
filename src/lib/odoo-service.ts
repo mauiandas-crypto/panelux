@@ -23,7 +23,18 @@ const odooConfig: OdooConfig = {
   password: process.env.ODOO_PASSWORD || '',
 }
 
+function validateOdooConfig(): void {
+  if (process.env.NODE_ENV === 'production') {
+    const requiredEnvVars = ['ODOO_URL', 'ODOO_DATABASE', 'ODOO_USERNAME', 'ODOO_PASSWORD']
+    const missingVars = requiredEnvVars.filter(v => !process.env[v])
+    if (missingVars.length > 0) {
+      throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`)
+    }
+  }
+}
+
 export async function syncProductInventory(products: ProductInventory[]): Promise<boolean> {
+  validateOdooConfig()
   try {
     // En producción, conectar a Odoo usando XML-RPC o REST API
     // const uid = await authenticateOdoo()

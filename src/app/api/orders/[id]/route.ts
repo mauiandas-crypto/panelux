@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getAdminSession } from '@/lib/admin-auth'
 
 // En producción, usar base de datos real
 let orders: any[] = []
@@ -23,10 +24,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '')
-    const isAdmin = token === process.env.ADMIN_PASSWORD
-
-    if (!isAdmin) {
+    if (!getAdminSession(request)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

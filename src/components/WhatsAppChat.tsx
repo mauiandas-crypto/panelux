@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { siteConfig } from '@/lib/config'
 
 export default function WhatsAppChat() {
   const [abierto, setAbierto] = useState(false)
+  const whatsappNumber = siteConfig.contact.whatsapp
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function WhatsAppChat() {
             {/* Opciones rápidas */}
             <div className="space-y-2">
               <a
-                href="https://wa.me/598095244593?text=Hola%20Panelux%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20disponibilidad%20de%20productos"
+                href="https://wa.me/${whatsappNumber}?text=Hola%20Panelux%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20disponibilidad%20de%20productos"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full block bg-blue-50 hover:bg-blue-100 text-blue-900 font-semibold py-2 px-3 rounded-lg text-sm transition"
@@ -47,7 +49,7 @@ export default function WhatsAppChat() {
                 📦 Consultar Disponibilidad
               </a>
               <a
-                href="https://wa.me/598095244593?text=Hola%20Panelux%2C%20tengo%20una%20pregunta%20sobre%20gu%C3%ADa%20de%20compra"
+                href="https://wa.me/${whatsappNumber}?text=Hola%20Panelux%2C%20tengo%20una%20pregunta%20sobre%20gu%C3%ADa%20de%20compra"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full block bg-blue-50 hover:bg-blue-100 text-blue-900 font-semibold py-2 px-3 rounded-lg text-sm transition"
@@ -55,7 +57,7 @@ export default function WhatsAppChat() {
                 🛒 Guía de Compra
               </a>
               <a
-                href="https://wa.me/598095244593?text=Hola%20Panelux%2C%20tengo%20una%20consulta%20sobre%20enviios"
+                href="https://wa.me/${whatsappNumber}?text=Hola%20Panelux%2C%20tengo%20una%20consulta%20sobre%20enviios"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full block bg-blue-50 hover:bg-blue-100 text-blue-900 font-semibold py-2 px-3 rounded-lg text-sm transition"
@@ -63,7 +65,7 @@ export default function WhatsAppChat() {
                 🚚 Consultar Envíos
               </a>
               <a
-                href="https://wa.me/598095244593"
+                href="https://wa.me/${whatsappNumber}"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 rounded-lg text-sm transition"
@@ -75,8 +77,8 @@ export default function WhatsAppChat() {
             {/* Info contacto */}
             <div className="text-center pt-4 border-t border-gray-200">
               <p className="text-xs text-gray-600">
-                📞 +598 95 244 593 <br />
-                ✉️ info@panelux.com.uy
+                📞 {siteConfig.contact.phone} <br />
+                ✉️ {siteConfig.contact.email}
               </p>
             </div>
           </div>

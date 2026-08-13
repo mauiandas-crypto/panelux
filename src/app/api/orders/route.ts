@@ -3,6 +3,7 @@ import { Order } from '@/lib/orders-types'
 import { sendEmail, getOrderConfirmationEmail } from '@/lib/email-service'
 import { updateInventoryAfterOrder } from '@/lib/odoo-service'
 import { createMercadopagoPreference } from '@/lib/mercadopago-service'
+import { getAdminSession } from '@/lib/admin-auth'
 
 // Almacenar órdenes en memoria (en producción usar base de datos)
 let orders: Order[] = []
@@ -10,16 +11,12 @@ let orders: Order[] = []
 export async function GET(request: NextRequest) {
   try {
     // Verificar si es una solicitud autenticada (admin)
-    const token = request.headers.get('authorization')?.replace('Bearer ', '')
-    const isAdmin = token === process.env.ADMIN_PASSWORD
-
-    // Si es admin, devolver todas las órdenes
-    if (isAdmin) {
-      return NextResponse.json(orders)
+    if (!getAdminSession(request)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Si no es admin, devolver solo error
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // Si es admin, devolver todas las órdenes
+    return NextResponse.json(orders)
   } catch (error) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
