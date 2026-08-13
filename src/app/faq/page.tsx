@@ -21,7 +21,7 @@ export default function FAQ() {
     },
     {
       pregunta: '¿Tienen envío gratis?',
-      respuesta: 'Sí, ofrecemos envío gratis en Montevideo y Ciudad de la Costa. Para otras zonas el costo varía según la ubicación. Consulta en WhatsApp al 095 244 593 para obtener el costo exacto de tu zona.',
+      respuesta: 'Sí, ofrecemos envío gratis en Montevideo y Ciudad de la Costa. Para otras zonas el costo varía según la ubicación. Consulta en WhatsApp al 092 715 555 para obtener el costo exacto de tu zona.',
     },
     {
       pregunta: '¿Cuánta garantía tienen los productos?',
@@ -41,7 +41,7 @@ export default function FAQ() {
     },
     {
       pregunta: '¿Venden al por mayor o distribuidor?',
-      respuesta: 'Sí, tenemos precios especiales para negocios, restaurantes y distribuidores. Contáctanos por WhatsApp (095 244 593) o email (info@panelux.com.uy) para consultar sobre volúmenes y precios mayoristas.',
+      respuesta: 'Sí, tenemos precios especiales para negocios, restaurantes y distribuidores. Contáctanos por WhatsApp (092 715 555) o email (info@panelux.com.uy) para consultar sobre volúmenes y precios mayoristas.',
     },
     {
       pregunta: '¿Ofrecen servicio técnico?',
@@ -49,7 +49,7 @@ export default function FAQ() {
     },
     {
       pregunta: '¿Cómo puedo contactarlos?',
-      respuesta: 'Puedes contactarnos por: WhatsApp (095 244 593), Email (info@panelux.com.uy), Teléfono (+598 9271 5555). Estamos disponibles Lun-Vie 9:00-18:00 y Sábado 10:00-14:00.',
+      respuesta: 'Puedes contactarnos por: WhatsApp (092 715 555), Email (info@panelux.com.uy), Teléfono (+598 9271 5555). Estamos disponibles Lun-Vie 9:00-18:00 y Sábado 10:00-14:00.',
     },
     {
       pregunta: '¿Tienen showroom físico?',
@@ -96,7 +96,7 @@ export default function FAQ() {
             Contáctanos directamente por WhatsApp y te ayudaremos al instante
           </p>
           <a
-            href="https://wa.me/598095244593"
+            href="https://wa.me/59892715555"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"

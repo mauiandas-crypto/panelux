@@ -107,13 +107,13 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
                 <span className="text-green-400">💬</span>
-                <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">
+                <a href="https://wa.me/59892715555" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">
                   WhatsApp
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-blue-400">☎️</span>
-                <a href="tel:+598095244593" className="hover:text-blue-400 transition">095 244 593</a>
+                <a href="tel:+59892715555" className="hover:text-blue-400 transition">092 715 555</a>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-gray-400">✉️</span>
@@ -174,7 +174,7 @@ export default function Footer() {
               <Link href="/faq" className="hover:text-gray-200 transition">FAQ</Link>
               <Link href="/testimonios" className="hover:text-gray-200 transition">Testimonios</Link>
               <Link href="/promociones" className="hover:text-gray-200 transition">Ofertas</Link>
-              <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition">Contacto</a>
+              <a href="https://wa.me/59892715555" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200 transition">Contacto</a>
             </div>
           </div>
         </div>

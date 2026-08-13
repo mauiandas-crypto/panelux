@@ -107,7 +107,7 @@ export default function Promociones() {
 
                 {/* CTA */}
                 <a
-                  href={`https://wa.me/598095244593?text=Me%20interesa%20la%20oferta%20de%20${encodeURIComponent(oferta.titulo)}`}
+                  href={`https://wa.me/59892715555?text=Me%20interesa%20la%20oferta%20de%20${encodeURIComponent(oferta.titulo)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg text-center transition"

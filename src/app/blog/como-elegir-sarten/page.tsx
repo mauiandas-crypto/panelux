@@ -183,7 +183,7 @@ export default function ArticuloSarten() {
           <h3 className="text-2xl font-bold mb-2">¿Listo para elegir tu sartén?</h3>
           <p className="mb-4">Nuestros expertos te ayudarán a encontrar exactamente lo que necesitas.</p>
           <a
-            href="https://wa.me/598095244593"
+            href="https://wa.me/59892715555"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg hover:bg-blue-50 transition"

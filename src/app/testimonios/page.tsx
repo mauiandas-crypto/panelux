@@ -120,7 +120,7 @@ export default function Testimonios() {
             Descubre por qué más de 500 familias eligen Panelux Uruguay
           </p>
           <a
-            href="https://wa.me/598095244593"
+            href="https://wa.me/59892715555"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"

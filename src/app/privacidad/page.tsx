@@ -83,7 +83,7 @@ export default function Privacidad() {
               Si tienes preguntas sobre esta política de privacidad, contáctanos:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <p><strong>WhatsApp:</strong> 095 244 593</p>
+              <p><strong>WhatsApp:</strong> 092 715 555</p>
               <p><strong>Email:</strong> info@panelux.com.uy</p>
               <p><strong>Horario:</strong> Lun-Vie 9:00-18:00</p>
             </div>

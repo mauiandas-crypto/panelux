@@ -111,7 +111,7 @@ export default function Terminos() {
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">11. Contacto</h2>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <p><strong>WhatsApp:</strong> 095 244 593</p>
+              <p><strong>WhatsApp:</strong> 092 715 555</p>
               <p><strong>Email:</strong> info@panelux.com.uy</p>
               <p><strong>Horario:</strong> Lun-Vie 9:00-18:00, Sáb 10:00-14:00</p>
             </div>

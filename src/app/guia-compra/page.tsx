@@ -230,7 +230,7 @@ export default function GuiaCompra() {
                 <p className="text-sm text-blue-100 mb-3">
                   Juego 5 Ollas Magnific + Sartén 24cm
                 </p>
-                <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-50 inline-block">
+                <a href="https://wa.me/59892715555" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-50 inline-block">
                   Consultar
                 </a>
               </div>
@@ -240,7 +240,7 @@ export default function GuiaCompra() {
                 <p className="text-sm text-blue-100 mb-3">
                   Juego 7 Ollas + Wok + 2 Sartenes
                 </p>
-                <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-50 inline-block">
+                <a href="https://wa.me/59892715555" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-50 inline-block">
                   Consultar
                 </a>
               </div>
@@ -250,7 +250,7 @@ export default function GuiaCompra() {
                 <p className="text-sm text-blue-100 mb-3">
                   Maximum Stone + Accesorios + Olla Presión
                 </p>
-                <a href="https://wa.me/598095244593" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-50 inline-block">
+                <a href="https://wa.me/59892715555" target="_blank" rel="noopener noreferrer" className="text-xs font-bold bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-50 inline-block">
                   Consultar
                 </a>
               </div>

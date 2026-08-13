@@ -165,7 +165,7 @@ export default function SobreNosotros() {
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <a
-              href="https://wa.me/598095244593"
+              href="https://wa.me/59892715555"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
@@ -179,7 +179,7 @@ export default function SobreNosotros() {
               ✉️ Email
             </a>
             <a
-              href="tel:+598095244593"
+              href="tel:+59892715555"
               className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
             >
               📞 Llamar

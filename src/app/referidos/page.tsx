@@ -148,7 +148,7 @@ export default function Referidos() {
             Comparte tu código referido y comienza a ganar descuentos
           </p>
           <a
-            href="https://wa.me/598095244593?text=Hola%20Panelux%2C%20quiero%20activar%20mi%20c%C3%B3digo%20de%20referidos"
+            href="https://wa.me/59892715555?text=Hola%20Panelux%2C%20quiero%20activar%20mi%20c%C3%B3digo%20de%20referidos"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"

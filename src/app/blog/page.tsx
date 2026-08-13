@@ -128,7 +128,7 @@ export default function Blog() {
           <h2 className="text-3xl font-bold mb-4">¿Necesitas Asesoramiento?</h2>
           <p className="text-lg text-blue-100 mb-8">Nuestro equipo experto te ayudará a elegir los utensilios perfectos</p>
           <a
-            href="https://wa.me/598095244593"
+            href="https://wa.me/59892715555"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition"

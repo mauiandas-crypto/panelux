@@ -17,11 +17,10 @@ export default function ProductGallery({ imagenBase, nombre, colores }: ProductG
   const [showModal, setShowModal] = useState(false)
   const imgRef = useRef<HTMLDivElement>(null)
 
-  const fotos = [
-    imagenBase,
-    imagenBase.replace(/\.(jpg|png)$/i, '_B.$1'),
-    imagenBase.replace(/\.(jpg|png)$/i, '_CX.$1'),
-  ]
+  // Only show base image if alternatives don't exist or if colores are provided
+  const fotos = colores && colores.length > 0
+    ? colores.map(c => c.imagen)
+    : [imagenBase]
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!imgRef.current || !isZoomed) return

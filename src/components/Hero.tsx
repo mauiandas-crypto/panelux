@@ -38,7 +38,7 @@ export default function Hero() {
                 📦 Ver Catálogo Completo
               </Link>
               <button
-                onClick={() => window.open('https://wa.me/598095244593', '_blank')}
+                onClick={() => window.open('https://wa.me/59892715555', '_blank')}
                 className="inline-flex items-center justify-center px-8 py-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition transform hover:scale-105"
               >
                 💬 Hablar con un Asesor
