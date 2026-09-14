@@ -18,6 +18,7 @@ export async function createPaymentPreference(
   }
 
   try {
+    console.log('📤 Enviando a Mercado Pago:', JSON.stringify(data, null, 2))
     const response = await fetch(`${MP_API_BASE}/checkout/preferences`, {
       method: 'POST',
       headers: {

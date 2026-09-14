@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
         failure: MP_CONFIG.cancelUrl,
         pending: MP_CONFIG.cancelUrl,
       },
-      auto_return: 'approved',
+      auto_return: 'all',
       external_reference: orderId || `order-${Date.now()}`,
       notification_url: MP_CONFIG.notificationUrl,
     })

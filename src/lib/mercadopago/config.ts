@@ -5,13 +5,13 @@ export const MP_CONFIG = {
   accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || '',
 
   // URL de retorno después del pago (success)
-  successUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payment/success`,
+  successUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001'}/checkout/confirmacion`,
 
   // URL de retorno si el usuario cancela
-  cancelUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/carrito`,
+  cancelUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001'}/carrito`,
 
   // URL de notificación de webhook
-  notificationUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/webhooks/mercadopago`,
+  notificationUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001'}/api/webhooks/mercadopago`,
 }
 
 export function validateMercadoPagoConfig(): boolean {
