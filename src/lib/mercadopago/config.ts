@@ -41,7 +41,7 @@ export interface CreatePreferenceData {
     failure: string
     pending: string
   }
-  auto_return: 'approved' | 'all'
+  auto_return?: 'approved' | 'all'
   external_reference: string
   notification_url: string
 }
