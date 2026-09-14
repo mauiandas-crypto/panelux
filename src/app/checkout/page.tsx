@@ -54,8 +54,9 @@ export default function CheckoutPage() {
 
       // Crear orden
       const now = new Date()
+      const orderId = `order-${Date.now()}`
       const order = {
-        id: `order-${Date.now()}`,
+        id: orderId,
         fecha: now.toISOString(),
         cliente: formData,
         items: items.map(item => ({
@@ -75,14 +76,49 @@ export default function CheckoutPage() {
         fechaActualizacion: now.toISOString(),
       }
 
+      // Guardar orden localmente
       await addOrder(order)
 
-      // Limpiar carrito
-      limpiarCarrito()
+      // Si es Mercado Pago, crear preference y redirigir
+      if (metodoPago === 'mercadopago') {
+        const mpResponse = await fetch('/api/payments/create-preference', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            items: items.map(item => ({
+              name: item.nombre,
+              quantity: item.cantidad,
+              price: item.pvp,
+            })),
+            email: formData.email,
+            orderId: orderId,
+          }),
+        })
 
-      // Redirigir a confirmación
-      router.push('/checkout/confirmacion')
+        if (!mpResponse.ok) {
+          setError('Error al procesar el pago. Intenta nuevamente.')
+          setLoading(false)
+          return
+        }
+
+        const mpData = await mpResponse.json()
+        const mpUrl = mpData.initPoint || mpData.sandboxInitPoint
+
+        if (!mpUrl) {
+          setError('No se pudo obtener URL de pago. Por favor contacta soporte.')
+          setLoading(false)
+          return
+        }
+
+        // Redirigir a Mercado Pago
+        window.location.href = mpUrl
+      } else {
+        // Para otros métodos, ir a confirmación
+        limpiarCarrito()
+        router.push('/checkout/confirmacion')
+      }
     } catch (err) {
+      console.error('Checkout error:', err)
       setError('Error al procesar tu pedido. Intenta nuevamente.')
       setLoading(false)
     }
@@ -222,7 +258,13 @@ export default function CheckoutPage() {
                   disabled={loading}
                   className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition mt-6"
                 >
-                  {loading ? 'Procesando...' : 'Completar pedido'}
+                  {loading ? (
+                    'Procesando...'
+                  ) : metodoPago === 'mercadopago' ? (
+                    '💳 Ir a Pagar con Mercado Pago'
+                  ) : (
+                    'Completar pedido'
+                  )}
                 </button>
               </form>
             </div>
