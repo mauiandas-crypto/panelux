@@ -79,6 +79,18 @@ export default function CheckoutPage() {
       // Guardar orden localmente
       await addOrder(order)
 
+      // Enviar emails de confirmación
+      try {
+        await fetch('/api/emails/send-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order),
+        })
+      } catch (emailError) {
+        console.error('Error enviando emails:', emailError)
+        // No interrumpir el flujo si hay error en emails
+      }
+
       // Si es Mercado Pago, crear preference y redirigir
       if (metodoPago === 'mercadopago') {
         const mpResponse = await fetch('/api/payments/create-preference', {
