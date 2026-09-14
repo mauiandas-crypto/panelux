@@ -1,83 +1,26 @@
-'use client'
+﻿'use client'
 
-import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
-import { useAdmin } from '@/context/AdminContext'
-import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function CarritoPage() {
-  const { items, removerDelCarrito, actualizarCantidad, total, limpiarCarrito } = useCart()
-  const { data } = useAdmin()
-  const [mounted, setMounted] = useState(false)
-  const [couponCode, setCouponCode] = useState('')
-  const [appliedCoupon, setAppliedCoupon] = useState<any>(null)
-  const [couponError, setCouponError] = useState('')
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const handleApplyCoupon = () => {
-    setCouponError('')
-    const coupon = data.coupons.find(
-      c => c.code.toLowerCase() === couponCode.toLowerCase() && c.active
-    )
-
-    if (!coupon) {
-      setCouponError('Cupón no válido')
-      return
-    }
-
-    // Verificar si el cupón ha expirado
-    if (new Date(coupon.expiresAt) < new Date()) {
-      setCouponError('Cupón expirado')
-      return
-    }
-
-    // Verificar usos máximos
-    if (coupon.usedCount >= coupon.maxUses) {
-      setCouponError('Cupón sin usos disponibles')
-      return
-    }
-
-    // Verificar compra mínima
-    if (coupon.minPurchase > 0 && total < coupon.minPurchase) {
-      setCouponError(`Compra mínima: $${coupon.minPurchase}`)
-      return
-    }
-
-    setAppliedCoupon(coupon)
-    setCouponCode('')
-  }
-
-  const handleRemoveCoupon = () => {
-    setAppliedCoupon(null)
-  }
-
-  const calculateDiscount = () => {
-    if (!appliedCoupon) return 0
-    if (appliedCoupon.discountType === 'percentage') {
-      return (total * appliedCoupon.discount) / 100
-    }
-    return appliedCoupon.discount
-  }
-
-  const discount = calculateDiscount()
-  const finalTotal = total - discount
-
-  if (!mounted) return null
+  const { items, total, removerDelCarrito, actualizarCantidad, limpiarCarrito } = useCart()
+  const router = useRouter()
 
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-white pt-24 pb-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="text-6xl mb-4">🛒</div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Tu carrito está vacío</h1>
-          <p className="text-gray-600 mb-8">Agrega productos a tu carrito para continuar</p>
+          <p className="text-gray-600 mb-8 text-lg">No hay productos en tu carrito. ¡Explora nuestro catálogo!</p>
           <Link
             href="/"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition"
           >
-            Volver al catálogo
+            📦 Volver al catálogo
           </Link>
         </div>
       </div>
@@ -85,214 +28,154 @@ export default function CarritoPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white pt-24 pb-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Tu carrito</h1>
+    <div className="min-h-screen bg-gray-50 pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <h1 className="text-4xl font-bold text-gray-900 mb-8">🛒 Tu Carrito</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Productos */}
+          {/* Tabla de productos */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              {items.map((item) => (
-                <div
-                  key={item.codigo}
-                  className="border-b border-gray-200 p-6 flex gap-6 hover:bg-gray-50 transition"
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-100 border-b-2 border-gray-200">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Producto</th>
+                      <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Precio</th>
+                      <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Cantidad</th>
+                      <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Subtotal</th>
+                      <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {items.map((item) => (
+                      <tr key={item.codigo} className="border-b border-gray-200 hover:bg-gray-50">
+                        <td className="px-6 py-4">
+                          <div className="flex gap-4">
+                            {item.imagen && (
+                              <div className="relative w-16 h-16 flex-shrink-0">
+                                <Image
+                                  src={item.imagen}
+                                  alt={item.nombre}
+                                  fill
+                                  className="object-contain"
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <p className="font-semibold text-gray-900">{item.nombre}</p>
+                              <p className="text-xs text-gray-500">{item.codigo}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 font-semibold text-gray-900">${item.pvp.toLocaleString()}</td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2 w-fit">
+                            <button
+                              onClick={() => actualizarCantidad(item.codigo, Math.max(1, item.cantidad - 1))}
+                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded text-sm font-bold transition"
+                            >
+                              −
+                            </button>
+                            <span className="w-8 text-center font-bold">{item.cantidad}</span>
+                            <button
+                              onClick={() => actualizarCantidad(item.codigo, item.cantidad + 1)}
+                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded text-sm font-bold transition"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 font-bold text-gray-900">${(item.pvp * item.cantidad).toLocaleString()}</td>
+                        <td className="px-6 py-4">
+                          <button
+                            onClick={() => removerDelCarrito(item.codigo)}
+                            className="text-red-600 hover:text-red-700 font-semibold transition"
+                          >
+                            🗑️ Remover
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="p-6 bg-gray-50 border-t-2 border-gray-200 flex justify-between">
+                <button
+                  onClick={() => limpiarCarrito()}
+                  className="text-red-600 hover:text-red-700 font-bold transition"
                 >
-                  {/* Imagen */}
-                  <div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                      src={item.imagen}
-                      alt={item.nombre}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Detalles */}
-                  <div className="flex-1">
-                    <Link
-                      href={`/productos/${item.codigo}`}
-                      className="text-lg font-bold text-gray-900 hover:text-blue-600 transition"
-                    >
-                      {item.nombre}
-                    </Link>
-                    <p className="text-gray-600 mt-1">Código: {item.codigo}</p>
-                    <p className="text-2xl font-bold text-blue-600 mt-2">${item.pvp}</p>
-
-                    {/* Cantidad */}
-                    <div className="flex items-center gap-3 mt-4">
-                      <span className="text-gray-600">Cantidad:</span>
-                      <button
-                        onClick={() => actualizarCantidad(item.codigo, item.cantidad - 1)}
-                        className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-3 rounded"
-                      >
-                        −
-                      </button>
-                      <span className="text-lg font-bold text-gray-900 w-8 text-center">
-                        {item.cantidad}
-                      </span>
-                      <button
-                        onClick={() => actualizarCantidad(item.codigo, item.cantidad + 1)}
-                        className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-3 rounded"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Subtotal y acciones */}
-                  <div className="text-right">
-                    <p className="text-gray-600 text-sm mb-2">Subtotal</p>
-                    <p className="text-2xl font-bold text-blue-600 mb-4">
-                      ${(item.pvp * item.cantidad).toLocaleString('es-UY')}
-                    </p>
-                    <button
-                      onClick={() => removerDelCarrito(item.codigo)}
-                      className="text-red-600 hover:text-red-700 font-bold text-sm"
-                    >
-                      🗑️ Remover
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Acciones */}
-            <div className="flex gap-4 mt-8">
-              <Link
-                href="/"
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-3 px-6 rounded-lg transition text-center"
-              >
-                ← Seguir comprando
-              </Link>
-              <button
-                onClick={limpiarCarrito}
-                className="flex-1 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-3 px-6 rounded-lg transition"
-              >
-                🗑️ Vaciar carrito
-              </button>
+                  🗑️ Limpiar carrito
+                </button>
+                <Link
+                  href="/"
+                  className="text-blue-600 hover:text-blue-700 font-bold transition"
+                >
+                  ← Seguir comprando
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* Resumen */}
+          {/* Resumen y checkout */}
           <div className="lg:col-span-1">
-            <div className="bg-blue-50 rounded-lg shadow-lg p-8 sticky top-28">
+            <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Resumen</h2>
 
-              <div className="space-y-4 mb-8">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Cantidad de items:</span>
-                  <span className="font-bold text-gray-900">{items.length}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Total de unidades:</span>
-                  <span className="font-bold text-gray-900">
-                    {items.reduce((acc, item) => acc + item.cantidad, 0)}
-                  </span>
-                </div>
-                <div className="border-t border-blue-200 pt-4">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-lg font-bold text-gray-900">Subtotal:</span>
-                    <span className="text-xl font-bold text-gray-900">
-                      ${total.toLocaleString('es-UY')}
-                    </span>
-                  </div>
+              {/* Información de envío */}
+              <div className="mb-6 pb-6 border-b border-gray-200">
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>📍 Zona de envío:</strong> Montevideo y Ciudad de la Costa
+                </p>
+                <p className="text-sm text-green-600 font-semibold">
+                  ✅ Envío GRATIS (en compras mayores a $3000)
+                </p>
+              </div>
 
-                  {/* Descuento del cupón */}
-                  {appliedCoupon && (
-                    <div className="flex justify-between text-green-600 mb-2">
-                      <span className="font-semibold">Descuento ({appliedCoupon.code}):</span>
-                      <span className="font-bold">
-                        -${discount.toLocaleString('es-UY')}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Total final */}
-                  <div className="flex justify-between pt-2 border-t border-blue-200">
-                    <span className="text-lg font-bold text-gray-900">Total:</span>
-                    <span className="text-3xl font-bold text-blue-600">
-                      ${finalTotal.toLocaleString('es-UY')}
-                    </span>
-                  </div>
+              {/* Detalles de precio */}
+              <div className="space-y-3 mb-6 pb-6 border-b-2 border-gray-200">
+                <div className="flex justify-between text-gray-700">
+                  <span>Subtotal ({items.reduce((sum, item) => sum + item.cantidad, 0)} items)</span>
+                  <span className="font-semibold">${total.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between text-gray-700">
+                  <span>Envío</span>
+                  <span className="text-green-600 font-semibold">GRATIS</span>
                 </div>
               </div>
 
-              {/* Cupón */}
-              {!appliedCoupon ? (
-                <div className="mb-6 p-4 bg-white rounded-lg border-2 border-gray-200">
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    🎟️ Código de cupón
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={couponCode}
-                      onChange={(e) => {
-                        setCouponCode(e.target.value.toUpperCase())
-                        setCouponError('')
-                      }}
-                      placeholder="WELCOME10"
-                      className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
-                    />
-                    <button
-                      onClick={handleApplyCoupon}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition"
-                    >
-                      Aplicar
-                    </button>
-                  </div>
-                  {couponError && (
-                    <p className="text-red-600 text-sm mt-2">{couponError}</p>
-                  )}
-                </div>
-              ) : (
-                <div className="mb-6 p-4 bg-green-50 rounded-lg border-2 border-green-200">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-bold text-green-900">✓ Cupón aplicado</p>
-                      <p className="text-sm text-green-700">{appliedCoupon.code}</p>
-                    </div>
-                    <button
-                      onClick={handleRemoveCoupon}
-                      className="text-red-600 hover:text-red-700 font-bold"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Beneficios */}
-              <div className="bg-white rounded-lg p-4 mb-6">
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <span>✅</span>
-                    <span className="text-gray-700">Envío seguro</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span>✅</span>
-                    <span className="text-gray-700">Hasta 6 cuotas</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span>✅</span>
-                    <span className="text-gray-700">Garantía oficial</span>
-                  </li>
-                </ul>
+              {/* Total */}
+              <div className="flex justify-between mb-6 text-2xl">
+                <span className="font-bold text-gray-900">Total:</span>
+                <span className="font-bold text-blue-600">${total.toLocaleString()}</span>
               </div>
 
-              <Link
-                href="/checkout"
-                className="block text-center w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition mb-3"
-              >
-                Proceder al Checkout
-              </Link>
+              {/* Botones de acción */}
+              <div className="space-y-3">
+                <Link
+                  href="/checkout"
+                  className="block w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-lg text-center transition transform hover:scale-105 shadow-lg"
+                >
+                  💳 Ir a Pagar
+                </Link>
+                <button
+                  onClick={() => router.push('/')}
+                  className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-2 px-4 rounded-lg text-center transition"
+                >
+                  Seguir Comprando
+                </button>
+              </div>
 
-              <Link
-                href="/"
-                className="block text-center text-blue-600 hover:text-blue-700 font-bold text-sm"
-              >
-                Continuar comprando
-              </Link>
+              {/* Info de seguridad */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <p className="text-xs text-gray-600 text-center">
+                  🔒 Compra 100% segura con Mercado Pago
+                </p>
+                <p className="text-xs text-gray-600 text-center mt-2">
+                  ✅ Hasta 12 cuotas sin interés
+                </p>
+              </div>
             </div>
           </div>
         </div>
