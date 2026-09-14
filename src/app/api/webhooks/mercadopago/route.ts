@@ -1,28 +1,53 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
+import { getPaymentInfo } from '@/lib/mercadopago/client'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    // Validar que sea un webhook de Mercado Pago
-    // En producción, verificar la firma del webhook
+    console.log('🔔 Webhook de Mercado Pago recibido:', body)
 
-    if (body.type === 'payment') {
-      const paymentId = body.data.id
-      const externalReference = body.external_reference
+    const { type, data } = body
 
-      console.log(`💳 Pago confirmado: ${paymentId}`)
-      console.log(`📋 Orden: ${externalReference}`)
+    if (type !== 'payment') {
+      return NextResponse.json({ received: true })
+    }
 
-      // TODO: Actualizar estado de la orden a "pagado"
-      // TODO: Enviar email de confirmación de pago
+    const paymentId = data.id
+    const paymentInfo = await getPaymentInfo(paymentId)
 
-      return NextResponse.json({ success: true })
+    if (!paymentInfo) {
+      console.error('❌ No se pudo obtener información del pago:', paymentId)
+      return NextResponse.json({ error: 'Payment not found' }, { status: 404 })
+    }
+
+    console.log('💰 Información del pago:', {
+      id: paymentInfo.id,
+      status: paymentInfo.status,
+      external_reference: paymentInfo.external_reference,
+      amount: paymentInfo.transaction_amount,
+    })
+
+    const orderId = paymentInfo.external_reference
+
+    if (paymentInfo.status === 'approved') {
+      console.log('✅ Pago aprobado para orden:', orderId)
+    } else if (paymentInfo.status === 'rejected' || paymentInfo.status === 'cancelled') {
+      console.log('❌ Pago rechazado/cancelado para orden:', orderId)
+    } else if (paymentInfo.status === 'pending' || paymentInfo.status === 'in_process') {
+      console.log('⏳ Pago pendiente para orden:', orderId)
     }
 
     return NextResponse.json({ received: true })
   } catch (error) {
-    console.error('Error processing webhook:', error)
-    return NextResponse.json({ error: 'Webhook error' }, { status: 400 })
+    console.error('❌ Error en webhook:', error)
+    return NextResponse.json(
+      { error: 'Webhook processing failed' },
+      { status: 500 }
+    )
   }
+}
+
+export async function GET(request: NextRequest) {
+  return NextResponse.json({ status: 'ok' })
 }
