@@ -4,10 +4,15 @@ import { useCart } from '@/context/CartContext'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { siteConfig } from '@/lib/config'
 
 export default function CarritoPage() {
   const { items, total, removerDelCarrito, actualizarCantidad, limpiarCarrito } = useCart()
   const router = useRouter()
+
+  const envioGratis = total >= siteConfig.shipping.minOrderForFreeShipping
+  const costoEnvio = envioGratis ? 0 : siteConfig.shipping.flatCost
+  const totalConEnvio = total + costoEnvio
 
   if (items.length === 0) {
     return (
@@ -129,7 +134,7 @@ export default function CarritoPage() {
                   <strong>📍 Zona de envío:</strong> Montevideo y Ciudad de la Costa
                 </p>
                 <p className="text-sm text-green-600 font-semibold">
-                  ✅ Envío GRATIS (en compras mayores a $3000)
+                  ✅ Envío GRATIS (en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')})
                 </p>
               </div>
 
@@ -141,14 +146,18 @@ export default function CarritoPage() {
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>Envío</span>
-                  <span className="text-green-600 font-semibold">GRATIS</span>
+                  {envioGratis ? (
+                    <span className="text-green-600 font-semibold">GRATIS</span>
+                  ) : (
+                    <span className="font-semibold">${costoEnvio.toLocaleString('es-UY')}</span>
+                  )}
                 </div>
               </div>
 
               {/* Total */}
               <div className="flex justify-between mb-6 text-2xl">
                 <span className="font-bold text-gray-900">Total:</span>
-                <span className="font-bold text-blue-600">${total.toLocaleString()}</span>
+                <span className="font-bold text-blue-600">${totalConEnvio.toLocaleString('es-UY')}</span>
               </div>
 
               {/* Botones de acción */}

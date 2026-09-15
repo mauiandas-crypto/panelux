@@ -82,7 +82,7 @@ export default function Referidos() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-2xl">✅</span>
-                  <span className="text-gray-700">Envío gratis en órdenes superiores a $3000</span>
+                  <span className="text-gray-700">Envío gratis en órdenes superiores a $2000</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-2xl">✅</span>

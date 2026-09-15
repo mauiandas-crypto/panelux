@@ -86,7 +86,7 @@ export const defaultAdminData: AdminData = {
   promoMessages: [
     {
       id: '1',
-      text: '📦 Envío gratis en compras mayores a $3000',
+      text: '📦 Envío gratis en compras mayores a $2000',
       active: true,
       order: 1,
     },

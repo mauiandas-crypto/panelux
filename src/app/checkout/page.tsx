@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
+import { siteConfig } from '@/lib/config'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -29,6 +30,9 @@ export default function CheckoutPage() {
   const [descuento, setDescuento] = useState(0)
 
   const totalConDescuento = Math.max(total - descuento, 0)
+  const envioGratis = total >= siteConfig.shipping.minOrderForFreeShipping
+  const costoEnvio = envioGratis ? 0 : siteConfig.shipping.flatCost
+  const totalFinal = totalConDescuento + costoEnvio
 
   const [validandoCupon, setValidandoCupon] = useState(false)
 
@@ -120,7 +124,8 @@ export default function CheckoutPage() {
         subtotal: total,
         descuento,
         cupon: cuponAplicado?.codigo || null,
-        total: totalConDescuento,
+        costoEnvio,
+        total: totalFinal,
         estado: 'pendiente' as const,
         metodoPago,
         notas: `Pedido realizado el ${now.toLocaleDateString('es-UY')}`,
@@ -159,6 +164,13 @@ export default function CheckoutPage() {
                     name: `Descuento (${cuponAplicado?.codigo})`,
                     quantity: 1,
                     price: -descuento,
+                  }]
+                : []),
+              ...(costoEnvio > 0
+                ? [{
+                    name: 'Envío',
+                    quantity: 1,
+                    price: costoEnvio,
                   }]
                 : []),
             ],
@@ -418,18 +430,22 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-between">
                   <span className="text-gray-600">Envío:</span>
-                  <span className="font-bold text-green-600">Gratis</span>
+                  {envioGratis ? (
+                    <span className="font-bold text-green-600">Gratis</span>
+                  ) : (
+                    <span className="font-bold text-gray-900">${costoEnvio.toLocaleString('es-UY')}</span>
+                  )}
                 </div>
 
                 <div className="border-t border-blue-200 pt-2 flex justify-between text-lg">
                   <span className="font-bold text-gray-900">Total:</span>
-                  <span className="font-bold text-blue-600">${totalConDescuento.toLocaleString('es-UY')}</span>
+                  <span className="font-bold text-blue-600">${totalFinal.toLocaleString('es-UY')}</span>
                 </div>
               </div>
 
               <div className="mt-6 p-4 bg-white rounded-lg border-2 border-blue-200">
                 <p className="text-xs text-gray-600">
-                  ✅ Envío gratis en compras mayores a $3000
+                  ✅ Envío gratis en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}
                 </p>
                 <p className="text-xs text-gray-600 mt-2">
                   ✅ Garantía oficial del fabricante

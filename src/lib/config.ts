@@ -27,7 +27,8 @@ export const siteConfig = {
   // Envíos
   shipping: {
     freeZones: ['Montevideo', 'Ciudad de la Costa'],
-    minOrderForFreeShipping: 3000,
+    minOrderForFreeShipping: 2000,
+    flatCost: 250,
   },
 
   // Pagos
