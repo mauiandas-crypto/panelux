@@ -10,6 +10,7 @@ export default function OrdersAdmin() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<Order['estado'] | 'all'>('all')
+  const [busqueda, setBusqueda] = useState('')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [showDetail, setShowDetail] = useState(false)
 
@@ -64,7 +65,17 @@ export default function OrdersAdmin() {
     }
   }
 
-  const filteredOrders = filter === 'all' ? orders : orders.filter(o => o.estado === filter)
+  const filteredOrders = orders
+    .filter(o => filter === 'all' || o.estado === filter)
+    .filter(o => {
+      if (!busqueda.trim()) return true
+      const q = busqueda.trim().toLowerCase()
+      return (
+        o.id.toLowerCase().includes(q) ||
+        o.cliente.nombre.toLowerCase().includes(q) ||
+        o.cliente.email.toLowerCase().includes(q)
+      )
+    })
 
   const estadoColors: Record<Order['estado'], string> = {
     pendiente: 'bg-yellow-100 text-yellow-800',
@@ -97,6 +108,17 @@ export default function OrdersAdmin() {
       </header>
 
       <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Buscador */}
+        <div className="mb-4">
+          <input
+            type="text"
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            placeholder="🔍 Buscar por número de orden, nombre o email..."
+            className="w-full max-w-lg px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-900"
+          />
+        </div>
+
         {/* Filtros */}
         <div className="mb-8 flex gap-2 flex-wrap">
           <button
