@@ -60,7 +60,8 @@ export default function AdminLogin() {
           router.push('/admin')
         }, 100)
       } else {
-        setError('Contraseña incorrecta')
+        const data = await response.json().catch(() => null)
+        setError(data?.error || 'Contraseña incorrecta')
         setLoading(false)
       }
     } catch (err) {
