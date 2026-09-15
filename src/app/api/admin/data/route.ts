@@ -6,7 +6,7 @@ import { getAdminSession } from '@/lib/admin-auth'
 let adminData: AdminData = defaultAdminData
 
 export async function GET(request: NextRequest) {
-  if (!getAdminSession(request)) {
+  if (!(await getAdminSession(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!getAdminSession(request)) {
+  if (!(await getAdminSession(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
