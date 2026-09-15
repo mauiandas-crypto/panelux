@@ -12,7 +12,7 @@ export default function WhatsAppChat() {
       {/* Botón flotante */}
       <button
         onClick={() => setAbierto(!abierto)}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center text-2xl z-40 transition transform hover:scale-110"
+        className="fixed bottom-4 right-4 w-12 h-12 sm:bottom-6 sm:right-6 sm:w-16 sm:h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center text-xl sm:text-2xl z-40 transition transform hover:scale-110"
         title="Chat con WhatsApp"
       >
         {abierto ? '✕' : '💬'}

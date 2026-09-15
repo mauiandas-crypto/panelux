@@ -81,7 +81,7 @@ export default function AIChat() {
       {/* Botón Flotante */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-32 right-6 z-40 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center font-bold text-2xl"
+        className="fixed bottom-20 right-4 w-11 h-11 text-lg sm:bottom-32 sm:right-6 sm:w-14 sm:h-14 sm:text-2xl z-40 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center font-bold"
         title={isOpen ? 'Cerrar chat' : 'Abrir chat'}
       >
         {isOpen ? '✕' : '💬'}
