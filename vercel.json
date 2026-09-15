@@ -31,12 +31,5 @@
         }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/admin/login",
-      "destination": "/admin/login",
-      "permanent": false
-    }
   ]
 }
