@@ -40,7 +40,7 @@ export default function WhatsAppChat() {
                 <strong>¿En qué te podemos ayudar?</strong>
               </p>
               <p className="text-xs text-gray-600 mb-4">
-                Disponibles Lun-Vie 9:00-18:00 | Sáb 10:00-14:00
+                Disponibles Lun-Vie 8:30-17:15
               </p>
             </div>
 

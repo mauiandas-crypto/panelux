@@ -144,11 +144,8 @@ export default function SobreNosotros() {
 
             <div className="bg-purple-50 rounded-xl p-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">⏰ Horarios</h3>
-              <p className="text-gray-700 mb-2">
-                <strong>Lunes a Viernes:</strong> 9:00 AM - 6:00 PM
-              </p>
               <p className="text-gray-700 mb-4">
-                <strong>Sábados:</strong> 10:00 AM - 2:00 PM
+                <strong>Lunes a Viernes:</strong> 8:30 - 17:15
               </p>
               <p className="text-gray-700">
                 Te recomendamos contactarnos antes de visitarnos para asegurar disponibilidad.

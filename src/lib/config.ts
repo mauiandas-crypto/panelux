@@ -13,14 +13,9 @@ export const siteConfig = {
   // Horarios
   hours: {
     weekday: {
-      open: '09:00',
-      close: '18:00',
+      open: '08:30',
+      close: '17:15',
       day: 'Lun-Vie',
-    },
-    saturday: {
-      open: '10:00',
-      close: '14:00',
-      day: 'Sábado',
     },
   },
 

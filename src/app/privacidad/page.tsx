@@ -85,7 +85,7 @@ export default function Privacidad() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <p><strong>WhatsApp:</strong> 092 715 555</p>
               <p><strong>Email:</strong> info@panelux.com.uy</p>
-              <p><strong>Horario:</strong> Lun-Vie 9:00-18:00</p>
+              <p><strong>Horario:</strong> Lun-Vie 8:30-17:15</p>
             </div>
           </section>
 

@@ -142,7 +142,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors flex items-center gap-2">
-                  <span>⏰</span> Lun-Vie 9:00-18:00
+                  <span>⏰</span> Lun-Vie 8:30-17:15
                 </a>
               </li>
             </ul>

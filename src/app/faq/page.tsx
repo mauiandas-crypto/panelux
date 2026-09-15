@@ -49,11 +49,11 @@ export default function FAQ() {
     },
     {
       pregunta: '¿Cómo puedo contactarlos?',
-      respuesta: 'Puedes contactarnos por: WhatsApp (092 715 555), Email (info@panelux.com.uy), Teléfono (+598 9271 5555). Estamos disponibles Lun-Vie 9:00-18:00 y Sábado 10:00-14:00.',
+      respuesta: 'Puedes contactarnos por: WhatsApp (092 715 555), Email (info@panelux.com.uy), Teléfono (+598 9271 5555). Estamos disponibles Lun-Vie 8:30-17:15.',
     },
     {
       pregunta: '¿Tienen showroom físico?',
-      respuesta: 'Sí, puedes visitarnos en Yaguarón 1764, Montevideo. Atendemos Lun-Vie 9:00-18:00 y Sábado 10:00-14:00. Te recomendamos consultar antes de pasar para asegurarte disponibilidad de stock.',
+      respuesta: 'Sí, puedes visitarnos en Yaguarón 1764, Montevideo. Atendemos Lun-Vie 8:30-17:15. Te recomendamos consultar antes de pasar para asegurarte disponibilidad de stock.',
     },
   ]
 
