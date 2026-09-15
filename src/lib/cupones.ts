@@ -1,5 +1,16 @@
 ﻿// Estructura de cupones disponibles
-export const cupones = [
+interface Cupon {
+  codigo: string
+  descripcion: string
+  descuento: number
+  tipo: 'porcentaje' | 'fijo' | 'envio'
+  minimo: number | null
+  maximo: number | null
+  activo: boolean
+  usoUnico: boolean
+}
+
+export const cupones: Cupon[] = [
   {
     codigo: 'BIENVENIDA10',
     descripcion: 'Descuento de bienvenida',
