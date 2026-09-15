@@ -41,6 +41,26 @@ export const cupones: Cupon[] = [
     activo: true,
     usoUnico: false,
   },
+  {
+    codigo: 'PRIMERACOMPRA',
+    descripcion: '15% en tu primera compra',
+    descuento: 15,
+    tipo: 'porcentaje',
+    minimo: 1500,
+    maximo: null,
+    activo: true,
+    usoUnico: false,
+  },
+  {
+    codigo: 'DESCUENTO500',
+    descripcion: '$500 de descuento',
+    descuento: 500,
+    tipo: 'fijo',
+    minimo: 2500,
+    maximo: null,
+    activo: true,
+    usoUnico: false,
+  },
 ]
 
 export function validarCupon(codigo: string, total: number) {
