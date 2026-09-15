@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
+import { validarCupon, calcularDescuento } from '@/lib/cupones'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -22,6 +23,43 @@ export default function CheckoutPage() {
   const [metodoPago, setMetodoPago] = useState<'mercadopago' | 'transferencia' | 'efectivo'>('mercadopago')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const [cuponCodigo, setCuponCodigo] = useState('')
+  const [cuponAplicado, setCuponAplicado] = useState<any>(null)
+  const [cuponError, setCuponError] = useState('')
+  const [descuento, setDescuento] = useState(0)
+
+  const totalConDescuento = Math.max(total - descuento, 0)
+
+  const handleAplicarCupon = () => {
+    setCuponError('')
+
+    if (!cuponCodigo.trim()) {
+      setCuponError('Ingresa un código de cupón')
+      return
+    }
+
+    const resultado = validarCupon(cuponCodigo, total)
+
+    if (!resultado.valido) {
+      setCuponError(resultado.error || 'Cupón inválido')
+      setCuponAplicado(null)
+      setDescuento(0)
+      return
+    }
+
+    const montoDescuento = calcularDescuento(resultado.cupon, total)
+    setCuponAplicado(resultado.cupon)
+    setDescuento(montoDescuento)
+    setCuponError('')
+  }
+
+  const handleQuitarCupon = () => {
+    setCuponAplicado(null)
+    setDescuento(0)
+    setCuponCodigo('')
+    setCuponError('')
+  }
 
   if (items.length === 0) {
     return (
@@ -68,8 +106,9 @@ export default function CheckoutPage() {
           subtotal: item.pvp * item.cantidad,
         })),
         subtotal: total,
-        descuento: 0,
-        total,
+        descuento,
+        cupon: cuponAplicado?.codigo || null,
+        total: totalConDescuento,
         estado: 'pendiente' as const,
         metodoPago,
         notas: `Pedido realizado el ${now.toLocaleDateString('es-UY')}`,
@@ -97,11 +136,20 @@ export default function CheckoutPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            items: items.map(item => ({
-              name: item.nombre,
-              quantity: item.cantidad,
-              price: item.pvp,
-            })),
+            items: [
+              ...items.map(item => ({
+                name: item.nombre,
+                quantity: item.cantidad,
+                price: item.pvp,
+              })),
+              ...(descuento > 0
+                ? [{
+                    name: `Descuento (${cuponAplicado?.codigo})`,
+                    quantity: 1,
+                    price: -descuento,
+                  }]
+                : []),
+            ],
             email: formData.email,
             orderId: orderId,
           }),
@@ -300,11 +348,60 @@ export default function CheckoutPage() {
                 ))}
               </div>
 
+              {/* Cupón de descuento */}
+              <div className="border-t border-blue-200 pt-4 mb-4">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  ¿Tenés un cupón?
+                </label>
+                {cuponAplicado ? (
+                  <div className="flex items-center justify-between bg-green-50 border-2 border-green-300 rounded-lg px-4 py-2">
+                    <div>
+                      <p className="text-sm font-bold text-green-800">✅ {cuponAplicado.codigo}</p>
+                      <p className="text-xs text-green-700">{cuponAplicado.descripcion}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleQuitarCupon}
+                      className="text-red-600 text-sm font-semibold hover:underline"
+                    >
+                      Quitar
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={cuponCodigo}
+                      onChange={(e) => setCuponCodigo(e.target.value.toUpperCase())}
+                      placeholder="Código de descuento"
+                      className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAplicarCupon}
+                      className="bg-gray-900 hover:bg-gray-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition"
+                    >
+                      Aplicar
+                    </button>
+                  </div>
+                )}
+                {cuponError && (
+                  <p className="text-red-600 text-xs mt-2">{cuponError}</p>
+                )}
+              </div>
+
               <div className="border-t border-blue-200 pt-4 space-y-2">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
                   <span className="font-bold text-gray-900">${total.toLocaleString('es-UY')}</span>
                 </div>
+
+                {descuento > 0 && (
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Descuento:</span>
+                    <span className="font-bold text-red-600">-${descuento.toLocaleString('es-UY')}</span>
+                  </div>
+                )}
 
                 <div className="flex justify-between">
                   <span className="text-gray-600">Envío:</span>
@@ -313,7 +410,7 @@ export default function CheckoutPage() {
 
                 <div className="border-t border-blue-200 pt-2 flex justify-between text-lg">
                   <span className="font-bold text-gray-900">Total:</span>
-                  <span className="font-bold text-blue-600">${total.toLocaleString('es-UY')}</span>
+                  <span className="font-bold text-blue-600">${totalConDescuento.toLocaleString('es-UY')}</span>
                 </div>
               </div>
 
