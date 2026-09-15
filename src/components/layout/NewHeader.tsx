@@ -7,8 +7,10 @@ import PromoBar from './PromoBar';
 import MenuDrawer from './MenuDrawer';
 import { COLORS, Z_INDEX } from '@/lib/design-tokens';
 import { productos } from '@/data/productos';
+import { useCart } from '@/context/CartContext';
 
 export default function NewHeader() {
+  const { totalItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState<typeof productos>([]);
@@ -157,8 +159,17 @@ export default function NewHeader() {
 
           {/* Icons */}
           <div className="flex items-center gap-4">
-            <Link href="/favoritos" className="p-2 hover:bg-gray-100 rounded-lg">❤️</Link>
-            <Link href="/carrito" className="p-2 hover:bg-gray-100 rounded-lg">🛒</Link>
+            <Link href="/carrito" className="relative p-2 hover:bg-gray-100 rounded-lg text-3xl">
+              🛒
+              {totalItems > 0 && (
+                <span
+                  className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-white text-xs font-bold"
+                  style={{ backgroundColor: COLORS.primary[500] }}
+                >
+                  {totalItems}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
       </header>
