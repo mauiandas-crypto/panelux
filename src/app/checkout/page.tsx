@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
-import { validarCupon, calcularDescuento } from '@/lib/cupones'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -31,7 +30,9 @@ export default function CheckoutPage() {
 
   const totalConDescuento = Math.max(total - descuento, 0)
 
-  const handleAplicarCupon = () => {
+  const [validandoCupon, setValidandoCupon] = useState(false)
+
+  const handleAplicarCupon = async () => {
     setCuponError('')
 
     if (!cuponCodigo.trim()) {
@@ -39,19 +40,30 @@ export default function CheckoutPage() {
       return
     }
 
-    const resultado = validarCupon(cuponCodigo, total)
+    setValidandoCupon(true)
+    try {
+      const response = await fetch('/api/coupons/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigo: cuponCodigo, total }),
+      })
+      const resultado = await response.json()
 
-    if (!resultado.valido) {
-      setCuponError(resultado.error || 'Cupón inválido')
-      setCuponAplicado(null)
-      setDescuento(0)
-      return
+      if (!resultado.valido) {
+        setCuponError(resultado.error || 'Cupón inválido')
+        setCuponAplicado(null)
+        setDescuento(0)
+        return
+      }
+
+      setCuponAplicado(resultado.cupon)
+      setDescuento(resultado.cupon.descuento)
+      setCuponError('')
+    } catch (err) {
+      setCuponError('No se pudo validar el cupón. Intenta nuevamente.')
+    } finally {
+      setValidandoCupon(false)
     }
-
-    const montoDescuento = calcularDescuento(resultado.cupon, total)
-    setCuponAplicado(resultado.cupon)
-    setDescuento(montoDescuento)
-    setCuponError('')
   }
 
   const handleQuitarCupon = () => {
@@ -379,9 +391,10 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={handleAplicarCupon}
-                      className="bg-gray-900 hover:bg-gray-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition"
+                      disabled={validandoCupon}
+                      className="bg-gray-900 hover:bg-gray-700 disabled:bg-gray-400 text-white font-bold px-4 py-2 rounded-lg text-sm transition"
                     >
-                      Aplicar
+                      {validandoCupon ? '...' : 'Aplicar'}
                     </button>
                   </div>
                 )}
