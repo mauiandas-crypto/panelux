@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Los campos de formulario mantienen texto oscuro sobre fondo claro
+   sin importar el modo oscuro del sistema, para que siempre sean legibles */
+input,
+select,
+textarea {
+  color: #111827;
+  background-color: #ffffff;
+}
