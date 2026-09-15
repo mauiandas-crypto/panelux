@@ -49,8 +49,13 @@ export default function AdminLogin() {
       })
 
       if (response.ok) {
-        // Token se guarda automáticamente como cookie HttpOnly Secure por el servidor
-        // No guardamos en localStorage por seguridad (vulnerable a XSS)
+        // El servidor también setea una cookie HttpOnly Secure, pero el resto
+        // del panel (useAdminAuth, fetch con Authorization: Bearer) depende de
+        // tener el token accesible desde el cliente, así que lo guardamos acá.
+        const data = await response.json()
+        if (data.token) {
+          localStorage.setItem('adminToken', data.token)
+        }
         setTimeout(() => {
           router.push('/admin')
         }, 100)
