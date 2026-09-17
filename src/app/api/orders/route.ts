@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Order } from '@/lib/orders-types'
 import { getAdminSession } from '@/lib/admin-auth'
-
-// Almacenar órdenes en memoria (en producción usar base de datos)
-let orders: Order[] = []
+import { getOrders, addOrder } from '@/lib/orders-store'
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,7 +11,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Si es admin, devolver todas las órdenes
-    return NextResponse.json(orders)
+    return NextResponse.json(getOrders())
   } catch (error) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
@@ -43,7 +41,7 @@ export async function POST(request: NextRequest) {
       fechaActualizacion: new Date().toISOString(),
     }
 
-    orders.push(newOrder)
+    addOrder(newOrder)
 
     // El email real (Resend) y la preference real de Mercado Pago se generan
     // desde el checkout (/api/emails/send-confirmation y

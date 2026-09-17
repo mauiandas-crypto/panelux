@@ -1,19 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAdminSession } from '@/lib/admin-auth'
-
-// En producción, usar base de datos real
-let orders: any[] = []
+import { getOrderById, updateOrder } from '@/lib/orders-store'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // Por ahora devolver error 404 ya que no tenemos DB
-    return NextResponse.json(
-      { error: 'Order not found' },
-      { status: 404 }
-    )
+    if (!(await getAdminSession(request))) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { id } = await params
+    const order = getOrderById(id)
+
+    if (!order) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+    }
+
+    return NextResponse.json(order)
   } catch (error) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
@@ -28,19 +33,23 @@ export async function PATCH(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { estado, numeroSeguimiento, notas } = await request.json()
+    const body = await request.json()
     const { id } = await params
 
-    // En producción actualizar en DB
-    console.log(`Actualizando orden ${id} a estado: ${estado}`)
+    // Solo aplicar los campos que realmente vinieron en el body, para no
+    // pisar con `undefined` un valor que ya tenía la orden.
+    const updates: Record<string, unknown> = {}
+    if (body.estado !== undefined) updates.estado = body.estado
+    if (body.numeroSeguimiento !== undefined) updates.numeroSeguimiento = body.numeroSeguimiento
+    if (body.notas !== undefined) updates.notas = body.notas
 
-    return NextResponse.json({
-      id,
-      estado,
-      numeroSeguimiento,
-      notas,
-      fechaActualizacion: new Date().toISOString(),
-    })
+    const updated = updateOrder(id, updates)
+
+    if (!updated) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+    }
+
+    return NextResponse.json(updated)
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update order' }, { status: 400 })
   }
