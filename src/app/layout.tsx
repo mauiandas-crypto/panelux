@@ -11,6 +11,7 @@ import { AdminProvider } from "@/context/AdminContext";
 import { OrderProvider } from "@/context/OrderContext";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
+import WelcomeBanner from "@/components/WelcomeBanner";
 
 export const metadata: Metadata = {
   title: "Panelux Uruguay | Distribuidor Oficial de Utensilios de Cocina Premium",
@@ -85,6 +86,7 @@ export default function RootLayout({
               <NewHeader />
               <TrustBadges />
               {children}
+              <WelcomeBanner />
               <WhatsAppChat />
               <DarkModeToggle />
               <Footer />
