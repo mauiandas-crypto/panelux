@@ -6,9 +6,7 @@ import Link from 'next/link'
 import { productos } from '@/data/productos'
 import { useCart } from '@/context/CartContext'
 import ProductGallery from '@/components/ProductGallery'
-import ReviewsSection from '@/components/ReviewsSection'
 import VideoGallery from '@/components/VideoGallery'
-import GreenShippingInfo from '@/components/GreenShippingInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
 
 export default function ProductoDetail() {
@@ -199,9 +197,7 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
         {/* Nuevas secciones de producto */}
         <div className="mt-16 space-y-16">
-          <ReviewsSection productoCodigo={producto.codigo} productNombre={producto.nombre} />
           <VideoGallery />
-          <GreenShippingInfo />
         </div>
       </div>
     </div>

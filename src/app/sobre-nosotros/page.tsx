@@ -12,7 +12,7 @@ export default function SobreNosotros() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">Sobre Panelux Uruguay</h1>
-          <p className="text-xl text-gray-600">Distribuidor oficial desde 2015</p>
+          <p className="text-xl text-gray-600">Distribuidor oficial desde 2020</p>
         </div>
 
         {/* Historia */}
@@ -20,13 +20,13 @@ export default function SobreNosotros() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Nuestra Historia</h2>
           <div className="prose prose-lg text-gray-700 space-y-4">
             <p>
-              Panelux Uruguay nace en 2015 como distribuidor oficial de Panelux Brasil, la marca brasileña líder en utensilios de cocina con más de 25 años de trayectoria.
+              Todogastro SAS nace en 2020 y hoy representa oficialmente a Panelux Brasil en Uruguay, la marca brasileña líder en utensilios de cocina con más de 25 años de trayectoria.
             </p>
             <p>
               Nuestro compromiso desde el día uno ha sido traer productos de calidad premium a los hogares uruguayos, manteniendo los más altos estándares de servicio y garantía.
             </p>
             <p>
-              Hoy, más de 500 familias confían en nosotros y recomiendan nuestros productos a sus amigos y familia.
+              Hoy seguimos trabajando para que cada vez más hogares uruguayos conozcan y confíen en los productos Panelux.
             </p>
           </div>
         </section>
@@ -101,29 +101,6 @@ export default function SobreNosotros() {
               <p className="text-gray-700">
                 Nuestro equipo está disponible para asesorarte en la elección del producto que mejor se adapte a tus necesidades.
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Números */}
-        <section className="mb-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Por los números</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">500+</div>
-              <p className="text-gray-700">Clientes Satisfechos</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">2000+</div>
-              <p className="text-gray-700">Órdenes Procesadas</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">9 años</div>
-              <p className="text-gray-700">En el Mercado</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-orange-600 mb-2">4.9⭐</div>
-              <p className="text-gray-700">Calificación Promedio</p>
             </div>
           </div>
         </section>

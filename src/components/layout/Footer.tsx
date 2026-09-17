@@ -166,7 +166,7 @@ export default function Footer() {
       <div className="border-t border-gray-700 pt-6">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-            <p>© 2026 Panelux SAS - Distribuidor oficial en Uruguay | RUT 21999001001</p>
+            <p>© 2026 Todogastro SAS - Representante oficial de Panelux en Uruguay | RUT 219825770010</p>
             <div className="flex gap-4 flex-wrap justify-center">
               <Link href="/privacidad" className="hover:text-gray-200 transition">Privacidad</Link>
               <Link href="/terminos" className="hover:text-gray-200 transition">Términos</Link>
