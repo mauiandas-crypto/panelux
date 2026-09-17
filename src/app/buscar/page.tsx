@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import Header from '@/components/header'
 import { SearchContent } from './search-content'
 
 function SearchFallback() {
@@ -14,7 +13,6 @@ function SearchFallback() {
 export default function SearchPage() {
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gray-50">
         <Suspense fallback={<SearchFallback />}>
           <SearchContent />

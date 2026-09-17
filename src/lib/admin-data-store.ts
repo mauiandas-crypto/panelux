@@ -19,3 +19,15 @@ export function setAdminData(data: AdminData): AdminData {
   }
   return adminData
 }
+
+// Suma un uso a un cupón cuando efectivamente se concreta un pedido con él
+// (no cuando el cliente solo lo "aplica" en el checkout, ya que eso no
+// garantiza que la compra se termine de hacer).
+export function incrementCouponUsage(codigo: string): void {
+  const cupon = adminData.coupons.find(
+    (c) => c.code.toUpperCase() === codigo.toUpperCase()
+  )
+  if (cupon) {
+    cupon.usedCount += 1
+  }
+}

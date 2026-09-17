@@ -1,8 +1,6 @@
 import { getCategoryBySlug, getProductBySlug } from '@/lib/products'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
 import AddToCartButton from '@/components/add-to-cart-button'
 
 interface Props {
@@ -34,7 +32,6 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
         <div className="bg-white border-b border-gray-200">
@@ -159,7 +156,6 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

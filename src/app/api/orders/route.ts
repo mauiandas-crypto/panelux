@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Order } from '@/lib/orders-types'
 import { getAdminSession } from '@/lib/admin-auth'
 import { getOrders, addOrder } from '@/lib/orders-store'
+import { incrementCouponUsage } from '@/lib/admin-data-store'
 
 export async function GET(request: NextRequest) {
   try {
@@ -42,6 +43,10 @@ export async function POST(request: NextRequest) {
     }
 
     addOrder(newOrder)
+
+    if (newOrder.cupon) {
+      incrementCouponUsage(newOrder.cupon)
+    }
 
     // El email real (Resend) y la preference real de Mercado Pago se generan
     // desde el checkout (/api/emails/send-confirmation y
