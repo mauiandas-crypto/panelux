@@ -155,7 +155,7 @@ export default function Footer() {
                 <span className="text-xs bg-gray-700 px-3 py-1 rounded">Mercado Pago</span>
                 <span className="text-xs bg-gray-700 px-3 py-1 rounded">Tarjetas</span>
                 <span className="text-xs bg-gray-700 px-3 py-1 rounded">Efectivo</span>
-                <span className="text-xs bg-gray-700 px-3 py-1 rounded">Hasta 6 cuotas</span>
+                <span className="text-xs bg-gray-700 px-3 py-1 rounded">Hasta 12 cuotas</span>
               </div>
             </div>
           </div>

@@ -31,6 +31,6 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 export const PROMO_MESSAGES = [
   '📦 Envío gratis en compras mayores a $2000',
-  '💳 Hasta 6 cuotas sin interés con tarjeta',
+  '💳 Hasta 12 cuotas sin interés con tarjeta',
   '🎁 Compra 2 productos y obtén 10% descuento',
 ];

@@ -92,7 +92,7 @@ export const defaultAdminData: AdminData = {
     },
     {
       id: '2',
-      text: '💳 Hasta 6 cuotas sin interés con tarjeta',
+      text: '💳 Hasta 12 cuotas sin interés con tarjeta',
       active: true,
       order: 2,
     },

@@ -190,7 +190,7 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-lg">✅</span>
-                  <span className="text-sm text-gray-700">Hasta 6 cuotas sin interés</span>
+                  <span className="text-sm text-gray-700">Hasta 12 cuotas sin interés</span>
                 </li>
               </ul>
             </div>
