@@ -29,21 +29,13 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const fetchAdminData = async () => {
     try {
-      const token = localStorage.getItem('adminToken')
-      if (!token) {
-        // Si no hay token, intentar obtener datos públicos (sin token)
-        // Por ahora usamos los datos por defecto
-        setLoading(false)
-        return
-      }
-
-      const response = await fetch('/api/admin/data', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      // Endpoint público: cualquier visitante (no solo el admin logueado)
+      // necesita ver los banners y textos promocionales configurados.
+      const response = await fetch('/api/site-data')
 
       if (response.ok) {
-        const adminData = await response.json()
-        setData(adminData)
+        const publicData = await response.json()
+        setData(prev => ({ ...prev, ...publicData }))
       }
     } catch (error) {
       console.error('Error fetching admin data:', error)
