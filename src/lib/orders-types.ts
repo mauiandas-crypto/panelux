@@ -21,6 +21,7 @@ export interface Order {
   subtotal: number
   descuento: number
   cupon?: string
+  costoEnvio?: number
   total: number
   estado: 'pendiente' | 'pagado' | 'en_preparacion' | 'enviado' | 'entregado' | 'cancelado'
   metodoPago: 'mercadopago' | 'transferencia' | 'efectivo'

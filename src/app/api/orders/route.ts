@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Order } from '@/lib/orders-types'
-import { sendEmail, getOrderConfirmationEmail } from '@/lib/email-service'
-import { updateInventoryAfterOrder } from '@/lib/odoo-service'
-import { createMercadopagoPreference } from '@/lib/mercadopago-service'
 import { getAdminSession } from '@/lib/admin-auth'
 
 // Almacenar órdenes en memoria (en producción usar base de datos)
@@ -27,13 +24,18 @@ export async function POST(request: NextRequest) {
     const orderData = await request.json()
 
     const newOrder: Order = {
-      id: 'ORD-' + Date.now(),
+      // Usar el id que ya generó el checkout, que es el mismo que se manda
+      // como external_reference a Mercado Pago y al email de confirmación.
+      // Generar uno nuevo acá los desincronizaba: la orden en el admin nunca
+      // iba a poder cruzarse con la notificación de pago del webhook.
+      id: orderData.id || 'ORD-' + Date.now(),
       fecha: new Date().toISOString(),
       cliente: orderData.cliente,
       items: orderData.items,
       subtotal: orderData.subtotal,
       descuento: orderData.descuento || 0,
       cupon: orderData.cupon,
+      costoEnvio: orderData.costoEnvio || 0,
       total: orderData.total,
       estado: 'pendiente',
       metodoPago: orderData.metodoPago || 'mercadopago',
@@ -43,25 +45,14 @@ export async function POST(request: NextRequest) {
 
     orders.push(newOrder)
 
-    // Enviar email de confirmación
-    const emailHtml = getOrderConfirmationEmail(newOrder)
-    await sendEmail({
-      to: newOrder.cliente.email,
-      subject: `Confirmación de pedido ${newOrder.id}`,
-      html: emailHtml,
-    })
-
-    // Actualizar inventario en Odoo
-    await updateInventoryAfterOrder(newOrder)
-
-    // Crear preferencia de Mercado Pago si es el método de pago
-    if (newOrder.metodoPago === 'mercadopago') {
-      const mpLink = await createMercadopagoPreference(newOrder)
-      if (mpLink) {
-        newOrder.mpPaymentId = mpLink
-      }
-    }
-
+    // El email real (Resend) y la preference real de Mercado Pago se generan
+    // desde el checkout (/api/emails/send-confirmation y
+    // /api/payments/create-preference), que sí llaman a las APIs reales con
+    // el cupón y el envío ya calculados. Antes esta ruta también intentaba
+    // hacer su propia versión de ambas cosas (más una sincronización con
+    // Odoo), pero eran simulaciones que solo hacían console.log y nunca
+    // pegaban a ningún servicio real - se sacaron para no tener dos caminos
+    // haciendo lo mismo, uno de ellos falso.
     console.log('✅ Nueva orden creada:', newOrder.id)
 
     return NextResponse.json(newOrder, { status: 201 })
