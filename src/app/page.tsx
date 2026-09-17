@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link"
 import { useState, useMemo } from "react"
 import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
@@ -24,45 +23,6 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Hero Azul Animado */}
       <Hero />
-
-      {/* Beneficios */}
-      <section className="bg-gradient-to-r from-blue-50 to-purple-50 py-8 px-6 border-b-4 border-blue-500">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl mb-3">⚡</div>
-              <h3 className="font-bold text-gray-900">Calidad Premium</h3>
-              <p className="text-gray-600 text-sm">Productos resistentes y confiables</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-3">🚚</div>
-              <h3 className="font-bold text-gray-900">Envíos Rápidos</h3>
-              <p className="text-gray-600 text-sm">Entrega segura a todo Uruguay</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-3">🔒</div>
-              <h3 className="font-bold text-gray-900">Seguridad</h3>
-              <p className="text-gray-600 text-sm">Compra 100% protegida</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-3">💳</div>
-              <h3 className="font-bold text-gray-900">Hasta 12 Cuotas</h3>
-              <p className="text-gray-600 text-sm">Sin interés en tarjeta</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hero */}
-      <section className="relative bg-gradient-to-b from-blue-600 to-blue-400 text-white py-24 px-6 min-h-96 flex items-center">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-6xl font-bold mb-6">Pasión por Cocinar</h1>
-          <p className="text-2xl mb-8">Distribuidor oficial en Uruguay de la marca brasileña líder en utensilios de cocina</p>
-          <a href="#productos" className="inline-block px-8 py-4 bg-cyan-500 text-white font-bold rounded-lg hover:bg-cyan-600 transition text-lg shadow-lg">
-            Explorar Productos
-          </a>
-        </div>
-      </section>
 
       {/* Categorías */}
       <section className="bg-white py-8 px-6 border-b sticky top-20 z-40">
