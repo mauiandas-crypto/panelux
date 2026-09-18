@@ -45,6 +45,13 @@ export default function MagnificQualityInfo() {
           ))}
         </div>
 
+        <div className="bg-gray-50 rounded-lg p-5 mb-6 flex items-center justify-center gap-8 flex-wrap">
+          <span className="text-sm font-semibold text-gray-700">🔥 Apto para:</span>
+          <span className="text-sm text-gray-700">Gas</span>
+          <span className="text-sm text-gray-700">Vitrocerámica</span>
+          <span className="text-sm text-gray-700">Eléctrica</span>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white border-2 border-gray-200 rounded-lg p-6 text-center">
             <p className="font-bold text-gray-900 mb-1">Certificación INMETRO</p>
