@@ -20,6 +20,16 @@ export default function ProductoDetail() {
 
   const producto = productos.find((p) => p.codigo === codigo)
 
+  // Algunos productos tienen specs reales cargadas desde el catálogo
+  // oficial (capacidadLitros, espesorMmReal, etc.); no todos los objetos
+  // del array las tienen, así que se leen con un cast seguro.
+  const specs = (producto ?? {}) as typeof producto & {
+    capacidadLitros?: number
+    espesorMmReal?: number
+    claseAdherencia?: string
+    libreDePfoaPfos?: boolean
+  }
+
   if (!producto) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -162,6 +172,27 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
             >
               Volver al catálogo
             </Link>
+
+            {/* Especificaciones técnicas reales (catálogo oficial Panelux) */}
+            {(specs.capacidadLitros || specs.espesorMmReal) && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <h2 className="text-lg font-bold text-gray-900 mb-3">Especificaciones técnicas</h2>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  {specs.capacidadLitros && (
+                    <li><span className="font-semibold">Capacidad:</span> {specs.capacidadLitros} L</li>
+                  )}
+                  {specs.espesorMmReal && (
+                    <li><span className="font-semibold">Espesor:</span> {specs.espesorMmReal} mm</li>
+                  )}
+                  {specs.claseAdherencia && (
+                    <li><span className="font-semibold">Antiadherencia certificada INMETRO:</span> Clase {specs.claseAdherencia} (Óptima)</li>
+                  )}
+                  {specs.libreDePfoaPfos && (
+                    <li><span className="font-semibold">Libre de PFOA y PFOS</span></li>
+                  )}
+                </ul>
+              </div>
+            )}
 
             {/* Descripción */}
             <div className="mt-8 pt-6 border-t border-gray-200">
