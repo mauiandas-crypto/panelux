@@ -1,23 +1,24 @@
-'use client'
-
-import { useState, useMemo } from "react"
+import Link from "next/link"
 import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
 import Hero from "@/components/Hero"
 
+const categorias = [
+  { nombre: 'Sartenes y woks', icono: '🍳' },
+  { nombre: 'Ollas y cacerolas', icono: '🍲' },
+  { nombre: 'Ollas a presión', icono: '⏱️' },
+  { nombre: 'Juego de ollas', icono: '🎁' },
+  { nombre: 'Asaderas y moldes', icono: '📦' },
+]
+
+// Un producto representativo por línea, para mostrar variedad en la portada
+// sin traer el catálogo completo (52 productos) de una.
+const codigosDestacados = ['5000096', '5000141', '5001656', '5000019', '5002424', '5001217', '5004086', '5000185']
+
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-
-  const productosPorCategoria = useMemo(() => {
-    return productos.reduce((acc: Record<string, any[]>, p) => {
-      if (!acc[p.categoria]) acc[p.categoria] = []
-      acc[p.categoria].push(p)
-      return acc
-    }, {})
-  }, [])
-
-  const categorias = Object.keys(productosPorCategoria).sort()
-  const productosVisibles = selectedCategory ? productosPorCategoria[selectedCategory] : productos
+  const destacados = codigosDestacados
+    .map((codigo) => productos.find((p) => p.codigo === codigo))
+    .filter(Boolean)
 
   return (
     <div className="min-h-screen bg-white">
@@ -25,46 +26,36 @@ export default function Home() {
       <Hero />
 
       {/* Categorías */}
-      <section className="bg-white py-8 px-6 border-b sticky top-20 z-40">
+      <section className="py-16 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-2">
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full font-semibold transition ${
-                selectedCategory === null
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-              }`}
-            >
-              Todos ({productos.length})
-            </button>
-            {categorias.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full font-semibold transition ${
-                  selectedCategory === cat
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                }`}
-              >
-                {cat} ({productosPorCategoria[cat].length})
-              </button>
-            ))}
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Comprá por categoría</h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {categorias.map((cat) => {
+              const cantidad = productos.filter((p) => p.categoria === cat.nombre).length
+              return (
+                <Link
+                  key={cat.nombre}
+                  href={`/catalogo?categoria=${encodeURIComponent(cat.nombre)}`}
+                  className="bg-white border-2 border-gray-200 rounded-xl p-6 text-center hover:border-blue-400 hover:shadow-lg transition"
+                >
+                  <div className="text-4xl mb-3">{cat.icono}</div>
+                  <p className="font-bold text-gray-900 text-sm mb-1">{cat.nombre}</p>
+                  <p className="text-xs text-gray-500">{cantidad} productos</p>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* Productos */}
-      <section id="productos" className="py-20 px-6 bg-gray-50">
+      {/* Productos destacados */}
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-black mb-4 text-center">Catálogo Completo</h2>
-          <p className="text-center text-gray-600 mb-12">
-            {productosVisibles.length} de {productos.length} productos
-          </p>
+          <h2 className="text-4xl font-bold text-black mb-4 text-center">Productos Destacados</h2>
+          <p className="text-center text-gray-600 mb-12">Una selección de nuestro catálogo</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {productosVisibles.map((producto: any) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {destacados.map((producto: any) => (
               <ProductCard
                 key={`${producto.codigo}-${producto.imagen}`}
                 codigo={producto.codigo}
@@ -74,6 +65,15 @@ export default function Home() {
                 pvp={producto.pvp}
               />
             ))}
+          </div>
+
+          <div className="text-center">
+            <Link
+              href="/catalogo"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-lg transition"
+            >
+              Ver catálogo completo ({productos.length} productos)
+            </Link>
           </div>
         </div>
       </section>
