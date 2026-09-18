@@ -131,6 +131,30 @@ export default function SobreNosotros() {
           </div>
         </section>
 
+        {/* Retiro y servicio técnico */}
+        <section className="mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-blue-50 rounded-xl p-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">📦 Retiro en local</h3>
+              <p className="text-gray-700">
+                Podés retirar tu pedido sin costo en nuestro local de Yaguarón 1764,
+                Montevideo. Coordiná el retiro por WhatsApp una vez confirmado tu pedido.
+              </p>
+            </div>
+
+            <div className="bg-purple-50 rounded-xl p-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 Servicio técnico</h3>
+              <p className="text-gray-700">
+                Contamos con servicio técnico propio para reparaciones y consultas sobre
+                productos dentro de garantía. Conocé nuestra{' '}
+                <Link href="/terminos" className="text-blue-600 font-semibold hover:underline">
+                  política de garantía y devoluciones
+                </Link>.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-12 text-center">
           <h2 className="text-3xl font-bold mb-4">¿Preguntas?</h2>
