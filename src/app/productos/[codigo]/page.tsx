@@ -174,7 +174,7 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
             </Link>
 
             {/* Especificaciones técnicas reales (catálogo oficial Panelux) */}
-            {(specs.capacidadLitros || specs.espesorMmReal) && (
+            {(specs.capacidadLitros || specs.espesorMmReal || specs.claseAdherencia || specs.libreDePfoaPfos) && (
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <h2 className="text-lg font-bold text-gray-900 mb-3">Especificaciones técnicas</h2>
                 <ul className="text-sm text-gray-700 space-y-1">
