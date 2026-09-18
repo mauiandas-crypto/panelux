@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
 import { siteConfig } from '@/lib/config'
+import { trackCheckout, trackConversion } from '@/components/AnalyticsTracker'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -33,6 +34,14 @@ export default function CheckoutPage() {
   const envioGratis = total >= siteConfig.shipping.minOrderForFreeShipping
   const costoEnvio = envioGratis ? 0 : siteConfig.shipping.flatCost
   const totalFinal = totalConDescuento + costoEnvio
+
+  useEffect(() => {
+    if (items.length > 0) {
+      trackCheckout(totalFinal, items.length)
+    }
+    // Se dispara una vez al entrar a la página con items en el carrito.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const [validandoCupon, setValidandoCupon] = useState(false)
 
@@ -134,6 +143,13 @@ export default function CheckoutPage() {
 
       // Guardar orden localmente
       await addOrder(order)
+
+      // Nota: para Mercado Pago esto marca la conversión en el momento en
+      // que se genera el pedido, no cuando el pago se confirma realmente
+      // (eso requeriría trackear desde el webhook con la Measurement
+      // Protocol de GA4, del lado servidor). Es una aproximación razonable
+      // mientras no esté esa pieza conectada.
+      trackConversion(orderId, totalFinal)
 
       // Enviar emails de confirmación
       try {

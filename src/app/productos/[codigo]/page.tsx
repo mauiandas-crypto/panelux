@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
@@ -9,6 +9,7 @@ import ProductGallery from '@/components/ProductGallery'
 import MagnificQualityInfo from '@/components/MagnificQualityInfo'
 import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
+import { trackProductView } from '@/components/AnalyticsTracker'
 
 export default function ProductoDetail() {
   const params = useParams()
@@ -29,6 +30,17 @@ export default function ProductoDetail() {
     claseAdherencia?: string
     libreDePfoaPfos?: boolean
   }
+
+  useEffect(() => {
+    if (producto) {
+      trackProductView({
+        id: producto.codigo,
+        name: producto.nombre,
+        price: producto.pvp,
+        category: producto.categoria,
+      })
+    }
+  }, [producto?.codigo])
 
   if (!producto) {
     return (
