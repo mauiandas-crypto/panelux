@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { productos } from '@/data/productos'
 import { useCart } from '@/context/CartContext'
 import ProductGallery from '@/components/ProductGallery'
-import VideoGallery from '@/components/VideoGallery'
 import MagnificQualityInfo from '@/components/MagnificQualityInfo'
 import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
@@ -232,7 +231,6 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
         <div className="mt-16 space-y-16">
           {producto.linea === 'Magnific AA' && <MagnificQualityInfo />}
           {producto.linea === 'Maximum Stone' && <MaximumStoneQualityInfo />}
-          <VideoGallery />
         </div>
       </div>
     </div>
