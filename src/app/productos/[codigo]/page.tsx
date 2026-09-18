@@ -8,6 +8,7 @@ import { useCart } from '@/context/CartContext'
 import ProductGallery from '@/components/ProductGallery'
 import VideoGallery from '@/components/VideoGallery'
 import MagnificQualityInfo from '@/components/MagnificQualityInfo'
+import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
 
 export default function ProductoDetail() {
@@ -229,7 +230,8 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
 
         {/* Nuevas secciones de producto */}
         <div className="mt-16 space-y-16">
-          {producto.linea.includes('Magnific') && <MagnificQualityInfo />}
+          {producto.linea === 'Magnific AA' && <MagnificQualityInfo />}
+          {producto.linea === 'Maximum Stone' && <MaximumStoneQualityInfo />}
           <VideoGallery />
         </div>
       </div>
