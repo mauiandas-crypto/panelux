@@ -11,8 +11,7 @@ export function OrganizationSchema() {
           url: "https://panelux.com.uy",
           logo: "https://panelux.com.uy/logo.png",
           sameAs: [
-            "https://www.facebook.com/paneluxuy",
-            "https://www.instagram.com/paneluxuy",
+            "https://www.instagram.com/panelux.uruguay/",
             "https://wa.me/59892715555",
           ],
           address: {
@@ -26,7 +25,7 @@ export function OrganizationSchema() {
             "@type": "ContactPoint",
             contactType: "Customer Service",
             telephone: "+598-9271-5555",
-            email: "info@panelux.uy",
+            email: "info@panelux.com.uy",
             availableLanguage: ["es"],
           },
         }),
@@ -54,7 +53,7 @@ export function LocalBusinessSchema() {
             addressCountry: "UY",
           },
           telephone: "+598-9271-5555",
-          email: "info@panelux.uy",
+          email: "info@panelux.com.uy",
           url: "https://panelux.com.uy",
           openingHoursSpecification: {
             "@type": "OpeningHoursSpecification",
