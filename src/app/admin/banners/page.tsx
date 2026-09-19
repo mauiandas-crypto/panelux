@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Banner, AdminData } from '@/lib/admin-data'
 import { useAdminAuth } from '@/hooks/useAdminAuth'
+import { ChevronLeftIcon, ImageIcon, SaveIcon, TrashIcon } from '@/components/icons/Icons'
 
 export default function BannersAdmin() {
   const { isAuthenticated, loading: authLoading } = useAdminAuth()
@@ -107,16 +108,18 @@ export default function BannersAdmin() {
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-bold">
-            ← Volver al panel
+          <Link href="/admin" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-bold">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al panel
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">🖼️ Gestión de Banners</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <ImageIcon className="w-6 h-6" /> Gestión de Banners
+          </h1>
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded transition"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded transition"
           >
-            {saving ? 'Guardando...' : '💾 Guardar cambios'}
+            {saving ? 'Guardando...' : <><SaveIcon className="w-4 h-4" /> Guardar cambios</>}
           </button>
         </div>
       </header>
@@ -237,9 +240,9 @@ export default function BannersAdmin() {
 
                   <button
                     onClick={() => deleteBanner(banner.id)}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition mt-4"
+                    className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition mt-4"
                   >
-                    🗑️ Eliminar
+                    <TrashIcon className="w-4 h-4" /> Eliminar
                   </button>
                 </div>
               </div>

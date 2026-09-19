@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ChevronLeftIcon } from '@/components/icons/Icons'
 
 export const metadata = {
   title: 'Beneficios de Cocinar con Olla a Presión - Panelux Uruguay',
@@ -150,8 +151,8 @@ export default function ArticuloOllaPresion() {
 
         {/* Volver */}
         <div className="mt-12 pt-8 border-t">
-          <Link href="/blog" className="text-blue-600 font-semibold hover:text-blue-800">
-            ← Volver al Blog
+          <Link href="/blog" className="inline-flex items-center gap-1.5 text-blue-600 font-semibold hover:text-blue-800">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al Blog
           </Link>
         </div>
       </article>

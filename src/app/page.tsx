@@ -2,13 +2,14 @@ import Link from "next/link"
 import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
 import Hero from "@/components/Hero"
+import { FlameIcon, ClockIcon, GiftIcon, BoxIcon, TrophyIcon, StarIcon, TruckIcon, ShieldIcon } from "@/components/icons/Icons"
 
 const categorias = [
-  { nombre: 'Sartenes y woks', icono: '🍳' },
-  { nombre: 'Ollas y cacerolas', icono: '🍲' },
-  { nombre: 'Ollas a presión', icono: '⏱️' },
-  { nombre: 'Juego de ollas', icono: '🎁' },
-  { nombre: 'Asaderas y moldes', icono: '📦' },
+  { nombre: 'Sartenes y woks', Icono: FlameIcon },
+  { nombre: 'Ollas y cacerolas', Icono: BoxIcon },
+  { nombre: 'Ollas a presión', Icono: ClockIcon },
+  { nombre: 'Juego de ollas', Icono: GiftIcon },
+  { nombre: 'Asaderas y moldes', Icono: BoxIcon },
 ]
 
 // Un producto representativo por línea, para mostrar variedad en la portada
@@ -38,7 +39,9 @@ export default function Home() {
                   href={`/catalogo?categoria=${encodeURIComponent(cat.nombre)}`}
                   className="bg-white border-2 border-gray-200 rounded-xl p-6 text-center hover:border-blue-400 hover:shadow-lg transition"
                 >
-                  <div className="text-4xl mb-3">{cat.icono}</div>
+                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <cat.Icono className="w-6 h-6" />
+                  </div>
                   <p className="font-bold text-gray-900 text-sm mb-1">{cat.nombre}</p>
                   <p className="text-xs text-gray-500">{cantidad} productos</p>
                 </Link>
@@ -85,22 +88,30 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="bg-white p-6 rounded-lg border-l-4 border-blue-500">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">🏆 Distribuidor Oficial</h3>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-blue-900 mb-4">
+                <TrophyIcon className="w-6 h-6" /> Distribuidor Oficial
+              </h3>
               <p className="text-gray-700">Somos el distribuidor oficial en Uruguay de Panelux, la marca brasileña con más de 25 años en el mercado.</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border-l-4 border-purple-500">
-              <h3 className="text-2xl font-bold text-purple-900 mb-4">⭐ Calidad Premium</h3>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-purple-900 mb-4">
+                <StarIcon className="w-6 h-6" /> Calidad Premium
+              </h3>
               <p className="text-gray-700">Productos resistentes, funcionales y duraderos con garantía oficial.</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border-l-4 border-blue-500">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">🚚 Envíos Rápidos</h3>
-              <p className="text-gray-700">Entrega segura a cualquier punto de Uruguay con seguimiento en tiempo real.</p>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-blue-900 mb-4">
+                <TruckIcon className="w-6 h-6" /> Envíos Rápidos
+              </h3>
+              <p className="text-gray-700">Entrega segura a cualquier punto de Uruguay, con número de seguimiento en cada pedido.</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border-l-4 border-purple-500">
-              <h3 className="text-2xl font-bold text-purple-900 mb-4">🛡️ Protegido</h3>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-purple-900 mb-4">
+                <ShieldIcon className="w-6 h-6" /> Protegido
+              </h3>
               <p className="text-gray-700">Pagos seguros con Mercado Pago. Cambios y devoluciones garantizados.</p>
             </div>
           </div>

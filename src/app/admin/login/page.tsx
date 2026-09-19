@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ChevronLeftIcon } from '@/components/icons/Icons'
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('')
@@ -109,8 +110,8 @@ export default function AdminLogin() {
         </form>
 
         <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-          <Link href="/" className="text-blue-600 hover:text-blue-700 font-semibold">
-            ← Volver al sitio
+          <Link href="/" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-semibold">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al sitio
           </Link>
         </div>
       </div>

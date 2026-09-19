@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { PromoMessage, AdminData } from '@/lib/admin-data'
 import { useAdminAuth } from '@/hooks/useAdminAuth'
+import { ChevronLeftIcon, MegaphoneIcon, SaveIcon, TrashIcon, EyeIcon } from '@/components/icons/Icons'
 
 export default function PromosAdmin() {
   const { isAuthenticated } = useAdminAuth()
@@ -103,16 +104,18 @@ export default function PromosAdmin() {
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-bold">
-            ← Volver al panel
+          <Link href="/admin" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-bold">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al panel
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">📢 Promociones (Textos que se mueven)</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <MegaphoneIcon className="w-6 h-6" /> Promociones (Textos que se mueven)
+          </h1>
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded transition"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded transition"
           >
-            {saving ? 'Guardando...' : '💾 Guardar cambios'}
+            {saving ? 'Guardando...' : <><SaveIcon className="w-4 h-4" /> Guardar cambios</>}
           </button>
         </div>
       </header>
@@ -185,7 +188,7 @@ export default function PromosAdmin() {
                   onClick={() => deletePromo(promo.id)}
                   className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition h-fit"
                 >
-                  🗑️
+                  <TrashIcon className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -195,7 +198,9 @@ export default function PromosAdmin() {
         {/* Preview */}
         {promos.filter((p) => p.active).length > 0 && (
           <div className="mt-12 pt-8 border-t-2 border-gray-300">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">📺 Vista previa</h2>
+            <h2 className="flex items-center gap-2 text-2xl font-bold text-gray-900 mb-4">
+              <EyeIcon className="w-6 h-6" /> Vista previa
+            </h2>
             <div className="bg-blue-600 text-white overflow-hidden rounded-lg">
               {promos
                 .filter((p) => p.active)

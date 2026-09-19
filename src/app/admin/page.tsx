@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ChartIcon, ImageIcon, MegaphoneIcon, TicketIcon, BoxIcon, ClipboardIcon, ChevronLeftIcon } from '@/components/icons/Icons'
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -59,7 +60,9 @@ export default function AdminDashboard() {
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">📊 Panel Administrador</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <ChartIcon className="w-6 h-6" /> Panel Administrador
+          </h1>
           <button
             onClick={handleLogout}
             className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition"
@@ -75,7 +78,7 @@ export default function AdminDashboard() {
           {/* Banners */}
           <Link href="/admin/banners">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer p-8 text-center">
-              <div className="text-5xl mb-4">🖼️</div>
+              <ImageIcon className="w-10 h-10 mx-auto mb-4 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Banners</h2>
               <p className="text-gray-600">Gestiona los banners principales</p>
             </div>
@@ -84,7 +87,7 @@ export default function AdminDashboard() {
           {/* Promos */}
           <Link href="/admin/promos">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer p-8 text-center">
-              <div className="text-5xl mb-4">📢</div>
+              <MegaphoneIcon className="w-10 h-10 mx-auto mb-4 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Promos</h2>
               <p className="text-gray-600">Textos que se mueven arriba</p>
             </div>
@@ -93,7 +96,7 @@ export default function AdminDashboard() {
           {/* Cupones */}
           <Link href="/admin/coupons">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer p-8 text-center">
-              <div className="text-5xl mb-4">🎟️</div>
+              <TicketIcon className="w-10 h-10 mx-auto mb-4 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Cupones</h2>
               <p className="text-gray-600">Descuentos y promociones</p>
             </div>
@@ -102,7 +105,7 @@ export default function AdminDashboard() {
           {/* Productos */}
           <Link href="/admin/productos">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer p-8 text-center">
-              <div className="text-5xl mb-4">📦</div>
+              <BoxIcon className="w-10 h-10 mx-auto mb-4 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Productos</h2>
               <p className="text-gray-600">Gestión de catálogo</p>
             </div>
@@ -111,7 +114,7 @@ export default function AdminDashboard() {
           {/* Órdenes */}
           <Link href="/admin/orders">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer p-8 text-center">
-              <div className="text-5xl mb-4">📋</div>
+              <ClipboardIcon className="w-10 h-10 mx-auto mb-4 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Órdenes</h2>
               <p className="text-gray-600">Pedidos realizados</p>
             </div>
@@ -120,7 +123,7 @@ export default function AdminDashboard() {
           {/* Estadísticas */}
           <Link href="/admin/stats">
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition cursor-pointer p-8 text-center">
-              <div className="text-5xl mb-4">📈</div>
+              <ChartIcon className="w-10 h-10 mx-auto mb-4 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Estadísticas</h2>
               <p className="text-gray-600">Resumen de ventas</p>
             </div>
@@ -129,8 +132,8 @@ export default function AdminDashboard() {
 
         {/* Volver al sitio */}
         <div className="mt-12 text-center">
-          <Link href="/" className="text-blue-600 hover:text-blue-700 font-bold">
-            ← Volver al sitio principal
+          <Link href="/" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-bold">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al sitio principal
           </Link>
         </div>
       </div>

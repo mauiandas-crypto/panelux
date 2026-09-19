@@ -6,16 +6,60 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model AdminToken {
-  id        String   @id @default(cuid())
-  token     String   @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+model Order {
+  id                 String   @id
+  fecha              DateTime @default(now())
+  clienteNombre      String
+  clienteEmail       String
+  clienteTelefono    String
+  clienteDireccion   String
+  clienteCiudad      String
+  items              Json
+  subtotal           Float
+  descuento          Float    @default(0)
+  cupon              String?
+  costoEnvio         Float    @default(0)
+  total              Float
+  estado             String   @default("pendiente")
+  metodoPago         String
+  numeroSeguimiento  String?
+  mpPaymentId        String?
+  notas              String?
+  fechaActualizacion DateTime @updatedAt
 
-  @@index([token])
-  @@index([expiresAt])
+  @@index([estado])
+  @@index([clienteEmail])
+}
+
+model Coupon {
+  id           String   @id @default(cuid())
+  code         String   @unique
+  discount     Float
+  discountType String
+  minPurchase  Float    @default(0)
+  maxUses      Int      @default(0)
+  usedCount    Int      @default(0)
+  active       Boolean  @default(true)
+  expiresAt    DateTime
+}
+
+model Banner {
+  id       String  @id @default(cuid())
+  imageUrl String
+  title    String
+  subtitle String
+  link     String?
+  active   Boolean @default(true)
+  order    Int     @default(0)
+}
+
+model PromoMessage {
+  id     String  @id @default(cuid())
+  text   String
+  active Boolean @default(true)
+  order  Int     @default(0)
 }

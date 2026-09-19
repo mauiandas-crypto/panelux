@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { TargetIcon, EyeIcon, HeartIcon, TrophyIcon, ShieldIcon, TruckIcon, WrenchIcon, CreditCardIcon, UsersIcon, PinIcon, ClockIcon, BoxIcon, ChatIcon, MailIcon, PhoneIcon, ChevronLeftIcon } from '@/components/icons/Icons'
+import { siteConfig } from '@/lib/config'
 
 export const metadata = {
   title: 'Sobre Panelux Uruguay - Distribuidor Oficial',
@@ -35,21 +37,27 @@ export default function SobreNosotros() {
         <section className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg">
-              <h3 className="text-2xl font-bold text-blue-900 mb-3">🎯 Misión</h3>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-blue-900 mb-3">
+                <TargetIcon className="w-6 h-6" /> Misión
+              </h3>
               <p className="text-gray-700">
                 Distribuir utensilios de cocina de calidad premium que mejoren la experiencia culinaria de cada familia uruguaya.
               </p>
             </div>
 
             <div className="bg-purple-50 border-l-4 border-purple-600 p-6 rounded-r-lg">
-              <h3 className="text-2xl font-bold text-purple-900 mb-3">👁️ Visión</h3>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-purple-900 mb-3">
+                <EyeIcon className="w-6 h-6" /> Visión
+              </h3>
               <p className="text-gray-700">
                 Ser el distribuidor más confiable y recomendado de utensilios de cocina en Uruguay.
               </p>
             </div>
 
             <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-r-lg">
-              <h3 className="text-2xl font-bold text-green-900 mb-3">💚 Valores</h3>
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-green-900 mb-3">
+                <HeartIcon className="w-6 h-6" filled /> Valores
+              </h3>
               <p className="text-gray-700">
                 Calidad, confianza, servicio al cliente y compromiso con la excelencia.
               </p>
@@ -62,42 +70,54 @@ export default function SobreNosotros() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">¿Por Qué Elegirnos?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border-2 border-gray-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">🏆 Distribuidor Oficial</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <TrophyIcon className="w-5 h-5" /> Distribuidor Oficial
+              </h3>
               <p className="text-gray-700">
                 Somos el distribuidor oficial certificado de Panelux en Uruguay. Todos nuestros productos son 100% auténticos.
               </p>
             </div>
 
             <div className="border-2 border-gray-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">🛡️ Garantía Oficial</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <ShieldIcon className="w-5 h-5" /> Garantía Oficial
+              </h3>
               <p className="text-gray-700">
                 Todos nuestros productos incluyen garantía oficial del fabricante. Somos responsables de su cumplimiento.
               </p>
             </div>
 
             <div className="border-2 border-gray-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">🚚 Logística Propia</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <TruckIcon className="w-5 h-5" /> Logística Propia
+              </h3>
               <p className="text-gray-700">
-                Contamos con envíos rápidos y seguimiento en tiempo real. Envío gratis en Montevideo y Cd. de la Costa.
+                Contamos con envíos rápidos y número de seguimiento en cada pedido. Envío gratis a todo Uruguay en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}.
               </p>
             </div>
 
             <div className="border-2 border-gray-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 Servicio Técnico Propio</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <WrenchIcon className="w-5 h-5" /> Servicio Técnico Propio
+              </h3>
               <p className="text-gray-700">
                 Contamos con equipo técnico capacitado para resolver problemas y brindar soporte post-venta.
               </p>
             </div>
 
             <div className="border-2 border-gray-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">💳 Múltiples Formas de Pago</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <CreditCardIcon className="w-5 h-5" /> Múltiples Formas de Pago
+              </h3>
               <p className="text-gray-700">
                 Tarjetas de crédito, débito, efectivo, transferencia, Mercado Pago. Hasta 12 cuotas sin interés.
               </p>
             </div>
 
             <div className="border-2 border-gray-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">👥 Atención Personalizada</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <UsersIcon className="w-5 h-5" /> Atención Personalizada
+              </h3>
               <p className="text-gray-700">
                 Nuestro equipo está disponible para asesorarte en la elección del producto que mejor se adapte a tus necesidades.
               </p>
@@ -110,7 +130,9 @@ export default function SobreNosotros() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Visitanos</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-blue-50 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">📍 Tienda Física</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <PinIcon className="w-5 h-5" /> Tienda Física
+              </h3>
               <p className="text-gray-700 mb-4">
                 <strong>Yaguarón 1764, Montevideo</strong>
               </p>
@@ -120,7 +142,9 @@ export default function SobreNosotros() {
             </div>
 
             <div className="bg-purple-50 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">⏰ Horarios</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <ClockIcon className="w-5 h-5" /> Horarios
+              </h3>
               <p className="text-gray-700 mb-4">
                 <strong>Lunes a Viernes:</strong> 8:30 - 17:15
               </p>
@@ -135,7 +159,9 @@ export default function SobreNosotros() {
         <section className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-blue-50 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">📦 Retiro en local</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <BoxIcon className="w-5 h-5" /> Retiro en local
+              </h3>
               <p className="text-gray-700">
                 Podés retirar tu pedido sin costo en nuestro local de Yaguarón 1764,
                 Montevideo. Coordiná el retiro por WhatsApp una vez confirmado tu pedido.
@@ -143,7 +169,9 @@ export default function SobreNosotros() {
             </div>
 
             <div className="bg-purple-50 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 Servicio técnico</h3>
+              <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4">
+                <WrenchIcon className="w-5 h-5" /> Servicio técnico
+              </h3>
               <p className="text-gray-700">
                 Contamos con servicio técnico propio para reparaciones y consultas sobre
                 productos dentro de garantía. Conocé nuestra{' '}
@@ -166,29 +194,29 @@ export default function SobreNosotros() {
               href="https://wa.me/59892715555"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
+              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
             >
-              💬 WhatsApp
+              <ChatIcon className="w-5 h-5" /> WhatsApp
             </a>
             <a
               href="mailto:info@panelux.com.uy"
-              className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
+              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
             >
-              ✉️ Email
+              <MailIcon className="w-5 h-5" /> Email
             </a>
             <a
               href="tel:+59892715555"
-              className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
+              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
             >
-              📞 Llamar
+              <PhoneIcon className="w-5 h-5" /> Llamar
             </a>
           </div>
         </div>
 
         {/* Volver */}
         <div className="mt-12 pt-8 border-t border-gray-200">
-          <Link href="/" className="text-blue-600 font-semibold hover:text-blue-800">
-            ← Volver al inicio
+          <Link href="/" className="inline-flex items-center gap-1.5 text-blue-600 font-semibold hover:text-blue-800">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al inicio
           </Link>
         </div>
       </div>

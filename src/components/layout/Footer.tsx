@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { CheckIcon, PinIcon, ClockIcon, ChatIcon, PhoneIcon, MailIcon } from '@/components/icons/Icons'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
@@ -39,7 +40,11 @@ export default function Footer() {
                 type="submit"
                 className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition text-sm"
               >
-                {subscribed ? '✓ Suscrito' : 'Suscribirse'}
+                {subscribed ? (
+                  <span className="inline-flex items-center gap-1.5">
+                    <CheckIcon className="w-4 h-4" /> Suscrito
+                  </span>
+                ) : 'Suscribirse'}
               </button>
             </form>
           </div>
@@ -85,14 +90,14 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-white mb-4">Visitanos</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
-                <span className="text-blue-400 mt-1">📍</span>
+                <PinIcon className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold">Uruguay</p>
                   <p className="text-gray-400 text-xs">Distribuidor oficial Panelux</p>
                 </div>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-400">🕐</span>
+                <ClockIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
                 <div className="text-xs">
                   <p>Lun-Vie: 08:30-17:15</p>
                 </div>
@@ -105,17 +110,17 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-white mb-4">Contáctanos</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
-                <span className="text-green-400">💬</span>
+                <ChatIcon className="w-4 h-4 text-green-400 flex-shrink-0" />
                 <a href="https://wa.me/59892715555" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">
                   WhatsApp
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-400">☎️</span>
+                <PhoneIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
                 <a href="tel:+59892715555" className="hover:text-blue-400 transition">092 715 555</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-gray-400">✉️</span>
+                <MailIcon className="w-4 h-4 text-gray-400 flex-shrink-0" />
                 <a href="mailto:info@panelux.com.uy" className="hover:text-blue-400 transition text-xs">
                   info@panelux.com.uy
                 </a>
@@ -133,17 +138,17 @@ export default function Footer() {
             <div>
               <h4 className="text-sm font-bold text-white mb-3 uppercase tracking-wide">Síguenos en Redes</h4>
               <div className="flex gap-4">
-                <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition text-xl">
-                  📘
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition text-xl">
-                  📷
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2}><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition text-xl">
-                  🎥
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M23 12s0-3.6-.46-5.2a2.9 2.9 0 0 0-2-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.54.5a2.9 2.9 0 0 0-2 2C1 8.4 1 12 1 12s0 3.6.46 5.2a2.9 2.9 0 0 0 2 2c1.64.5 8.54.5 8.54.5s6.9 0 8.54-.5a2.9 2.9 0 0 0 2-2C23 15.6 23 12 23 12zM9.8 15.5V8.5l6.2 3.5z"/></svg>
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition text-xl">
-                  𝕏
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition">
+                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.8L4.4 22H1.3l8.1-9.3L1 2h7.1l4.9 6.2zM17.6 20h1.9L6.5 3.9H4.4z"/></svg>
                 </a>
               </div>
             </div>

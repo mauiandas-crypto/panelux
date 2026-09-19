@@ -7,6 +7,7 @@ import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
 import { siteConfig } from '@/lib/config'
 import { trackCheckout, trackConversion } from '@/components/AnalyticsTracker'
+import { CreditCardIcon, TicketIcon, CheckIcon, BankIcon, MoneyIcon } from '@/components/icons/Icons'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -215,7 +216,7 @@ export default function CheckoutPage() {
       } else {
         // Para otros métodos, ir a confirmación
         limpiarCarrito()
-        router.push('/checkout/confirmacion')
+        router.push(`/checkout/confirmacion?metodo=${metodoPago}`)
       }
     } catch (err) {
       console.error('Checkout error:', err)
@@ -318,7 +319,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setMetodoPago(e.target.value as any)}
                         className="w-4 h-4"
                       />
-                      <span className="text-gray-900 font-semibold">💳 Mercado Pago (Tarjeta, Efectivo)</span>
+                      <span className="text-gray-900 font-semibold flex items-center gap-2"><CreditCardIcon className="w-5 h-5" /> Mercado Pago (Tarjeta, Efectivo)</span>
                     </label>
 
                     <label className="flex items-center gap-3 cursor-pointer">
@@ -330,8 +331,29 @@ export default function CheckoutPage() {
                         onChange={(e) => setMetodoPago(e.target.value as any)}
                         className="w-4 h-4"
                       />
-                      <span className="text-gray-900 font-semibold">🏦 Transferencia Bancaria</span>
+                      <span className="text-gray-900 font-semibold flex items-center gap-2"><BankIcon className="w-5 h-5" /> Transferencia Bancaria</span>
                     </label>
+
+                    {metodoPago === 'transferencia' && (
+                      <div className="ml-7 bg-gray-50 border-2 border-gray-200 rounded-lg p-4 space-y-4">
+                        <p className="text-sm text-gray-700">
+                          Realizá la transferencia por el total del pedido a una de estas cuentas y enviá el comprobante por WhatsApp. Tu pedido se confirma al recibir el pago.
+                        </p>
+                        {siteConfig.bankAccounts.map((cuenta) => (
+                          <div key={cuenta.banco} className="text-sm text-gray-900">
+                            <p className="font-bold">{cuenta.banco}</p>
+                            <p className="text-gray-700">
+                              {cuenta.tipoCuenta}{cuenta.sucursal ? ` · Suc. ${cuenta.sucursal}` : ''} · Titular: {cuenta.titular}
+                            </p>
+                            {cuenta.cuentas.map((c) => (
+                              <p key={c.moneda} className="text-gray-700">
+                                {c.moneda}: <span className="font-semibold">{c.numero}</span>
+                              </p>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     <label className="flex items-center gap-3 cursor-pointer">
                       <input
@@ -342,7 +364,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setMetodoPago(e.target.value as any)}
                         className="w-4 h-4"
                       />
-                      <span className="text-gray-900 font-semibold">💵 Efectivo a la entrega</span>
+                      <span className="text-gray-900 font-semibold flex items-center gap-2"><MoneyIcon className="w-5 h-5" /> Efectivo a la entrega</span>
                     </label>
                   </div>
                 </div>
@@ -356,12 +378,12 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition mt-6"
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition mt-6 flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     'Procesando...'
                   ) : metodoPago === 'mercadopago' ? (
-                    '💳 Ir a Pagar con Mercado Pago'
+                    <><CreditCardIcon className="w-5 h-5" /> Ir a Pagar con Mercado Pago</>
                   ) : (
                     'Completar pedido'
                   )}
@@ -396,7 +418,7 @@ export default function CheckoutPage() {
                 {cuponAplicado ? (
                   <div className="flex items-center justify-between bg-green-50 border-2 border-green-300 rounded-lg px-4 py-2">
                     <div>
-                      <p className="text-sm font-bold text-green-800">✅ {cuponAplicado.codigo}</p>
+                      <p className="text-sm font-bold text-green-800 flex items-center gap-1.5"><TicketIcon className="w-4 h-4" /> {cuponAplicado.codigo}</p>
                       <p className="text-xs text-green-700">{cuponAplicado.descripcion}</p>
                     </div>
                     <button
@@ -460,11 +482,11 @@ export default function CheckoutPage() {
               </div>
 
               <div className="mt-6 p-4 bg-white rounded-lg border-2 border-blue-200">
-                <p className="text-xs text-gray-600">
-                  ✅ Envío gratis en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}
+                <p className="text-xs text-gray-600 flex items-center gap-1.5">
+                  <CheckIcon className="w-3.5 h-3.5 text-green-600 flex-shrink-0" /> Envío gratis en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}
                 </p>
-                <p className="text-xs text-gray-600 mt-2">
-                  ✅ Garantía oficial del fabricante
+                <p className="text-xs text-gray-600 mt-2 flex items-center gap-1.5">
+                  <CheckIcon className="w-3.5 h-3.5 text-green-600 flex-shrink-0" /> Garantía oficial del fabricante
                 </p>
               </div>
             </div>

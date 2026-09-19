@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  return NextResponse.json(getAdminData())
+  return NextResponse.json(await getAdminData())
 }
 
 export async function POST(request: NextRequest) {
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const data = await request.json()
-    return NextResponse.json(setAdminData(data))
+    return NextResponse.json(await setAdminData(data))
   } catch (error) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }

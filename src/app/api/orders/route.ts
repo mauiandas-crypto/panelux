@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Si es admin, devolver todas las órdenes
-    return NextResponse.json(getOrders())
+    return NextResponse.json(await getOrders())
   } catch (error) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
@@ -42,10 +42,10 @@ export async function POST(request: NextRequest) {
       fechaActualizacion: new Date().toISOString(),
     }
 
-    addOrder(newOrder)
+    const created = await addOrder(newOrder)
 
     if (newOrder.cupon) {
-      incrementCouponUsage(newOrder.cupon)
+      await incrementCouponUsage(newOrder.cupon)
     }
 
     // El email real (Resend) y la preference real de Mercado Pago se generan
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     // haciendo lo mismo, uno de ellos falso.
     console.log('✅ Nueva orden creada:', newOrder.id)
 
-    return NextResponse.json(newOrder, { status: 201 })
+    return NextResponse.json(created, { status: 201 })
   } catch (error) {
     console.error('Error creating order:', error)
     return NextResponse.json({ error: 'Failed to create order' }, { status: 400 })

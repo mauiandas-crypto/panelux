@@ -19,9 +19,9 @@ export const siteConfig = {
     },
   },
 
-  // Envíos
+  // Envíos: el envío gratis aplica a todo el país a partir de este monto
+  // (no depende de la zona - ver cálculo real en carrito/checkout).
   shipping: {
-    freeZones: ['Montevideo', 'Ciudad de la Costa'],
     minOrderForFreeShipping: 2000,
     flatCost: 250,
   },
@@ -31,6 +31,37 @@ export const siteConfig = {
     maxInstallments: 12,
     methods: ['Mercado Pago', 'Tarjeta de Crédito', 'Tarjeta de Débito', 'Efectivo', 'Transferencia'],
   },
+
+  // Cuentas bancarias para pago por transferencia (titular: Todogastro SAS)
+  bankAccounts: [
+    {
+      banco: 'Itaú',
+      tipoCuenta: 'Cuenta corriente',
+      titular: 'Todogastro SAS',
+      cuentas: [
+        { moneda: 'UYU', numero: '2677769' },
+        { moneda: 'USD', numero: '2677770' },
+      ],
+    },
+    {
+      banco: 'BBVA',
+      tipoCuenta: 'Cuenta corriente',
+      titular: 'Todogastro SAS',
+      cuentas: [
+        { moneda: 'UYU y USD', numero: '26426935' },
+      ],
+    },
+    {
+      banco: 'Santander',
+      tipoCuenta: 'Cuenta corriente',
+      titular: 'Todogastro SAS',
+      sucursal: '71',
+      cuentas: [
+        { moneda: 'UYU', numero: '1675753' },
+        { moneda: 'USD', numero: '5101434992' },
+      ],
+    },
+  ],
 
   // Analytics
   analytics: {

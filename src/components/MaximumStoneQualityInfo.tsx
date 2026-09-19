@@ -3,25 +3,27 @@
 // Contenido técnico real de la línea Maximum Stone (catálogo Panelux
 // Brasil 2026), traducido al español.
 
+import { FlameIcon, RulerIcon, HandIcon, DropletIcon, CheckIcon } from '@/components/icons/Icons'
+
 export default function MaximumStoneQualityInfo() {
   const caracteristicas = [
     {
-      icon: '🍳',
+      Icon: FlameIcon,
       titulo: 'No se pega, fácil de limpiar',
       descripcion: 'Antiadherente interno y externo, con 7 capas de recubrimiento.',
     },
     {
-      icon: '📏',
+      Icon: RulerIcon,
       titulo: 'Aluminio de 1,9mm de espesor',
       descripcion: 'Mayor espesura y resistencia que garantiza durabilidad.',
     },
     {
-      icon: '🖐️',
+      Icon: HandIcon,
       titulo: 'Mangos y asas de baquelita',
       descripcion: 'No se calientan, haciendo el manejo fácil y seguro.',
     },
     {
-      icon: '🫒',
+      Icon: DropletIcon,
       titulo: 'Menos aceite',
       descripcion: 'La superficie antiadherente permite cocinar con menos materia grasa.',
     },
@@ -35,7 +37,9 @@ export default function MaximumStoneQualityInfo() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {caracteristicas.map((c, idx) => (
             <div key={idx} className="flex gap-4 bg-gray-50 rounded-lg p-5">
-              <div className="text-3xl">{c.icon}</div>
+              <div className="w-10 h-10 flex-shrink-0 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                <c.Icon className="w-5 h-5" />
+              </div>
               <div>
                 <h3 className="font-bold text-gray-900 mb-1">{c.titulo}</h3>
                 <p className="text-sm text-gray-600">{c.descripcion}</p>
@@ -53,7 +57,7 @@ export default function MaximumStoneQualityInfo() {
             </p>
           </div>
           <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6 text-center">
-            <p className="font-bold text-gray-900 mb-1">✅ Libre de PFOA y PFOS</p>
+            <p className="font-bold text-gray-900 mb-1 flex items-center justify-center gap-1.5"><CheckIcon className="w-4 h-4 text-green-600" /> Libre de PFOA y PFOS</p>
             <p className="text-sm text-gray-700">
               PFOA y PFOS son sustancias químicas utilizadas en el pasado en
               procesos de fabricación de revestimientos. Este producto sigue

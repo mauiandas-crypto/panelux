@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useAdminAuth } from '@/hooks/useAdminAuth'
 import { Order } from '@/lib/orders-types'
+import { ChevronLeftIcon, ClipboardIcon, CloseIcon } from '@/components/icons/Icons'
 
 export default function OrdersAdmin() {
   const { isAuthenticated } = useAdminAuth()
@@ -99,10 +100,12 @@ export default function OrdersAdmin() {
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-bold">
-            ← Volver al panel
+          <Link href="/admin" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-bold">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al panel
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">📋 Órdenes ({orders.length})</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <ClipboardIcon className="w-6 h-6" /> Órdenes ({orders.length})
+          </h1>
           <div></div>
         </div>
       </header>
@@ -114,7 +117,7 @@ export default function OrdersAdmin() {
             type="text"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
-            placeholder="🔍 Buscar por número de orden, nombre o email..."
+            placeholder="Buscar por número de orden, nombre o email..."
             className="w-full max-w-lg px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-900"
           />
         </div>
@@ -239,9 +242,9 @@ export default function OrdersAdmin() {
                   </div>
                   <button
                     onClick={() => setShowDetail(false)}
-                    className="text-gray-600 hover:text-gray-900 text-2xl"
+                    className="text-gray-600 hover:text-gray-900"
                   >
-                    ✕
+                    <CloseIcon className="w-6 h-6" />
                   </button>
                 </div>
 

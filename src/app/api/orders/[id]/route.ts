@@ -7,15 +7,23 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    if (!(await getAdminSession(request))) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     const { id } = await params
-    const order = getOrderById(id)
+    const order = await getOrderById(id)
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+    }
+
+    // Un admin autenticado puede ver cualquier orden. Un cliente sin sesión
+    // (no hay login de clientes) puede consultar la suya si conoce el id
+    // Y el email con el que la hizo - así "Mis pedidos" funciona sin exponer
+    // pedidos de otras personas a quien solo adivine un id.
+    const isAdmin = await getAdminSession(request)
+    if (!isAdmin) {
+      const email = request.nextUrl.searchParams.get('email')?.trim().toLowerCase()
+      if (!email || email !== order.cliente.email.trim().toLowerCase()) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
     }
 
     return NextResponse.json(order)
@@ -43,7 +51,7 @@ export async function PATCH(
     if (body.numeroSeguimiento !== undefined) updates.numeroSeguimiento = body.numeroSeguimiento
     if (body.notas !== undefined) updates.notas = body.notas
 
-    const updated = updateOrder(id, updates)
+    const updated = await updateOrder(id, updates)
 
     if (!updated) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })

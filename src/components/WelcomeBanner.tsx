@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { CloseIcon, GiftIcon } from '@/components/icons/Icons'
 
 const SESSION_KEY = 'panelux_welcome_shown'
 
@@ -45,14 +46,16 @@ export default function WelcomeBanner() {
       >
         <button
           onClick={cerrar}
-          className="absolute top-3 right-3 text-white/90 hover:text-white text-2xl leading-none z-10"
+          className="absolute top-3 right-3 text-white/90 hover:text-white leading-none z-10"
           aria-label="Cerrar"
         >
-          ✕
+          <CloseIcon className="w-6 h-6" />
         </button>
 
         <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white px-6 pt-10 pb-8 text-center">
-          <div className="text-5xl mb-3">🎉</div>
+          <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-white/15 flex items-center justify-center">
+            <GiftIcon className="w-8 h-8" />
+          </div>
           <h2 className="text-2xl font-bold mb-2">¡Bienvenido a Panelux!</h2>
           <p className="text-blue-100 text-sm">
             Tenés 10% de descuento en tu primera compra

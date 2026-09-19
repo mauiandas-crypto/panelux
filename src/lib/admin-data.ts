@@ -86,13 +86,13 @@ export const defaultAdminData: AdminData = {
   promoMessages: [
     {
       id: '1',
-      text: '📦 Envío gratis en compras mayores a $2000',
+      text: 'Envío gratis en compras mayores a $2000',
       active: true,
       order: 1,
     },
     {
       id: '2',
-      text: '💳 Hasta 12 cuotas sin interés con tarjeta',
+      text: 'Hasta 12 cuotas sin interés con tarjeta',
       active: true,
       order: 2,
     },

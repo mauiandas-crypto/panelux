@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
+import { ChevronLeftIcon, BoxIcon, EditIcon } from '@/components/icons/Icons'
 
 export default function ProductosAdmin() {
   const [filtro, setFiltro] = useState('')
@@ -30,13 +31,13 @@ export default function ProductosAdmin() {
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-bold">
-            ← Volver al panel
+          <Link href="/admin" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-bold">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al panel
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">📦 Gestión de Productos</h1>
-          <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
-            + Agregar producto
-          </button>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+            <BoxIcon className="w-6 h-6" /> Gestión de Productos
+          </h1>
+          <div></div>
         </div>
       </header>
 
@@ -61,7 +62,6 @@ export default function ProductosAdmin() {
                 <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Código</th>
                 <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Categoría</th>
                 <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Precio</th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-gray-900">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -71,14 +71,6 @@ export default function ProductosAdmin() {
                   <td className="px-6 py-4 text-gray-600 font-mono">{producto.codigo}</td>
                   <td className="px-6 py-4 text-gray-600">{producto.categoria}</td>
                   <td className="px-6 py-4 text-gray-900 font-bold">${producto.pvp}</td>
-                  <td className="px-6 py-4">
-                    <button className="text-blue-600 hover:text-blue-700 font-semibold mr-4">
-                      Editar
-                    </button>
-                    <button className="text-red-600 hover:text-red-700 font-semibold">
-                      Eliminar
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -91,7 +83,9 @@ export default function ProductosAdmin() {
 
         {/* Info */}
         <div className="mt-12 bg-blue-50 border-2 border-blue-300 rounded-lg p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">📝 Nota</h2>
+          <h2 className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-3">
+            <EditIcon className="w-5 h-5" /> Nota
+          </h2>
           <p className="text-gray-700">
             Los productos se cargan desde el archivo de datos. Para agregar o editar productos,
             necesitas actualizar el archivo <code className="bg-gray-200 px-2 py-1 rounded">src/data/productos.ts</code>

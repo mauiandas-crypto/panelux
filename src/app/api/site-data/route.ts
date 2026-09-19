@@ -9,6 +9,6 @@ import { getAdminData } from '@/lib/admin-data-store'
 // logueado en su navegador. No incluye cupones (esos tienen su propio
 // endpoint de validación en /api/coupons/validate).
 export async function GET() {
-  const { banners, promoMessages } = getAdminData()
+  const { banners, promoMessages } = await getAdminData()
   return NextResponse.json({ banners, promoMessages })
 }

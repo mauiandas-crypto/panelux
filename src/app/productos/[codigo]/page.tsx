@@ -10,6 +10,7 @@ import MagnificQualityInfo from '@/components/MagnificQualityInfo'
 import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
 import { trackProductView } from '@/components/AnalyticsTracker'
+import { CartIcon, CheckIcon } from '@/components/icons/Icons'
 
 export default function ProductoDetail() {
   const params = useParams()
@@ -168,13 +169,17 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
             {/* Botón Agregar al Carrito */}
             <button
               onClick={handleAgregarAlCarrito}
-              className={`w-full py-3 px-4 rounded-lg font-bold text-base transition mb-3 ${
+              className={`w-full py-3 px-4 rounded-lg font-bold text-base transition mb-3 flex items-center justify-center gap-2 ${
                 agregado
                   ? 'bg-green-600 text-white'
                   : 'bg-blue-600 hover:bg-blue-700 text-white'
               }`}
             >
-              {agregado ? '✓ Agregado al carrito!' : '🛒 Agregar al carrito'}
+              {agregado ? (
+                <><CheckIcon className="w-5 h-5" /> Agregado al carrito</>
+              ) : (
+                <><CartIcon className="w-5 h-5" /> Agregar al carrito</>
+              )}
             </button>
 
             {/* Volver */}
@@ -219,19 +224,19 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
               <h3 className="text-base font-bold text-gray-900 mb-3">¿Por qué comprarnos a nosotros?</h3>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
-                  <span className="text-lg">✅</span>
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
                   <span className="text-sm text-gray-700">Distribuidor oficial de Panelux en Uruguay</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-lg">✅</span>
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
                   <span className="text-sm text-gray-700">Garantía oficial del fabricante</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-lg">✅</span>
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
                   <span className="text-sm text-gray-700">Envíos seguros a todo el país</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-lg">✅</span>
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
                   <span className="text-sm text-gray-700">Hasta 12 cuotas sin interés</span>
                 </li>
               </ul>

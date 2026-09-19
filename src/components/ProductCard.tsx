@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useCart } from '@/context/CartContext'
+import { CheckIcon, CartIcon } from '@/components/icons/Icons'
 
 interface ProductCardProps {
   codigo: string
@@ -99,13 +100,17 @@ export default function ProductCard({ codigo, nombre, imagen, linea, pvp }: Prod
               {/* Botón Agregar */}
               <button
                 onClick={handleAgregar}
-                className={`flex-1 py-2 px-3 rounded font-bold text-sm transition text-white ${
+                className={`flex-1 py-2 px-3 rounded font-bold text-sm transition text-white flex items-center justify-center gap-1.5 ${
                   agregado
                     ? 'bg-green-600'
                     : 'bg-blue-600 hover:bg-blue-700'
                 }`}
               >
-                {agregado ? '✓ Agregado' : '🛒 Agregar'}
+                {agregado ? (
+                  <><CheckIcon className="w-4 h-4" /> Agregado</>
+                ) : (
+                  <><CartIcon className="w-4 h-4" /> Agregar</>
+                )}
               </button>
             </div>
           </div>

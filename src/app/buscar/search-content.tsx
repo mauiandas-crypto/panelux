@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { BoxIcon } from '@/components/icons/Icons'
 
 interface SearchResult {
   id: string
@@ -104,7 +105,7 @@ export function SearchContent() {
                       unoptimized
                     />
                   ) : (
-                    <span className="text-6xl">🍳</span>
+                    <BoxIcon className="w-16 h-16 text-gray-300" />
                   )}
                 </div>
 

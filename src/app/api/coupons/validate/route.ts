@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { coupons } = getAdminData()
+    const { coupons } = await getAdminData()
     const cupon = coupons.find(
       (c) => c.code.toUpperCase() === codigo.trim().toUpperCase()
     )

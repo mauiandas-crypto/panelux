@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Image from 'next/image'
+import { SearchIcon, CloseIcon, ChevronLeftIcon, ChevronRightIcon } from '@/components/icons/Icons'
 
 interface ProductGalleryProps {
   imagenBase: string
@@ -66,8 +67,8 @@ export default function ProductGallery({ imagenBase, nombre, colores }: ProductG
         </div>
 
         {isZoomed && (
-          <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg text-sm font-semibold">
-            🔍 {Math.round(zoomLevel * 100)}%
+          <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-1.5">
+            <SearchIcon className="w-4 h-4" /> {Math.round(zoomLevel * 100)}%
           </div>
         )}
 
@@ -90,10 +91,10 @@ export default function ProductGallery({ imagenBase, nombre, colores }: ProductG
 
         <button
           onClick={() => setShowModal(true)}
-          className="absolute top-4 left-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition opacity-0 group-hover:opacity-100"
+          className="absolute top-4 left-4 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg transition opacity-0 group-hover:opacity-100 flex items-center gap-1.5"
           title="Ver en pantalla completa"
         >
-          ⛶ Ampliar
+          <SearchIcon className="w-4 h-4" /> Ampliar
         </button>
       </div>
 
@@ -128,9 +129,9 @@ export default function ProductGallery({ imagenBase, nombre, colores }: ProductG
           <div className="relative w-full h-full flex items-center justify-center">
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 p-3 rounded-full z-10 text-2xl"
+              className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 p-3 rounded-full z-10"
             >
-              ✕
+              <CloseIcon className="w-6 h-6" />
             </button>
 
             <Image
@@ -145,15 +146,15 @@ export default function ProductGallery({ imagenBase, nombre, colores }: ProductG
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-4">
               <button
                 onClick={() => setFotoIndex((prev) => (prev - 1 + fotos.length) % fotos.length)}
-                className="bg-white/90 hover:bg-white text-black px-4 py-2 rounded-lg font-bold transition"
+                className="bg-white/90 hover:bg-white text-black px-4 py-2 rounded-lg font-bold transition flex items-center gap-1"
               >
-                ← Anterior
+                <ChevronLeftIcon className="w-4 h-4" /> Anterior
               </button>
               <button
                 onClick={() => setFotoIndex((prev) => (prev + 1) % fotos.length)}
-                className="bg-white/90 hover:bg-white text-black px-4 py-2 rounded-lg font-bold transition"
+                className="bg-white/90 hover:bg-white text-black px-4 py-2 rounded-lg font-bold transition flex items-center gap-1"
               >
-                Siguiente →
+                Siguiente <ChevronRightIcon className="w-4 h-4" />
               </button>
             </div>
           </div>

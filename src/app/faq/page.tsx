@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { ChatIcon, ChevronLeftIcon } from '@/components/icons/Icons'
+import { siteConfig } from '@/lib/config'
 
 export default function FAQ() {
   const [abierto, setAbierto] = useState<number | null>(0)
@@ -17,11 +19,11 @@ export default function FAQ() {
     },
     {
       pregunta: '¿Qué métodos de pago aceptan?',
-      respuesta: 'Aceptamos: Mercado Pago (tarjetas de crédito/débito, efectivo, transferencia), hasta 12 cuotas sin interés en tarjetas participantes, y pago al recibir con POS Herby en Montevideo y Ciudad de la Costa.',
+      respuesta: 'Aceptamos Mercado Pago (tarjetas de crédito/débito, efectivo), transferencia bancaria, y hasta 12 cuotas sin interés en tarjetas participantes.',
     },
     {
       pregunta: '¿Tienen envío gratis?',
-      respuesta: 'Sí, ofrecemos envío gratis en Montevideo y Ciudad de la Costa. Para otras zonas el costo varía según la ubicación. Consulta en WhatsApp al 092 715 555 para obtener el costo exacto de tu zona.',
+      respuesta: `Sí, el envío es gratis a todo Uruguay en compras mayores a $${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}. Por debajo de ese monto, el envío tiene un costo de $${siteConfig.shipping.flatCost}.`,
     },
     {
       pregunta: '¿Cuánta garantía tienen los productos?',
@@ -99,16 +101,16 @@ export default function FAQ() {
             href="https://wa.me/59892715555"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
+            className="inline-flex items-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-lg hover:bg-blue-50 transition"
           >
-            💬 Hablar por WhatsApp
+            <ChatIcon className="w-5 h-5" /> Hablar por WhatsApp
           </a>
         </div>
 
         {/* Volver */}
         <div className="mt-12 pt-8 border-t border-gray-200">
-          <Link href="/" className="text-blue-600 font-semibold hover:text-blue-800">
-            ← Volver al inicio
+          <Link href="/" className="inline-flex items-center gap-1.5 text-blue-600 font-semibold hover:text-blue-800">
+            <ChevronLeftIcon className="w-4 h-4" /> Volver al inicio
           </Link>
         </div>
       </div>

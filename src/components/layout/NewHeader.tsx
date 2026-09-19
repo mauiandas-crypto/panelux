@@ -8,6 +8,7 @@ import MenuDrawer from './MenuDrawer';
 import { COLORS, Z_INDEX } from '@/lib/design-tokens';
 import { productos } from '@/data/productos';
 import { useCart } from '@/context/CartContext';
+import { MenuIcon, SearchIcon, CartIcon } from '@/components/icons/Icons';
 
 export default function NewHeader() {
   const { totalItems } = useCart();
@@ -88,7 +89,7 @@ export default function NewHeader() {
               onClick={() => setMenuOpen(!menuOpen)}
               className="p-2 hover:bg-gray-100 rounded-lg md:hidden"
             >
-              ☰
+              <MenuIcon className="w-6 h-6 text-gray-900" />
             </button>
             <Link href="/" className="flex items-center">
               <img src="/assets/panelux-logo.png" alt="Panelux" className="h-12 w-auto" />
@@ -112,7 +113,7 @@ export default function NewHeader() {
                 className="px-4 py-2 rounded-r-lg text-white hover:opacity-90 transition"
                 style={{ backgroundColor: COLORS.primary[500] }}
               >
-                🔍
+                <SearchIcon className="w-5 h-5" />
               </button>
             </form>
 
@@ -159,8 +160,8 @@ export default function NewHeader() {
 
           {/* Icons */}
           <div className="flex items-center gap-4">
-            <Link href="/carrito" className="relative p-2 hover:bg-gray-100 rounded-lg text-3xl">
-              🛒
+            <Link href="/carrito" className="relative p-2 hover:bg-gray-100 rounded-lg">
+              <CartIcon className="w-7 h-7 text-gray-900" />
               {totalItems > 0 && (
                 <span
                   className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-white text-xs font-bold"

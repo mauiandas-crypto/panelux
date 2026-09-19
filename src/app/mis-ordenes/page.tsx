@@ -3,6 +3,7 @@
 import { useOrder } from '@/context/OrderContext'
 import Link from 'next/link'
 import { useState } from 'react'
+import { CloseIcon } from '@/components/icons/Icons'
 
 export default function MisOrdenesPage() {
   const { orders } = useOrder()
@@ -66,7 +67,7 @@ export default function MisOrdenesPage() {
             <div className="bg-white rounded-lg p-8 max-w-2xl w-full">
               <div className="flex justify-between mb-6">
                 <h2 className="text-2xl font-bold">Pedido {selectedOrder.id}</h2>
-                <button onClick={() => setSelectedOrder(null)} className="text-2xl">✕</button>
+                <button onClick={() => setSelectedOrder(null)}><CloseIcon className="w-6 h-6" /></button>
               </div>
               <div className="space-y-4">
                 {selectedOrder.items.map((item: any, i: number) => (

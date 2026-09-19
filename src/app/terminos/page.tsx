@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { siteConfig } from '@/lib/config'
 
 export const metadata = {
   title: 'Términos de Servicio - Panelux Uruguay',
@@ -44,7 +45,6 @@ export default function Terminos() {
             <p>Aceptamos:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Mercado Pago:</strong> Tarjetas de crédito/débito, efectivo, transferencia</li>
-              <li><strong>Pago al recibir:</strong> Con POS Herby en Montevideo y Cd. de la Costa</li>
               <li><strong>Hasta 12 cuotas:</strong> Sin interés en tarjetas participantes</li>
             </ul>
           </section>
@@ -52,8 +52,8 @@ export default function Terminos() {
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">5. Envíos y Entregas</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Zona de envío gratis:</strong> Montevideo y Ciudad de la Costa</li>
-              <li><strong>Otras zonas:</strong> Consultar costo de envío</li>
+              <li><strong>Envío gratis:</strong> A todo Uruguay en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}</li>
+              <li><strong>Por debajo de ese monto:</strong> Costo de envío de ${siteConfig.shipping.flatCost}</li>
               <li><strong>Tiempo de entrega:</strong> 3-5 días hábiles después de confirmado el pago</li>
               <li><strong>Riesgo:</strong> El riesgo de pérdida pasa al cliente una vez entregado</li>
             </ul>

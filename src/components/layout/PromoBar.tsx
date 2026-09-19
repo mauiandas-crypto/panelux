@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { COLORS } from '@/lib/design-tokens';
 import { useAdmin } from '@/context/AdminContext';
+import { ChevronLeftIcon, ChevronRightIcon } from '@/components/icons/Icons';
 
 export default function PromoBar() {
   const { data } = useAdmin();
@@ -35,14 +36,14 @@ export default function PromoBar() {
         onClick={() => setCurrent(c => (c - 1 + activePromos.length) % activePromos.length)}
         className="hover:opacity-75"
       >
-        ←
+        <ChevronLeftIcon className="w-4 h-4" />
       </button>
       <div className="flex-1">{activePromos[current]?.text}</div>
       <button
         onClick={() => setCurrent(c => (c + 1) % activePromos.length)}
         className="hover:opacity-75"
       >
-        →
+        <ChevronRightIcon className="w-4 h-4" />
       </button>
     </div>
   );

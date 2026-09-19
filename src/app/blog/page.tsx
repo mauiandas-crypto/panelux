@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { ClockIcon, FlameIcon, WrenchIcon, BoxIcon, TrophyIcon, StarIcon, ChevronRightIcon } from '@/components/icons/Icons'
 
 export const metadata = {
   title: 'Blog - Panelux Uruguay',
@@ -14,7 +15,7 @@ export default function Blog() {
       resumen: 'Ahorra tiempo y energía cocinando con olla a presión. Descubre por qué es el utensilio favorito de chefs profesionales.',
       fecha: '12 de agosto de 2026',
       categoria: 'Consejos',
-      imagen: '🍲',
+      Icon: ClockIcon,
     },
     {
       id: 'como-elegir-sarten',
@@ -22,7 +23,7 @@ export default function Blog() {
       resumen: 'Guía completa para elegir la mejor sartén según tus necesidades. Tipos de materiales y usos principales.',
       fecha: '10 de agosto de 2026',
       categoria: 'Guías',
-      imagen: '🍳',
+      Icon: FlameIcon,
     },
     {
       id: 'cuidados-utensilios',
@@ -30,7 +31,7 @@ export default function Blog() {
       resumen: 'Aprende cómo mantener tus utensilios en perfectas condiciones. Consejos para prolongar la vida útil de tus productos.',
       fecha: '8 de agosto de 2026',
       categoria: 'Mantenimiento',
-      imagen: '🧹',
+      Icon: WrenchIcon,
     },
     {
       id: 'receta-guiso',
@@ -38,7 +39,7 @@ export default function Blog() {
       resumen: 'Recetas tradicionales y sabrosas que puedes preparar con tu olla de vidrio Panelux. ¡Delicioso!',
       fecha: '5 de agosto de 2026',
       categoria: 'Recetas',
-      imagen: '👨‍🍳',
+      Icon: BoxIcon,
     },
     {
       id: 'juego-ollas-completo',
@@ -46,7 +47,7 @@ export default function Blog() {
       resumen: 'Ventajas de tener un juego completo de ollas vs comprar piezas individuales. Calidad y ahorro garantizado.',
       fecha: '3 de agosto de 2026',
       categoria: 'Consejos',
-      imagen: '🏆',
+      Icon: TrophyIcon,
     },
     {
       id: 'tecnicas-cocina',
@@ -54,7 +55,7 @@ export default function Blog() {
       resumen: 'Aprende técnicas de chef profesional usando los utensilios adecuados. Mejora tus habilidades en la cocina.',
       fecha: '1 de agosto de 2026',
       categoria: 'Técnicas',
-      imagen: '⭐',
+      Icon: StarIcon,
     },
   ]
 
@@ -96,8 +97,8 @@ export default function Blog() {
                 href={`/blog/${articulo.id}`}
                 className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1"
               >
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 h-48 flex items-center justify-center text-7xl border-b-4 border-blue-200">
-                  {articulo.imagen}
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 h-48 flex items-center justify-center border-b-4 border-blue-200">
+                  <articulo.Icon className="w-16 h-16 text-blue-500" />
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
@@ -112,8 +113,8 @@ export default function Blog() {
                   <p className="text-gray-600 text-sm line-clamp-3">
                     {articulo.resumen}
                   </p>
-                  <div className="mt-4 text-blue-600 font-semibold text-sm">
-                    Leer más →
+                  <div className="mt-4 text-blue-600 font-semibold text-sm flex items-center gap-1">
+                    Leer más <ChevronRightIcon className="w-4 h-4" />
                   </div>
                 </div>
               </Link>
