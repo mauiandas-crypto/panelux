@@ -84,7 +84,11 @@ export default function RootLayout({
           <OrderProvider>
             <CartProvider>
               <NewHeader />
-              <TrustBadges />
+              {/* En mobile ocupa mucho scroll antes de llegar al contenido, y
+                  en el home repite lo que ya dicen los bullets del Hero. */}
+              <div className="hidden md:block">
+                <TrustBadges />
+              </div>
               {children}
               <WelcomeBanner />
               <WhatsAppChat />

@@ -1,15 +1,18 @@
 import Link from "next/link"
+import Image from "next/image"
 import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
 import Hero from "@/components/Hero"
-import { FlameIcon, ClockIcon, GiftIcon, BoxIcon, TrophyIcon, StarIcon, TruckIcon, ShieldIcon } from "@/components/icons/Icons"
+import { TrophyIcon, StarIcon, TruckIcon, ShieldIcon } from "@/components/icons/Icons"
 
+// Foto real de un producto representativo de cada categoría, en vez de un
+// ícono genérico - se ve mucho más "de la marca" en las tarjetas.
 const categorias = [
-  { nombre: 'Sartenes y woks', Icono: FlameIcon },
-  { nombre: 'Ollas y cacerolas', Icono: BoxIcon },
-  { nombre: 'Ollas a presión', Icono: ClockIcon },
-  { nombre: 'Juego de ollas', Icono: GiftIcon },
-  { nombre: 'Asaderas y moldes', Icono: BoxIcon },
+  { nombre: 'Sartenes y woks', imagen: '/Productos/Magnific AA/5000041_Magnific_AA_Frigideira Francesa Ø32_Grafite.jpg' },
+  { nombre: 'Ollas y cacerolas', imagen: '/Productos/Magnific AA/5000096_Magnific_AA_Caçarola Ø22_Grafite.jpg' },
+  { nombre: 'Ollas a presión', imagen: '/Productos/Panela de Pressão/5000001_Classic_PPFI_3L_Polida.jpg' },
+  { nombre: 'Juego de ollas', imagen: '/Productos/Magnific Alto Brilho/5002424_Magnific_Alto Brilho_Conjunto 6 peças_Polido.jpg' },
+  { nombre: 'Asaderas y moldes', imagen: '/Productos/Magnific AA/5000220_Magnific_AA_Assadeira 27x18cm_Grafite.jpg' },
 ]
 
 // Un producto representativo por línea, para mostrar variedad en la portada
@@ -27,23 +30,31 @@ export default function Home() {
       <Hero />
 
       {/* Categorías */}
-      <section className="py-16 px-6 bg-gray-50">
+      <section className="py-6 md:py-16 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Comprá por categoría</h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Comprá por categoría</h2>
+
+          {/* Mobile: fila horizontal con scroll, compacta. Desktop: grilla. */}
+          <div className="flex md:grid md:grid-cols-5 gap-3 md:gap-4 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
             {categorias.map((cat) => {
               const cantidad = productos.filter((p) => p.categoria === cat.nombre).length
               return (
                 <Link
                   key={cat.nombre}
                   href={`/catalogo?categoria=${encodeURIComponent(cat.nombre)}`}
-                  className="bg-white border-2 border-gray-200 rounded-xl p-6 text-center hover:border-blue-400 hover:shadow-lg transition"
+                  className="flex-shrink-0 w-24 md:w-auto bg-white border-2 border-gray-200 rounded-xl p-3 md:p-6 text-center hover:border-blue-400 hover:shadow-lg transition"
                 >
-                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
-                    <cat.Icono className="w-6 h-6" />
+                  <div className="relative w-12 h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3 rounded-full bg-blue-50 overflow-hidden">
+                    <Image
+                      src={cat.imagen}
+                      alt={cat.nombre}
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                    />
                   </div>
-                  <p className="font-bold text-gray-900 text-sm mb-1">{cat.nombre}</p>
-                  <p className="text-xs text-gray-500">{cantidad} productos</p>
+                  <p className="font-bold text-gray-900 text-xs md:text-sm mb-0.5 md:mb-1 leading-tight">{cat.nombre}</p>
+                  <p className="text-[10px] md:text-xs text-gray-500">{cantidad} productos</p>
                 </Link>
               )
             })}

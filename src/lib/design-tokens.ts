@@ -2,13 +2,15 @@
  * Design Tokens - Paleta de colores y constantes de diseño
  */
 
+// Púrpura real de la marca Panelux (sampleado de panelux.com.br), coordinado
+// con la escala "blue" de Tailwind sobreescrita en globals.css.
 export const COLORS = {
   primary: {
-    50: '#eff6ff',
-    100: '#dbeafe',
-    200: '#bfdbfe',
-    500: '#3b82f6',
-    600: '#2563eb',
+    50: '#f4f3fa',
+    100: '#e7e4f3',
+    200: '#cfc9e8',
+    500: '#5e5198',
+    600: '#4e4280',
   },
   secondary: {
     500: '#22c55e',

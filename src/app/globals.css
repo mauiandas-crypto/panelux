@@ -10,6 +10,22 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Paleta "blue" reemplazada por el púrpura real de la marca Panelux
+     (sampleado del sitio oficial panelux.com.br: #5E5198, usado en el
+     texto del logo y en secciones grandes como el newsletter). Todo el
+     sitio usa clases bg-blue-600/text-blue-600/etc, así que sobreescribir
+     la escala acá la actualiza en todos lados de una. */
+  --color-blue-50: #f4f3fa;
+  --color-blue-100: #e7e4f3;
+  --color-blue-200: #cfc9e8;
+  --color-blue-300: #ada1d6;
+  --color-blue-400: #8879be;
+  --color-blue-500: #5e5198;
+  --color-blue-600: #4e4280;
+  --color-blue-700: #40376a;
+  --color-blue-800: #332b54;
+  --color-blue-900: #292342;
 }
 
 @media (prefers-color-scheme: dark) {
