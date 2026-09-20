@@ -46,15 +46,17 @@ export function CatalogoContent() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Filtros */}
-      <section className="bg-white py-8 px-6 border-b sticky top-20 z-40">
-        <div className="max-w-7xl mx-auto space-y-4">
+      {/* Filtros: sticky solo en desktop - en mobile, con categoría + línea +
+          orden envueltos en varias líneas, quedaba una franja anclada gigante
+          tapando media pantalla al scrollear. */}
+      <section className="bg-white py-4 md:py-8 px-6 border-b md:sticky md:top-20 md:z-40">
+        <div className="max-w-7xl mx-auto space-y-3 md:space-y-4">
           <div>
             <p className="text-xs font-semibold text-gray-500 mb-2">CATEGORÍA</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex md:flex-wrap gap-2 overflow-x-auto md:overflow-visible pb-1 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
               <button
                 onClick={() => setSelectedCategory(null)}
-                className={`px-4 py-2 rounded-full font-semibold transition text-sm ${
+                className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold transition text-sm ${
                   selectedCategory === null
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
@@ -66,7 +68,7 @@ export function CatalogoContent() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full font-semibold transition text-sm ${
+                  className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold transition text-sm ${
                     selectedCategory === cat
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
@@ -78,13 +80,13 @@ export function CatalogoContent() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 justify-between">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 md:justify-between">
             <div>
               <p className="text-xs font-semibold text-gray-500 mb-2">LÍNEA</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex md:flex-wrap gap-2 overflow-x-auto md:overflow-visible pb-1 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
                 <button
                   onClick={() => setSelectedLinea(null)}
-                  className={`px-3 py-1.5 rounded-full font-semibold transition text-xs ${
+                  className={`flex-shrink-0 px-3 py-1.5 rounded-full font-semibold transition text-xs ${
                     selectedLinea === null
                       ? 'bg-gray-900 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -96,7 +98,7 @@ export function CatalogoContent() {
                   <button
                     key={linea}
                     onClick={() => setSelectedLinea(linea)}
-                    className={`px-3 py-1.5 rounded-full font-semibold transition text-xs ${
+                    className={`flex-shrink-0 px-3 py-1.5 rounded-full font-semibold transition text-xs ${
                       selectedLinea === linea
                         ? 'bg-gray-900 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -113,7 +115,7 @@ export function CatalogoContent() {
               <select
                 value={orden}
                 onChange={(e) => setOrden(e.target.value as any)}
-                className="px-3 py-2 border-2 border-gray-300 rounded-lg text-sm text-gray-900"
+                className="w-full md:w-auto px-3 py-2 border-2 border-gray-300 rounded-lg text-sm text-gray-900"
               >
                 <option value="default">Relevancia</option>
                 <option value="precioAsc">Precio: menor a mayor</option>
