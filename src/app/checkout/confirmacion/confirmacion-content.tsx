@@ -80,7 +80,7 @@ export function ConfirmacionContent() {
               <div className="text-left">
                 <p className="font-bold text-gray-900">Recibe tu orden</p>
                 <p className="text-gray-600 text-sm">
-                  Enviaremos tu pedido con número de seguimiento. Recibirás tu compra en 3-5 días hábiles.
+                  Enviaremos tu pedido con número de seguimiento. Recibirás tu compra en {siteConfig.shipping.deliveryTime}.
                 </p>
               </div>
             </li>

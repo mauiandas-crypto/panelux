@@ -24,6 +24,7 @@ export const siteConfig = {
   shipping: {
     minOrderForFreeShipping: 2000,
     flatCost: 250,
+    deliveryTime: '24 horas',
   },
 
   // Pagos

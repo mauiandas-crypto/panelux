@@ -1,4 +1,5 @@
 import { LockIcon, CheckIcon, ShieldIcon, TruckIcon } from './icons/Icons'
+import { siteConfig } from '@/lib/config'
 
 export default function TrustBadges() {
   const badges = [
@@ -20,7 +21,7 @@ export default function TrustBadges() {
     {
       icon: TruckIcon,
       titulo: 'Envío Rápido',
-      descripcion: '3-5 días hábiles',
+      descripcion: siteConfig.shipping.deliveryTime,
     },
   ]
 

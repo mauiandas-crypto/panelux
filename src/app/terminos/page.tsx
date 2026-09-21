@@ -54,7 +54,7 @@ export default function Terminos() {
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Envío gratis:</strong> A todo Uruguay en compras mayores a ${siteConfig.shipping.minOrderForFreeShipping.toLocaleString('es-UY')}</li>
               <li><strong>Por debajo de ese monto:</strong> Costo de envío de ${siteConfig.shipping.flatCost}</li>
-              <li><strong>Tiempo de entrega:</strong> 3-5 días hábiles después de confirmado el pago</li>
+              <li><strong>Tiempo de entrega:</strong> {siteConfig.shipping.deliveryTime} después de confirmado el pago</li>
               <li><strong>Riesgo:</strong> El riesgo de pérdida pasa al cliente una vez entregado</li>
             </ul>
           </section>
