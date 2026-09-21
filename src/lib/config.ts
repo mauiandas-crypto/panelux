@@ -30,7 +30,7 @@ export const siteConfig = {
   // Pagos
   payments: {
     maxInstallments: 12,
-    methods: ['Mercado Pago', 'Tarjeta de Crédito', 'Tarjeta de Débito', 'Efectivo', 'Transferencia'],
+    methods: ['Mercado Pago', 'Tarjeta de Crédito', 'Tarjeta de Débito', 'Transferencia'],
   },
 
   // Cuentas bancarias para pago por transferencia (titular: Todogastro SAS)

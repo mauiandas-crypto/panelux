@@ -15,11 +15,11 @@ export default function FAQ() {
     },
     {
       pregunta: '¿Cómo es el proceso de compra?',
-      respuesta: `Es muy simple: 1) Selecciona el producto en nuestro catálogo, 2) Agrega a carrito, 3) Completa tus datos de envío, 4) Elige método de pago (Mercado Pago, tarjeta, efectivo, transferencia), 5) Recibes confirmación por email. El envío tarda ${siteConfig.shipping.deliveryTime}.`,
+      respuesta: `Es muy simple: 1) Selecciona el producto en nuestro catálogo, 2) Agrega a carrito, 3) Completa tus datos de envío, 4) Elige método de pago (Mercado Pago o transferencia bancaria), 5) Recibes confirmación por email. El envío tarda ${siteConfig.shipping.deliveryTime}.`,
     },
     {
       pregunta: '¿Qué métodos de pago aceptan?',
-      respuesta: 'Aceptamos Mercado Pago (tarjetas de crédito/débito, efectivo), transferencia bancaria, y hasta 12 cuotas sin interés en tarjetas participantes.',
+      respuesta: 'Aceptamos Mercado Pago (tarjetas de crédito/débito) y transferencia bancaria, con hasta 12 cuotas sin interés en tarjetas participantes.',
     },
     {
       pregunta: '¿Tienen envío gratis?',

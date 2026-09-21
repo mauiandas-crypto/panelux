@@ -110,7 +110,7 @@ export default function SobreNosotros() {
                 <CreditCardIcon className="w-5 h-5" /> Múltiples Formas de Pago
               </h3>
               <p className="text-gray-700">
-                Tarjetas de crédito, débito, efectivo, transferencia, Mercado Pago. Hasta 12 cuotas sin interés.
+                Tarjetas de crédito y débito con Mercado Pago, o transferencia bancaria. Hasta 12 cuotas sin interés.
               </p>
             </div>
 

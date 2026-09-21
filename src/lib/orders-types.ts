@@ -24,6 +24,9 @@ export interface Order {
   costoEnvio?: number
   total: number
   estado: 'pendiente' | 'pagado' | 'en_preparacion' | 'enviado' | 'entregado' | 'cancelado'
+  // 'efectivo' se dejó de ofrecer como opción de pago, pero se mantiene acá
+  // como valor válido por si hay pedidos históricos guardados con ese
+  // método - así no rompe al leerlos de la base.
   metodoPago: 'mercadopago' | 'transferencia' | 'efectivo'
   numeroSeguimiento?: string
   mpPaymentId?: string

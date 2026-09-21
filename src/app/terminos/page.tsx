@@ -44,7 +44,8 @@ export default function Terminos() {
             <h2 className="text-2xl font-bold text-gray-900 mb-3">4. Formas de Pago</h2>
             <p>Aceptamos:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Mercado Pago:</strong> Tarjetas de crédito/débito, efectivo, transferencia</li>
+              <li><strong>Mercado Pago:</strong> Tarjetas de crédito/débito</li>
+              <li><strong>Transferencia bancaria:</strong> A las cuentas indicadas en el checkout</li>
               <li><strong>Hasta 12 cuotas:</strong> Sin interés en tarjetas participantes</li>
             </ul>
           </section>

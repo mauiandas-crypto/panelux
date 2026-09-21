@@ -150,7 +150,7 @@ export default function Footer() {
               <div className="flex flex-wrap gap-3 items-center">
                 <span className="text-xs bg-gray-700 px-3 py-1 rounded">Mercado Pago</span>
                 <span className="text-xs bg-gray-700 px-3 py-1 rounded">Tarjetas</span>
-                <span className="text-xs bg-gray-700 px-3 py-1 rounded">Efectivo</span>
+                <span className="text-xs bg-gray-700 px-3 py-1 rounded">Transferencia</span>
                 <span className="text-xs bg-gray-700 px-3 py-1 rounded">Hasta 12 cuotas</span>
               </div>
             </div>

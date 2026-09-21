@@ -7,7 +7,7 @@ import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
 import { siteConfig } from '@/lib/config'
 import { trackCheckout, trackConversion, getGaClientId } from '@/components/AnalyticsTracker'
-import { CreditCardIcon, TicketIcon, CheckIcon, BankIcon, MoneyIcon } from '@/components/icons/Icons'
+import { CreditCardIcon, TicketIcon, CheckIcon, BankIcon } from '@/components/icons/Icons'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -22,7 +22,7 @@ export default function CheckoutPage() {
     ciudad: 'Montevideo',
   })
 
-  const [metodoPago, setMetodoPago] = useState<'mercadopago' | 'transferencia' | 'efectivo'>('mercadopago')
+  const [metodoPago, setMetodoPago] = useState<'mercadopago' | 'transferencia'>('mercadopago')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -320,7 +320,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setMetodoPago(e.target.value as any)}
                         className="w-4 h-4"
                       />
-                      <span className="text-gray-900 font-semibold flex items-center gap-2"><CreditCardIcon className="w-5 h-5" /> Mercado Pago (Tarjeta, Efectivo)</span>
+                      <span className="text-gray-900 font-semibold flex items-center gap-2"><CreditCardIcon className="w-5 h-5" /> Mercado Pago (Tarjeta)</span>
                     </label>
 
                     <label className="flex items-center gap-3 cursor-pointer">
@@ -356,17 +356,6 @@ export default function CheckoutPage() {
                       </div>
                     )}
 
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="pago"
-                        value="efectivo"
-                        checked={metodoPago === 'efectivo'}
-                        onChange={(e) => setMetodoPago(e.target.value as any)}
-                        className="w-4 h-4"
-                      />
-                      <span className="text-gray-900 font-semibold flex items-center gap-2"><MoneyIcon className="w-5 h-5" /> Efectivo a la entrega</span>
-                    </label>
                   </div>
                 </div>
 
