@@ -81,14 +81,14 @@ export default function CarritoPage() {
                           <div className="flex items-center gap-2 w-fit">
                             <button
                               onClick={() => actualizarCantidad(item.codigo, Math.max(1, item.cantidad - 1))}
-                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded text-sm font-bold transition"
+                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 text-gray-900 rounded text-sm font-bold transition"
                             >
                               −
                             </button>
-                            <span className="w-8 text-center font-bold">{item.cantidad}</span>
+                            <span className="w-8 text-center font-bold text-gray-900">{item.cantidad}</span>
                             <button
                               onClick={() => actualizarCantidad(item.codigo, item.cantidad + 1)}
-                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded text-sm font-bold transition"
+                              className="w-8 h-8 bg-gray-200 hover:bg-gray-300 text-gray-900 rounded text-sm font-bold transition"
                             >
                               +
                             </button>
