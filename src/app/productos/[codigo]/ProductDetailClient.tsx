@@ -9,6 +9,7 @@ import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
 import PressureCookerQualityInfo from '@/components/PressureCookerQualityInfo'
 import AltoBrilhoQualityInfo from '@/components/AltoBrilhoQualityInfo'
 import { trackProductView } from '@/components/AnalyticsTracker'
+import { getSlugFromCategoria } from '@/lib/categorias'
 import { CartIcon, CheckIcon } from '@/components/icons/Icons'
 import type { productos } from '@/data/productos'
 
@@ -78,7 +79,7 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
         <div className="mb-8 text-sm text-gray-600">
           <Link href="/" className="hover:text-blue-600">Inicio</Link>
           <span className="mx-2">/</span>
-          <Link href={`/catalogo?categoria=${encodeURIComponent(producto.categoria)}`} className="hover:text-blue-600">
+          <Link href={`/${getSlugFromCategoria(producto.categoria) ?? 'catalogo'}`} className="hover:text-blue-600">
             {producto.categoria}
           </Link>
           <span className="mx-2">/</span>

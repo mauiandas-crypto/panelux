@@ -2,6 +2,7 @@
 import crypto from 'crypto'
 import { getPaymentInfo } from '@/lib/mercadopago/client'
 import { getOrderById, updateOrder } from '@/lib/orders-store'
+import { sendPurchaseEvent } from '@/lib/ga4-measurement-protocol'
 
 // Valida la firma x-signature que Mercado Pago envía si se configuró una
 // "clave secreta" para el webhook en el panel de MP. Sin esa variable de
@@ -67,8 +68,16 @@ export async function POST(request: NextRequest) {
     }
 
     if (paymentInfo.status === 'approved') {
+      const yaEstabaPagada = order.estado === 'pagado'
       await updateOrder(orderId, { estado: 'pagado', mpPaymentId: String(paymentInfo.id) })
       console.log('✅ Pago aprobado, orden actualizada:', orderId)
+
+      // Mercado Pago puede reintentar la misma notificación varias veces;
+      // solo mandar el evento de conversión real la primera vez que se
+      // confirma, para no contar la misma compra dos veces en GA4.
+      if (!yaEstabaPagada) {
+        await sendPurchaseEvent({ ...order, estado: 'pagado', mpPaymentId: String(paymentInfo.id) })
+      }
     } else if (paymentInfo.status === 'rejected' || paymentInfo.status === 'cancelled') {
       await updateOrder(orderId, { estado: 'cancelado', mpPaymentId: String(paymentInfo.id) })
       console.log('❌ Pago rechazado/cancelado, orden actualizada:', orderId)

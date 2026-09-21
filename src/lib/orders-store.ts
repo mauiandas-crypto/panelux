@@ -25,6 +25,7 @@ function toOrder(row: {
   numeroSeguimiento: string | null
   mpPaymentId: string | null
   notas: string | null
+  gaClientId: string | null
   fechaActualizacion: Date
 }): Order {
   return {
@@ -48,6 +49,7 @@ function toOrder(row: {
     numeroSeguimiento: row.numeroSeguimiento ?? undefined,
     mpPaymentId: row.mpPaymentId ?? undefined,
     notas: row.notas ?? undefined,
+    gaClientId: row.gaClientId ?? undefined,
     fechaActualizacion: row.fechaActualizacion.toISOString(),
   }
 }
@@ -83,6 +85,7 @@ export async function addOrder(order: Order): Promise<Order> {
       numeroSeguimiento: order.numeroSeguimiento,
       mpPaymentId: order.mpPaymentId,
       notas: order.notas,
+      gaClientId: order.gaClientId,
     },
   })
   return toOrder(row)

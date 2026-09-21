@@ -4,6 +4,7 @@ import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
 import Hero from "@/components/Hero"
 import { TrophyIcon, StarIcon, TruckIcon, ShieldIcon } from "@/components/icons/Icons"
+import { getSlugFromCategoria } from "@/lib/categorias"
 
 // Foto real de un producto representativo de cada categoría, en vez de un
 // ícono genérico - se ve mucho más "de la marca" en las tarjetas.
@@ -41,7 +42,7 @@ export default function Home() {
               return (
                 <Link
                   key={cat.nombre}
-                  href={`/catalogo?categoria=${encodeURIComponent(cat.nombre)}`}
+                  href={`/${getSlugFromCategoria(cat.nombre)}`}
                   className="flex-shrink-0 w-24 md:w-auto bg-white border-2 border-gray-200 rounded-xl p-3 md:p-6 text-center hover:border-blue-400 hover:shadow-lg transition"
                 >
                   <div className="relative w-12 h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3 rounded-full bg-blue-50 overflow-hidden">

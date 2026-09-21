@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
 import { useOrder } from '@/context/OrderContext'
 import { siteConfig } from '@/lib/config'
-import { trackCheckout, trackConversion } from '@/components/AnalyticsTracker'
+import { trackCheckout, trackConversion, getGaClientId } from '@/components/AnalyticsTracker'
 import { CreditCardIcon, TicketIcon, CheckIcon, BankIcon, MoneyIcon } from '@/components/icons/Icons'
 
 export default function CheckoutPage() {
@@ -139,6 +139,7 @@ export default function CheckoutPage() {
         estado: 'pendiente' as const,
         metodoPago,
         notas: `Pedido realizado el ${now.toLocaleDateString('es-UY')}`,
+        gaClientId: getGaClientId(),
         fechaActualizacion: now.toISOString(),
       }
 

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { productos } from '@/data/productos'
+import { CATEGORIA_SLUGS } from '@/lib/categorias'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://panelux.com.uy'
@@ -66,10 +67,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  // URLs de categorías (viven en /catalogo desde la reorganización de portada)
-  const categorias = [...new Set(productos.map((p) => p.categoria))]
-  const categoryUrls: MetadataRoute.Sitemap = categorias.map((categoria) => ({
-    url: `${baseUrl}/catalogo?categoria=${encodeURIComponent(categoria)}`,
+  // URLs de categorías: rutas propias (/ollas-a-presion, etc.) en vez de
+  // /catalogo?categoria=X - una URL basada en parámetros que Google indexa
+  // peor que una página con su propio contenido y metadata.
+  const categoryUrls: MetadataRoute.Sitemap = Object.keys(CATEGORIA_SLUGS).map((slug) => ({
+    url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,

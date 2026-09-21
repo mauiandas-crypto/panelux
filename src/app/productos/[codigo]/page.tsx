@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
+import { getSlugFromCategoria } from '@/lib/categorias'
 import ProductDetailClient from './ProductDetailClient'
 
 interface Props {
@@ -75,7 +76,7 @@ export default async function ProductoDetailPage({ params }: Props) {
       />
       <BreadcrumbSchema items={[
         { name: 'Inicio', url: 'https://panelux.com.uy' },
-        { name: producto.categoria, url: `https://panelux.com.uy/catalogo?categoria=${encodeURIComponent(producto.categoria)}` },
+        { name: producto.categoria, url: `https://panelux.com.uy/${getSlugFromCategoria(producto.categoria) ?? `catalogo?categoria=${encodeURIComponent(producto.categoria)}`}` },
         { name: producto.nombre, url: `https://panelux.com.uy/productos/${producto.codigo}` },
       ]} />
       <ProductDetailClient producto={producto} />

@@ -28,6 +28,10 @@ export interface Order {
   numeroSeguimiento?: string
   mpPaymentId?: string
   notas?: string
+  // client_id de GA4 (cookie _ga) capturado al crear el pedido, para poder
+  // mandar el evento "purchase" real desde el webhook de Mercado Pago
+  // cuando el pago se confirma - no en el momento de crear el pedido.
+  gaClientId?: string
   fechaActualizacion: string
 }
 

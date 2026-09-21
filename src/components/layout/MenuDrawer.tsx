@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { MENU_CATEGORIES, HELP_LINKS, CONTACT_DATA } from '@/config/menu-data';
 import { COLORS, Z_INDEX } from '@/lib/design-tokens';
 import { CloseIcon } from '@/components/icons/Icons';
+import { getSlugFromCategoria } from '@/lib/categorias';
 
 interface MenuDrawerProps {
   onClose: () => void;
@@ -39,7 +40,7 @@ export default function MenuDrawer({ onClose }: MenuDrawerProps) {
             {MENU_CATEGORIES.map(cat => (
               <Link
                 key={cat.id}
-                href={`/catalogo?categoria=${encodeURIComponent(cat.categoria)}`}
+                href={`/${getSlugFromCategoria(cat.categoria)}`}
                 onClick={onClose}
                 className="block py-3 px-3 rounded-lg hover:bg-gray-100 font-medium"
               >

@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
       estado: 'pendiente',
       metodoPago: orderData.metodoPago || 'mercadopago',
       notas: orderData.notas,
+      gaClientId: orderData.gaClientId,
       fechaActualizacion: new Date().toISOString(),
     }
 

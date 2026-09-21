@@ -1,21 +1,26 @@
 'use client'
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 import { productos } from "@/data/productos"
 import ProductCard from "@/components/ProductCard"
+import { getSlugFromCategoria } from "@/lib/categorias"
 
-export function CatalogoContent() {
+interface CatalogoContentProps {
+  // Cuando se renderiza desde /ollas-a-presion, etc. la categoría viene fija
+  // por la URL (mejor para SEO que solo /catalogo?categoria=X). En /catalogo
+  // a secas sigue funcionando por query string como antes.
+  categoriaFija?: string
+}
+
+export function CatalogoContent({ categoriaFija }: CatalogoContentProps) {
   const searchParams = useSearchParams()
-  const categoriaInicial = searchParams.get('categoria')
+  const categoriaQuery = searchParams.get('categoria')
+  const selectedCategory = categoriaFija ?? categoriaQuery
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(categoriaInicial)
   const [selectedLinea, setSelectedLinea] = useState<string | null>(null)
   const [orden, setOrden] = useState<'default' | 'precioAsc' | 'precioDesc'>('default')
-
-  useEffect(() => {
-    if (categoriaInicial) setSelectedCategory(categoriaInicial)
-  }, [categoriaInicial])
 
   const productosPorCategoria = useMemo(() => {
     return productos.reduce((acc: Record<string, any[]>, p) => {
@@ -44,6 +49,15 @@ export function CatalogoContent() {
     return lista
   }, [selectedCategory, selectedLinea, orden, productosPorCategoria])
 
+  // Cada categoría navega a su propia URL limpia (/ollas-a-presion) en vez
+  // de solo cambiar estado - así cada una es una página real, indexable y
+  // compartible, no una vista que solo existe con JS después de cargar.
+  const hrefTodas = '/catalogo'
+  const hrefPorCategoria = (cat: string) => {
+    const slug = getSlugFromCategoria(cat)
+    return slug ? `/${slug}` : `/catalogo?categoria=${encodeURIComponent(cat)}`
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Filtros: sticky solo en desktop - en mobile, con categoría + línea +
@@ -54,20 +68,20 @@ export function CatalogoContent() {
           <div>
             <p className="text-xs font-semibold text-gray-500 mb-2">CATEGORÍA</p>
             <div className="flex md:flex-wrap gap-2 overflow-x-auto md:overflow-visible pb-1 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
-              <button
-                onClick={() => setSelectedCategory(null)}
+              <Link
+                href={hrefTodas}
                 className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold transition text-sm ${
-                  selectedCategory === null
+                  !selectedCategory
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
               >
                 Todas ({productos.length})
-              </button>
+              </Link>
               {categorias.map((cat) => (
-                <button
+                <Link
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  href={hrefPorCategoria(cat)}
                   className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold transition text-sm ${
                     selectedCategory === cat
                       ? 'bg-blue-600 text-white'
@@ -75,7 +89,7 @@ export function CatalogoContent() {
                   }`}
                 >
                   {cat} ({productosPorCategoria[cat].length})
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -129,7 +143,9 @@ export function CatalogoContent() {
       {/* Productos */}
       <section className="py-12 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold text-black mb-4 text-center">Catálogo Completo</h1>
+          <h1 className="text-4xl font-bold text-black mb-4 text-center">
+            {selectedCategory ? `${selectedCategory} Panelux Uruguay` : 'Catálogo Completo'}
+          </h1>
           <p className="text-center text-gray-600 mb-12">
             {productosVisibles.length} de {productos.length} productos
           </p>

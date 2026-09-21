@@ -105,6 +105,17 @@ export function trackCheckout(totalValue: number, itemsCount: number) {
   }
 }
 
+// Lee el client_id real de GA4 desde la cookie _ga del navegador (formato
+// GA1.1.XXXXXXXXXX.YYYYYYYYYY - el client_id es "XXXXXXXXXX.YYYYYYYYYY").
+// Se guarda en el pedido para poder mandar el evento "purchase" real desde
+// el servidor cuando el pago se confirma en el webhook de Mercado Pago, en
+// vez de solo aproximarlo del lado del cliente al crear el pedido.
+export function getGaClientId(): string | undefined {
+  if (typeof document === 'undefined') return undefined
+  const match = document.cookie.match(/_ga=GA\d\.\d\.(\d+\.\d+)/)
+  return match?.[1]
+}
+
 export function trackConversion(orderId: string, totalValue: number) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'purchase', {

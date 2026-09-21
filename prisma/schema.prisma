@@ -29,6 +29,7 @@ model Order {
   numeroSeguimiento  String?
   mpPaymentId        String?
   notas              String?
+  gaClientId         String?
   fechaActualizacion DateTime @updatedAt
 
   @@index([estado])
