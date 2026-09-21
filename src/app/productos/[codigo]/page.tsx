@@ -8,6 +8,8 @@ import { useCart } from '@/context/CartContext'
 import ProductGallery from '@/components/ProductGallery'
 import MagnificQualityInfo from '@/components/MagnificQualityInfo'
 import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
+import PressureCookerQualityInfo from '@/components/PressureCookerQualityInfo'
+import AltoBrilhoQualityInfo from '@/components/AltoBrilhoQualityInfo'
 import { ProductSchema, BreadcrumbSchema } from '@/components/SchemaOrg'
 import { trackProductView } from '@/components/AnalyticsTracker'
 import { CartIcon, CheckIcon } from '@/components/icons/Icons'
@@ -30,7 +32,18 @@ export default function ProductoDetail() {
     espesorMmReal?: number
     claseAdherencia?: string
     libreDePfoaPfos?: boolean
+    fotosExtra?: string[]
   }
+
+  // Algunos productos (sobre todo juegos/kits) tienen una foto real
+  // adicional del embalaje, verificada contra el archivo en disco - no
+  // adivinada, como pasaba antes y mostraba imágenes rotas.
+  const galeriaFotos = producto
+    ? [
+        { nombre: 'Principal', imagen: producto.imagen },
+        ...(specs.fotosExtra ?? []).map((imagen, i) => ({ nombre: `Foto ${i + 2}`, imagen })),
+      ]
+    : []
 
   useEffect(() => {
     if (producto) {
@@ -110,7 +123,11 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Galería de Productos */}
           <div>
-            <ProductGallery imagenBase={producto.imagen} nombre={producto.nombre} />
+            <ProductGallery
+              imagenBase={producto.imagen}
+              nombre={producto.nombre}
+              colores={galeriaFotos.length > 1 ? galeriaFotos : undefined}
+            />
           </div>
 
           {/* Detalles */}
@@ -248,6 +265,10 @@ Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
         <div className="mt-16 space-y-16">
           {producto.linea === 'Magnific AA' && <MagnificQualityInfo />}
           {producto.linea === 'Maximum Stone' && <MaximumStoneQualityInfo />}
+          {producto.linea === 'Panela de Pressão' && (
+            <PressureCookerQualityInfo conRevestimiento={producto.nombre.includes('Magnific')} />
+          )}
+          {producto.linea === 'Magnific Alto Brilho' && <AltoBrilhoQualityInfo />}
         </div>
       </div>
     </div>
