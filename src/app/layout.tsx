@@ -12,6 +12,7 @@ import { OrderProvider } from "@/context/OrderContext";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import WelcomeBanner from "@/components/WelcomeBanner";
+import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Panelux Uruguay | Distribuidor Oficial de Utensilios de Cocina Premium",
@@ -75,10 +76,44 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Meta Pixel */}
+        {siteConfig.analytics.metaPixelId && (
+          <Script
+            id="meta-pixel"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '${siteConfig.analytics.metaPixelId}');
+                fbq('track', 'PageView');
+              `,
+            }}
+          />
+        )}
+
         <OrganizationSchema />
         <LocalBusinessSchema />
       </head>
       <body>
+        {siteConfig.analytics.metaPixelId && (
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src={`https://www.facebook.com/tr?id=${siteConfig.analytics.metaPixelId}&ev=PageView&noscript=1`}
+              alt=""
+            />
+          </noscript>
+        )}
         <AnalyticsTracker />
         <AdminProvider>
           <OrderProvider>

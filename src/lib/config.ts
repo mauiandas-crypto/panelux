@@ -67,6 +67,7 @@ export const siteConfig = {
   // Analytics
   analytics: {
     googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || '',
+    metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
   },
 
   // URLs

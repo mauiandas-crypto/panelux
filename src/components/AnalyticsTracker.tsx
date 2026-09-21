@@ -26,6 +26,16 @@ export function AnalyticsTracker() {
   return null
 }
 
+// Manda el mismo evento al Meta Pixel (fbq), si está cargado. Las funciones
+// trackX de acá abajo llaman a esta además de a gtag, para que cada acción
+// se reporte a ambas plataformas con un solo llamado desde el resto del
+// sitio.
+function fbqTrack(event: string, params?: Record<string, any>) {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', event, params)
+  }
+}
+
 // Event tracking functions
 export function trackProductView(product: ProductData) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -40,6 +50,13 @@ export function trackProductView(product: ProductData) {
       ],
     })
   }
+  fbqTrack('ViewContent', {
+    content_ids: [product.id],
+    content_name: product.name,
+    content_type: 'product',
+    value: product.price,
+    currency: 'UYU',
+  })
 }
 
 export function trackAddToCart(product: ProductData, quantity: number = 1) {
@@ -57,6 +74,13 @@ export function trackAddToCart(product: ProductData, quantity: number = 1) {
       ],
     })
   }
+  fbqTrack('AddToCart', {
+    content_ids: [product.id],
+    content_name: product.name,
+    content_type: 'product',
+    value: product.price * quantity,
+    currency: 'UYU',
+  })
 }
 
 export function trackSearch(query: string, results: number) {
@@ -103,6 +127,11 @@ export function trackCheckout(totalValue: number, itemsCount: number) {
       items_count: itemsCount,
     })
   }
+  fbqTrack('InitiateCheckout', {
+    value: totalValue,
+    currency: 'UYU',
+    num_items: itemsCount,
+  })
 }
 
 // Lee el client_id real de GA4 desde la cookie _ga del navegador (formato
@@ -124,4 +153,12 @@ export function trackConversion(orderId: string, totalValue: number) {
       currency: 'UYU',
     })
   }
+  // Igual que con GA4: esto es una aproximación al crear el pedido, no una
+  // confirmación real de pago. El evento server-side real (Conversions API)
+  // se manda desde el webhook de Mercado Pago cuando está configurado.
+  fbqTrack('Purchase', {
+    value: totalValue,
+    currency: 'UYU',
+    content_ids: [orderId],
+  })
 }
