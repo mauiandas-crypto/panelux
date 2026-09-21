@@ -1,0 +1,241 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useCart } from '@/context/CartContext'
+import ProductGallery from '@/components/ProductGallery'
+import MagnificQualityInfo from '@/components/MagnificQualityInfo'
+import MaximumStoneQualityInfo from '@/components/MaximumStoneQualityInfo'
+import PressureCookerQualityInfo from '@/components/PressureCookerQualityInfo'
+import AltoBrilhoQualityInfo from '@/components/AltoBrilhoQualityInfo'
+import { trackProductView } from '@/components/AnalyticsTracker'
+import { CartIcon, CheckIcon } from '@/components/icons/Icons'
+import type { productos } from '@/data/productos'
+
+type Producto = (typeof productos)[number]
+
+export default function ProductDetailClient({ producto }: { producto: Producto }) {
+  const [cantidad, setCantidad] = useState(1)
+  const [agregado, setAgregado] = useState(false)
+  const { agregarAlCarrito } = useCart()
+
+  // Algunos productos tienen specs reales cargadas desde el catálogo
+  // oficial (capacidadLitros, espesorMmReal, etc.); no todos los objetos
+  // del array las tienen, así que se leen con un cast seguro.
+  const specs = producto as Producto & {
+    capacidadLitros?: number
+    espesorMmReal?: number
+    claseAdherencia?: string
+    libreDePfoaPfos?: boolean
+    fotosExtra?: string[]
+  }
+
+  // Algunos productos (sobre todo juegos/kits) tienen una foto real
+  // adicional del embalaje, verificada contra el archivo en disco - no
+  // adivinada, como pasaba antes y mostraba imágenes rotas.
+  const galeriaFotos = [
+    { nombre: 'Principal', imagen: producto.imagen },
+    ...(specs.fotosExtra ?? []).map((imagen, i) => ({ nombre: `Foto ${i + 2}`, imagen })),
+  ]
+
+  useEffect(() => {
+    trackProductView({
+      id: producto.codigo,
+      name: producto.nombre,
+      price: producto.pvp,
+      category: producto.categoria,
+    })
+  }, [producto.codigo, producto.nombre, producto.pvp, producto.categoria])
+
+  const handleAgregarAlCarrito = () => {
+    agregarAlCarrito(
+      {
+        codigo: producto.codigo,
+        nombre: producto.nombre,
+        pvp: producto.pvp,
+        imagen: producto.imagen,
+      },
+      cantidad
+    )
+    setAgregado(true)
+    setTimeout(() => setAgregado(false), 2000)
+  }
+
+  const descripcion = `${producto.nombre}
+
+Marca: ${producto.linea}
+Código: ${producto.codigo}
+Precio: $${producto.pvp}
+
+Este es un producto de calidad premium de la marca brasileña Panelux.
+Distribuido por Todogastro, distribuidor oficial en Uruguay.
+Incluye garantía oficial del fabricante y envíos seguros a todo el país.`
+
+  return (
+    <div className="min-h-screen bg-white pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Breadcrumb */}
+        <div className="mb-8 text-sm text-gray-600">
+          <Link href="/" className="hover:text-blue-600">Inicio</Link>
+          <span className="mx-2">/</span>
+          <Link href={`/catalogo?categoria=${encodeURIComponent(producto.categoria)}`} className="hover:text-blue-600">
+            {producto.categoria}
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-gray-900 font-semibold">{producto.nombre}</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Galería de Productos */}
+          <div>
+            <ProductGallery
+              imagenBase={producto.imagen}
+              nombre={producto.nombre}
+              colores={galeriaFotos.length > 1 ? galeriaFotos : undefined}
+            />
+          </div>
+
+          {/* Detalles */}
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{producto.nombre}</h1>
+
+            <div className="mb-4 space-y-1">
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold">Línea:</span> {producto.linea}
+              </p>
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold">Categoría:</span> {producto.categoria}
+              </p>
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold">Código:</span> {producto.codigo}
+              </p>
+            </div>
+
+            {/* Precio y Cantidad */}
+            <div className="mb-6 flex items-end gap-4">
+              {/* Precio */}
+              <div className="flex-1">
+                <p className="text-xs text-gray-600 mb-1">Precio</p>
+                <p className="text-2xl font-bold text-blue-600">${producto.pvp}</p>
+              </div>
+
+              {/* Cantidad */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-900 mb-1">
+                  Cantidad
+                </label>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setCantidad(Math.max(1, cantidad - 1))}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-2 rounded transition text-sm"
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    value={cantidad}
+                    onChange={(e) => setCantidad(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-12 text-center text-sm font-bold border-2 border-gray-300 rounded px-2 py-1 text-black"
+                    min="1"
+                  />
+                  <button
+                    onClick={() => setCantidad(cantidad + 1)}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-1 px-2 rounded transition text-sm"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Botón Agregar al Carrito */}
+            <button
+              onClick={handleAgregarAlCarrito}
+              className={`w-full py-3 px-4 rounded-lg font-bold text-base transition mb-3 flex items-center justify-center gap-2 ${
+                agregado
+                  ? 'bg-green-600 text-white'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
+            >
+              {agregado ? (
+                <><CheckIcon className="w-5 h-5" /> Agregado al carrito</>
+              ) : (
+                <><CartIcon className="w-5 h-5" /> Agregar al carrito</>
+              )}
+            </button>
+
+            {/* Volver */}
+            <Link
+              href="/catalogo"
+              className="block text-center py-2 px-4 border-2 border-gray-300 rounded-lg text-gray-900 font-bold text-sm hover:bg-gray-50 transition"
+            >
+              Volver al catálogo
+            </Link>
+
+            {/* Especificaciones técnicas reales (catálogo oficial Panelux) */}
+            {(specs.capacidadLitros || specs.espesorMmReal || specs.claseAdherencia || specs.libreDePfoaPfos) && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <h2 className="text-lg font-bold text-gray-900 mb-3">Especificaciones técnicas</h2>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  {specs.capacidadLitros && (
+                    <li><span className="font-semibold">Capacidad:</span> {specs.capacidadLitros} L</li>
+                  )}
+                  {specs.espesorMmReal && (
+                    <li><span className="font-semibold">Espesor:</span> {specs.espesorMmReal} mm</li>
+                  )}
+                  {specs.claseAdherencia && (
+                    <li><span className="font-semibold">Antiadherencia certificada INMETRO:</span> Clase {specs.claseAdherencia} (Óptima)</li>
+                  )}
+                  {specs.libreDePfoaPfos && (
+                    <li><span className="font-semibold">Libre de PFOA y PFOS</span></li>
+                  )}
+                </ul>
+              </div>
+            )}
+
+            {/* Descripción */}
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <h2 className="text-lg font-bold text-gray-900 mb-3">Descripción del producto</h2>
+              <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
+                {descripcion}
+              </p>
+            </div>
+
+            {/* Info adicional */}
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h3 className="text-base font-bold text-gray-900 mb-3">¿Por qué comprarnos a nosotros?</h3>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-gray-700">Distribuidor oficial de Panelux en Uruguay</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-gray-700">Garantía oficial del fabricante</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-gray-700">Envíos seguros a todo el país</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-gray-700">Hasta 12 cuotas sin interés</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Nuevas secciones de producto */}
+        <div className="mt-16 space-y-16">
+          {producto.linea === 'Magnific AA' && <MagnificQualityInfo />}
+          {producto.linea === 'Maximum Stone' && <MaximumStoneQualityInfo />}
+          {producto.linea === 'Panela de Pressão' && (
+            <PressureCookerQualityInfo conRevestimiento={producto.nombre.includes('Magnific')} />
+          )}
+          {producto.linea === 'Magnific Alto Brilho' && <AltoBrilhoQualityInfo />}
+        </div>
+      </div>
+    </div>
+  )
+}

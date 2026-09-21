@@ -123,11 +123,9 @@ export function ProductSchema({ codigo, nombre, descripcion, imagen, pvp, catego
             price: pvp.toString(),
             availability: "https://schema.org/InStock",
           },
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.5",
-            reviewCount: "12",
-          },
+          // Sin aggregateRating: no hay reseñas reales y verificables en el
+          // sitio. Ponerlo inventado viola las políticas de datos
+          // estructurados de Google y puede penalizar el sitio.
         }),
       }}
     />
