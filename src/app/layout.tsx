@@ -57,6 +57,8 @@ export default function RootLayout({
       <head>
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="TN5rsy79YpZLsfZ-7Acl6QPAqq1ggb73s3OGTsbS50Y" />
+        {/* Google Merchant Center Verification */}
+        <meta name="google-site-verification" content="blC9UrUVOaeg1PM5jXtFjBFmti77fAsyaq9lw-Rc40s" />
 
         {/* Google Analytics */}
         <Script
