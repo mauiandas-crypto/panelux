@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { CheckIcon, PinIcon, ClockIcon, ChatIcon, PhoneIcon, MailIcon } from '@/components/icons/Icons'
+import DistributorBanner from '@/components/DistributorBanner'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
@@ -18,7 +19,9 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gray-900 text-gray-100 pt-12 pb-6">
+    <>
+      <DistributorBanner />
+      <footer className="bg-gray-900 text-gray-100 pt-12 pb-6">
       {/* Newsletter */}
       <div className="bg-gray-800 py-8 mb-12">
         <div className="max-w-7xl mx-auto px-6">
@@ -175,5 +178,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   )
 }
