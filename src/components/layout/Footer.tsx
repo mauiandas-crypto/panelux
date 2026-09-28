@@ -8,13 +8,30 @@ import DistributorBanner from '@/components/DistributorBanner'
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [enviando, setEnviando] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email) {
+    if (!email) return
+
+    setEnviando(true)
+    setError('')
+    try {
+      const res = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      if (!res.ok) throw new Error('subscribe failed')
+
       setSubscribed(true)
       setEmail('')
       setTimeout(() => setSubscribed(false), 3000)
+    } catch {
+      setError('No se pudo suscribir. Intentá de nuevo.')
+    } finally {
+      setEnviando(false)
     }
   }
 
@@ -41,15 +58,17 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition text-sm"
+                disabled={enviando}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white font-bold rounded-lg transition text-sm"
               >
                 {subscribed ? (
                   <span className="inline-flex items-center gap-1.5">
                     <CheckIcon className="w-4 h-4" /> Suscrito
                   </span>
-                ) : 'Suscribirse'}
+                ) : enviando ? 'Enviando...' : 'Suscribirse'}
               </button>
             </form>
+            {error && <p className="text-red-400 text-xs mt-2">{error}</p>}
           </div>
         </div>
       </div>
