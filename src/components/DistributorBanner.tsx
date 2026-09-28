@@ -15,7 +15,7 @@ export default function DistributorBanner() {
           href={`https://wa.me/${whatsappNumber}?text=${mensaje}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-1.5 rounded-full text-sm transition"
+          className="inline-flex items-center gap-1.5 bg-green-700 hover:bg-green-800 text-white font-bold px-4 py-1.5 rounded-full text-sm transition"
         >
           <ChatIcon className="w-4 h-4" />
           Escribir por WhatsApp

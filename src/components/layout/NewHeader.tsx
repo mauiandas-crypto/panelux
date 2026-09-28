@@ -88,11 +88,12 @@ export default function NewHeader() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="p-2 hover:bg-gray-100 rounded-lg md:hidden"
+              aria-label="Abrir menú"
             >
               <MenuIcon className="w-6 h-6 text-gray-900" />
             </button>
             <Link href="/" className="flex items-center">
-              <img src="/assets/panelux-logo.png" alt="Panelux" className="h-12 w-auto" />
+              <img src="/assets/panelux-logo.png" alt="Panelux" width={198} height={48} className="h-12 w-auto" />
             </Link>
           </div>
 
@@ -132,6 +133,8 @@ export default function NewHeader() {
                     <img
                       src={producto.imagen}
                       alt={producto.nombre}
+                      width={32}
+                      height={32}
                       className="w-8 h-8 object-cover rounded"
                     />
                     <div>
@@ -160,7 +163,7 @@ export default function NewHeader() {
 
           {/* Icons */}
           <div className="flex items-center gap-4">
-            <Link href="/carrito" className="relative p-2 hover:bg-gray-100 rounded-lg">
+            <Link href="/carrito" className="relative p-2 hover:bg-gray-100 rounded-lg" aria-label="Ver carrito">
               <CartIcon className="w-7 h-7 text-gray-900" />
               {totalItems > 0 && (
                 <span

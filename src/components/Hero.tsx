@@ -130,7 +130,7 @@ export default function Hero() {
               </Link>
               <button
                 onClick={() => window.open('https://wa.me/59892715555', '_blank')}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition transform hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition transform hover:scale-105"
               >
                 <ChatIcon />
                 Hablar con un asesor

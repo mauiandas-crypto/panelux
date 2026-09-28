@@ -13,7 +13,7 @@ export default function WhatsAppChat() {
       {/* Botón flotante */}
       <button
         onClick={() => setAbierto(!abierto)}
-        className="fixed bottom-4 right-4 w-12 h-12 sm:bottom-6 sm:right-6 sm:w-16 sm:h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition transform hover:scale-110"
+        className="fixed bottom-4 right-4 w-12 h-12 sm:bottom-6 sm:right-6 sm:w-16 sm:h-16 bg-green-700 hover:bg-green-800 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition transform hover:scale-110"
         title="Chat con WhatsApp"
       >
         {abierto ? (
@@ -75,7 +75,7 @@ export default function WhatsAppChat() {
                 href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 rounded-lg text-sm transition"
+                className="w-full flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-3 rounded-lg text-sm transition"
               >
                 <ChatIcon className="w-4 h-4 flex-shrink-0" /> Escribir Mensaje
               </a>

@@ -34,14 +34,16 @@ export default function PromoBar() {
     >
       <button
         onClick={() => setCurrent(c => (c - 1 + activePromos.length) % activePromos.length)}
-        className="hover:opacity-75"
+        className="hover:opacity-75 p-2 -m-2"
+        aria-label="Promoción anterior"
       >
         <ChevronLeftIcon className="w-4 h-4" />
       </button>
       <div className="flex-1">{activePromos[current]?.text}</div>
       <button
         onClick={() => setCurrent(c => (c + 1) % activePromos.length)}
-        className="hover:opacity-75"
+        className="hover:opacity-75 p-2 -m-2"
+        aria-label="Promoción siguiente"
       >
         <ChevronRightIcon className="w-4 h-4" />
       </button>
