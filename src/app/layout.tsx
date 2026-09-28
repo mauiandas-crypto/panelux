@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import NewHeader from "@/components/layout/NewHeader";
 import Footer from "@/components/layout/Footer";
@@ -12,7 +11,7 @@ import { OrderProvider } from "@/context/OrderContext";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import WelcomeBanner from "@/components/WelcomeBanner";
-import { siteConfig } from "@/lib/config";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "Panelux Uruguay | Distribuidor Oficial de Utensilios de Cocina Premium",
@@ -26,20 +25,11 @@ export const metadata: Metadata = {
     siteName: "Panelux Uruguay",
     title: "Panelux Uruguay | Distribuidor Oficial",
     description: "Utensilios de cocina premium de la marca brasileña Panelux",
-    images: [
-      {
-        url: "https://panelux.com.uy/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Panelux Uruguay",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Panelux Uruguay",
     description: "Distribuidor oficial de utensilios de cocina premium",
-    images: ["https://panelux.com.uy/twitter-image.jpg"],
   },
   alternates: {
     canonical: "https://panelux.com.uy",
@@ -60,62 +50,10 @@ export default function RootLayout({
         {/* Google Merchant Center Verification */}
         <meta name="google-site-verification" content="blC9UrUVOaeg1PM5jXtFjBFmti77fAsyaq9lw-Rc40s" />
 
-        {/* Google Analytics */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-PNDPWGJF2Y"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-PNDPWGJF2Y');
-            `,
-          }}
-        />
-        {/* Meta Pixel */}
-        {siteConfig.analytics.metaPixelId && (
-          <Script
-            id="meta-pixel"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${siteConfig.analytics.metaPixelId}');
-                fbq('track', 'PageView');
-              `,
-            }}
-          />
-        )}
-
         <OrganizationSchema />
         <LocalBusinessSchema />
       </head>
       <body>
-        {siteConfig.analytics.metaPixelId && (
-          <noscript>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              height="1"
-              width="1"
-              style={{ display: 'none' }}
-              src={`https://www.facebook.com/tr?id=${siteConfig.analytics.metaPixelId}&ev=PageView&noscript=1`}
-              alt=""
-            />
-          </noscript>
-        )}
         <AnalyticsTracker />
         <AdminProvider>
           <OrderProvider>
@@ -131,6 +69,7 @@ export default function RootLayout({
               <WhatsAppChat />
               <DarkModeToggle />
               <Footer />
+              <CookieConsent />
             </CartProvider>
           </OrderProvider>
         </AdminProvider>

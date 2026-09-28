@@ -1,6 +1,11 @@
 import { Suspense } from 'react'
 import { SearchContent } from './search-content'
 
+export const metadata = {
+  title: 'Buscar productos - Panelux Uruguay',
+  description: 'Buscá entre nuestro catálogo de utensilios de cocina Panelux: ollas, sartenes, cacerolas y más productos premium con garantía oficial.',
+}
+
 function SearchFallback() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
