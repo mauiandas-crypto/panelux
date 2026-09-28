@@ -26,6 +26,10 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  // Honeypot anti-spam: campo invisible para humanos que los bots suelen
+  // completar igual. Si llega con valor, se ignora el envío en silencio.
+  const [honeypot, setHoneypot] = useState('')
+
   const [cuponCodigo, setCuponCodigo] = useState('')
   const [cuponAplicado, setCuponAplicado] = useState<any>(null)
   const [cuponError, setCuponError] = useState('')
@@ -105,6 +109,11 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Si el honeypot viene completo, es un bot: no mostramos error para no
+    // delatar el mecanismo, simplemente no procesamos el pedido.
+    if (honeypot) return
+
     setError('')
     setLoading(true)
 
@@ -238,6 +247,18 @@ export default function CheckoutPage() {
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Datos de envío</h2>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot: oculto para personas, visible para bots que autocompletan todos los campos */}
+                <input
+                  type="text"
+                  name="empresa"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                />
+
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-1">
                     Nombre completo
