@@ -1,29 +1,23 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
 import { Order } from '@/lib/orders-types'
+import { useAdminAuth } from '@/hooks/useAdminAuth'
 import { ChevronLeftIcon, ChartIcon, BoxIcon, TagIcon, MoneyIcon, ClipboardIcon } from '@/components/icons/Icons'
 
 export default function StatsAdmin() {
-  const router = useRouter()
+  const { isAuthenticated } = useAdminAuth()
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const t = localStorage.getItem('adminToken')
-    if (!t) {
-      router.push('/admin/login')
-      return
-    }
+    if (!isAuthenticated) return
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch('/api/orders', {
-          headers: { Authorization: `Bearer ${t}` },
-        })
+        const response = await fetch('/api/orders')
         if (response.ok) {
           setOrders(await response.json())
         }
@@ -35,7 +29,7 @@ export default function StatsAdmin() {
     }
 
     fetchOrders()
-  }, [router])
+  }, [isAuthenticated])
 
   const stats = {
     totalProducts: productos.length,

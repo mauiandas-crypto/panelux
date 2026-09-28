@@ -8,10 +8,25 @@ import crypto from 'crypto'
 // Un token firmado con expiración embebida no necesita persistirse en
 // ningún lado para poder validarse después.
 
-const SECRET = process.env.ADMIN_PASSWORD || 'panelux-admin-fallback-secret'
-
+// Sin fallback: si ADMIN_PASSWORD no está seteada, firmar con un secreto fijo
+// visible en el repo dejaría a cualquiera forjar tokens de sesión válidos.
+// Mejor fallar fuerte que degradar silenciosamente la seguridad.
 function sign(payload: string): string {
-  return crypto.createHmac('sha256', SECRET).update(payload).digest('hex')
+  const secret = process.env.ADMIN_PASSWORD
+  if (!secret) {
+    throw new Error('ADMIN_PASSWORD no está configurada')
+  }
+  return crypto.createHmac('sha256', secret).update(payload).digest('hex')
+}
+
+function getCookie(request: Request, name: string): string | null {
+  const cookieHeader = request.headers.get('cookie')
+  if (!cookieHeader) return null
+  const match = cookieHeader
+    .split(';')
+    .map((c) => c.trim())
+    .find((c) => c.startsWith(`${name}=`))
+  return match ? decodeURIComponent(match.slice(name.length + 1)) : null
 }
 
 export function isValidAdminPassword(password: string): boolean {
@@ -32,19 +47,16 @@ export async function storeToken(_token: string, _expirationMinutes?: number): P
 }
 
 // Sin almacenamiento no hay forma de invalidar un token antes de su
-// expiración natural. Limitación aceptada por ahora: el logout del lado del
-// cliente simplemente borra el token guardado en localStorage.
+// expiración natural. El logout (POST /api/admin/logout) borra la cookie del
+// navegador, pero un token ya emitido seguiría siendo válido si alguien lo
+// hubiera copiado antes del logout - limitación aceptada dado el bajo riesgo
+// (panel de un solo admin, sesiones de 24hs).
 export async function invalidateToken(_token: string): Promise<void> {
   return
 }
 
 export async function getAdminSession(request: Request): Promise<boolean> {
-  const authHeader = request.headers.get('authorization')
-  if (!authHeader?.startsWith('Bearer ')) {
-    return false
-  }
-
-  const token = authHeader.substring(7)
+  const token = getCookie(request, 'adminToken')
   if (!token || !token.includes('.')) {
     return false
   }

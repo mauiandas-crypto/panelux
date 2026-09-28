@@ -50,16 +50,10 @@ export default function AdminLogin() {
       })
 
       if (response.ok) {
-        // El servidor también setea una cookie HttpOnly Secure, pero el resto
-        // del panel (useAdminAuth, fetch con Authorization: Bearer) depende de
-        // tener el token accesible desde el cliente, así que lo guardamos acá.
-        const data = await response.json()
-        if (data.token) {
-          localStorage.setItem('adminToken', data.token)
-        }
-        setTimeout(() => {
-          router.push('/admin')
-        }, 100)
+        // El servidor setea una cookie httpOnly Secure con el token; el resto
+        // del panel la usa automáticamente en cada request, no hace falta
+        // guardar nada del lado del cliente.
+        router.push('/admin')
       } else {
         const data = await response.json().catch(() => null)
         setError(data?.error || 'Contraseña incorrecta')

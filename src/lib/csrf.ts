@@ -6,11 +6,16 @@ import crypto from 'crypto'
 // un Map en memoria (como se hacía antes) casi nunca coincide entre el GET
 // que lo genera y el POST que lo valida, rompiendo el login de forma
 // intermitente.
-const SECRET = process.env.ADMIN_PASSWORD || 'panelux-csrf-fallback-secret'
 const EXPIRATION_MS = 60 * 60 * 1000 // 1 hora
 
+// Sin fallback: ver la misma nota en admin-auth.ts - un secreto fijo en el
+// repo permitiría forjar tokens CSRF válidos si la env var falta.
 function sign(payload: string): string {
-  return crypto.createHmac('sha256', SECRET).update(payload).digest('hex')
+  const secret = process.env.ADMIN_PASSWORD
+  if (!secret) {
+    throw new Error('ADMIN_PASSWORD no está configurada')
+  }
+  return crypto.createHmac('sha256', secret).update(payload).digest('hex')
 }
 
 export function generateCSRFToken(): string {

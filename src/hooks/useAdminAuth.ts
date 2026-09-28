@@ -3,38 +3,37 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+// La sesión vive en una cookie httpOnly (no accesible desde JS), así que la
+// única forma de saber si el usuario sigue logueado es preguntarle al
+// servidor. Antes esto se manejaba guardando una copia del token en
+// localStorage, lo que lo dejaba expuesto a robo vía XSS.
 export function useAdminAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    // Pequeño delay para asegurar que localStorage esté disponible
-    const timer = setTimeout(() => {
-      const token = localStorage.getItem('adminToken')
+    let cancelled = false
 
-      if (!token) {
-        // Intentar obtener de la cookie también
-        const cookieToken = document.cookie
-          .split('; ')
-          .find((row) => row.startsWith('adminToken='))
-          ?.split('=')[1]
-
-        if (!cookieToken) {
-          router.push('/admin/login')
-          return
-        } else {
-          localStorage.setItem('adminToken', cookieToken)
+    fetch('/api/admin/session')
+      .then((res) => {
+        if (cancelled) return
+        if (res.ok) {
           setIsAuthenticated(true)
-          setLoading(false)
+        } else {
+          router.push('/admin/login')
         }
-      } else {
-        setIsAuthenticated(true)
-        setLoading(false)
-      }
-    }, 50)
+      })
+      .catch(() => {
+        if (!cancelled) router.push('/admin/login')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
 
-    return () => clearTimeout(timer)
+    return () => {
+      cancelled = true
+    }
   }, [router])
 
   return { isAuthenticated, loading }

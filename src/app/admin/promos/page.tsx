@@ -21,10 +21,7 @@ export default function PromosAdmin() {
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem('adminToken')
-      const response = await fetch('/api/admin/data', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      const response = await fetch('/api/admin/data')
       if (response.ok) {
         const adminData = await response.json()
         setData(adminData)
@@ -40,13 +37,9 @@ export default function PromosAdmin() {
   const saveData = async (updatedPromos: PromoMessage[]) => {
     setSaving(true)
     try {
-      const token = localStorage.getItem('adminToken')
       const response = await fetch('/api/admin/data', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, promoMessages: updatedPromos }),
       })
       if (response.ok) {

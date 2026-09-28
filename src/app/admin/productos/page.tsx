@@ -1,30 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import Link from 'next/link'
 import { productos } from '@/data/productos'
+import { useAdminAuth } from '@/hooks/useAdminAuth'
 import { ChevronLeftIcon, BoxIcon, EditIcon } from '@/components/icons/Icons'
 
 export default function ProductosAdmin() {
   const [filtro, setFiltro] = useState('')
-  const [token, setToken] = useState<string | null>(null)
-  const router = useRouter()
-
-  useEffect(() => {
-    const t = localStorage.getItem('adminToken')
-    if (!t) {
-      router.push('/admin/login')
-    } else {
-      setToken(t)
-    }
-  }, [router])
+  const { loading } = useAdminAuth()
 
   const productosFiltered = productos.filter(
     (p) =>
       p.nombre.toLowerCase().includes(filtro.toLowerCase()) ||
       p.codigo.includes(filtro)
   )
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-900 font-bold">Cargando...</div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

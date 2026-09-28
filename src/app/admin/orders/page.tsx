@@ -23,10 +23,7 @@ export default function OrdersAdmin() {
 
   const fetchOrders = async () => {
     try {
-      const token = localStorage.getItem('adminToken')
-      const response = await fetch('/api/orders', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      const response = await fetch('/api/orders')
 
       if (response.ok) {
         const data = await response.json()
@@ -41,13 +38,9 @@ export default function OrdersAdmin() {
 
   const updateOrderStatus = async (orderId: string, nuevoEstado: Order['estado']) => {
     try {
-      const token = localStorage.getItem('adminToken')
       const response = await fetch(`/api/orders/${orderId}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ estado: nuevoEstado }),
       })
 
