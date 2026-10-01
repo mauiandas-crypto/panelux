@@ -5,7 +5,8 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { siteConfig } from '@/lib/config'
 
-const CONSENT_KEY = 'panelux_cookie_consent'
+export const CONSENT_KEY = 'panelux_cookie_consent'
+export const CONSENT_CHANGED_EVENT = 'panelux-cookie-consent-changed'
 
 type Consent = 'accepted' | 'rejected'
 
@@ -28,6 +29,7 @@ export default function CookieConsent() {
       localStorage.setItem(CONSENT_KEY, value)
     } catch {}
     setConsent(value)
+    window.dispatchEvent(new Event(CONSENT_CHANGED_EVENT))
   }
 
   return (

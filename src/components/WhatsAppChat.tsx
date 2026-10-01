@@ -1,19 +1,40 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { siteConfig } from '@/lib/config'
 import { CloseIcon, BoxIcon, CartIcon, TruckIcon, ChatIcon, PhoneIcon, MailIcon } from '@/components/icons/Icons'
+import { CONSENT_KEY, CONSENT_CHANGED_EVENT } from '@/components/CookieConsent'
 
 export default function WhatsAppChat() {
   const [abierto, setAbierto] = useState(false)
+  // En mobile el banner de cookies tapa el botón flotante hasta que el
+  // usuario decide; mientras esté pendiente, lo subimos para que siga
+  // accesible en vez de quedar escondido detrás.
+  const [consentPending, setConsentPending] = useState(false)
   const whatsappNumber = siteConfig.contact.whatsapp
+
+  useEffect(() => {
+    const checkConsent = () => {
+      try {
+        const stored = localStorage.getItem(CONSENT_KEY)
+        setConsentPending(stored !== 'accepted' && stored !== 'rejected')
+      } catch {
+        setConsentPending(false)
+      }
+    }
+    checkConsent()
+    window.addEventListener(CONSENT_CHANGED_EVENT, checkConsent)
+    return () => window.removeEventListener(CONSENT_CHANGED_EVENT, checkConsent)
+  }, [])
 
   return (
     <>
       {/* Botón flotante */}
       <button
         onClick={() => setAbierto(!abierto)}
-        className="fixed bottom-4 right-4 w-12 h-12 sm:bottom-6 sm:right-6 sm:w-16 sm:h-16 bg-green-700 hover:bg-green-800 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition transform hover:scale-110"
+        className={`fixed right-4 w-12 h-12 sm:bottom-6 sm:right-6 sm:w-16 sm:h-16 bg-green-700 hover:bg-green-800 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition transform hover:scale-110 ${
+          consentPending ? 'bottom-44' : 'bottom-4'
+        }`}
         title="Chat con WhatsApp"
       >
         {abierto ? (
@@ -27,7 +48,11 @@ export default function WhatsAppChat() {
 
       {/* Widget de chat */}
       {abierto && (
-        <div className="fixed bottom-24 right-6 w-80 bg-white rounded-xl shadow-2xl overflow-hidden z-40 animate-in">
+        <div
+          className={`fixed right-6 w-80 bg-white rounded-xl shadow-2xl overflow-hidden z-40 animate-in ${
+            consentPending ? 'bottom-64' : 'bottom-24'
+          }`}
+        >
           {/* Header */}
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4">
             <h3 className="font-bold text-lg">¡Hola!</h3>
